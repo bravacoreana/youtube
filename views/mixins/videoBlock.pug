@@ -1,0 +1,9 @@
+//- views > mixins > videoBlock.pug
+
+mixin videoBlock(video={})
+    .videoBlock
+        img.videoBlock__thumbnail(src=video.thumbnail)
+        img.videoBlock__avatar(src=video.avatar)
+        h4.videoBlock__title=video.title
+        h6.videoBlock__creator=video.name
+        h6.videoBlock__views=video.views

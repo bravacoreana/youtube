@@ -1,0 +1,12 @@
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.videoUpload, method="post")
+            label(for="Video") Choose a video
+            input(type="file", id="thumbnailFile", name="thumbnailFile")
+            input(type="file", id="videoFile", name="videoFile")
+            input(type="title", name="title", placeholder="Title")
+            textarea(name="description", placeholder="Description")
+            input(type="submit", value="Upload")
+        a(href=routes.video+routes.edit) Edit Video

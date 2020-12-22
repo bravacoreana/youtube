@@ -1,0 +1,13 @@
+extends layouts/main
+include mixins/videoBlock
+
+block content
+    .videos
+        each video in videos
+            +videoBlock({
+                title: video.title,
+                thumbnail:  video.thumbnail,
+                avatar: video.creator.avatar,
+                name: video.creator.name,
+                views: video.views
+            })

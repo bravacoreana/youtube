@@ -1,0 +1,44 @@
+header.header
+    .header__column
+        a(href=routes.home)
+            i.fab.fa-youtube
+    .header__column
+        form(action=routes.results, method="get")
+            input(type="text", placeholder="Search", name="search_query")
+            button(type="submit")
+                i.fas.fa-search
+    .header__column
+        a(href=routes.shootVideo)
+            i.fas.fa-video
+    .header__column
+        .dropdown
+            button.dropbtn User Account
+            if !user.isAuthenticated
+                .dropdown-content
+                    a(href=routes.signUp)
+                        i.fas.fa-user
+                        span Sign Up
+                    a(href=routes.signIn)
+                        i.fas.fa-user
+                        span Sign In
+            else
+                .dropdown-content
+                    a(href=routes.upload)
+                        i.fas.fa-film
+                        span Upload Video
+                    a(href=routes.userDetail(user.id))
+                        i.fas.fa-user
+                        span Profile
+                    a(href=routes.logout)
+                        i.fas.fa-user
+                        span Logout
+
+            //- ul
+        //-     li
+        //-         a(href=routes.signUp)
+        //-             i.material-icons account_circle
+        //-             | Sign Up
+        //-     li
+        //-         a(href=routes.signIn)
+        //-             i.material-icons account_circle
+        //-             | Sign In

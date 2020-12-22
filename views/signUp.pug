@@ -1,0 +1,13 @@
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.signUp, method="post")
+            label(for="avatar") Avatar
+            input(type="file", id="avatar", name="avatar")
+            input(type="text", name="name", placeholder="Full Name")
+            input(type="email", name="email", placeholder="Email")
+            input(type="password", name="password", placeholder="Password")
+            input(type="password", name="password2", placeholder="Verify Password")
+            input(type="submit", value="Sign Up")
+        include partials/socialLogin

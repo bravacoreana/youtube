@@ -1,0 +1,11 @@
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.edit, method="post")
+            label(for="thumbnail") Update Thumbnail
+            input(type="file", id="thumbnailFile", name="thumbnailFile")
+            input(type="title", name="title", placeholder="Title")
+            textarea(name="description", placeholder="Description")
+            input(type="submit", value="Save")
+        a(href=routes.video+routes.delete) Delete Video
