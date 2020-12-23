@@ -5,9 +5,8 @@ block content
     .videos
         each video in videos
             +videoBlock({
+                id: video.id,
                 title: video.title,
-                thumbnail:  video.thumbnail,
-                avatar: video.creator.avatar,
-                name: video.creator.name,
+                thumbnail: video.thumbnailFile,
                 views: video.views
             })

@@ -8,7 +8,7 @@ header.header
             button(type="submit")
                 i.fas.fa-search
     .header__column
-        a(href=routes.shootVideo)
+        a(href=routes.video+routes.shootVideo)
             i.fas.fa-video
     .header__column
         .dropdown
@@ -23,7 +23,7 @@ header.header
                         span Sign In
             else
                 .dropdown-content
-                    a(href=routes.upload)
+                    a(href=routes.video+routes.upload)
                         i.fas.fa-film
                         span Upload Video
                     a(href=routes.userDetail(user.id))
