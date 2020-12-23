@@ -3,7 +3,7 @@ const HOME = "/";
 const SIGN_UP = "/signUp";
 const SIGN_IN = "/signIn";
 const RESULTS = "/results";
-const LOGOUT = "/logout";
+const LOG_OUT = "/logout";
 
 // USER
 const USER = "/user";
@@ -24,7 +24,7 @@ const routes = {
   signUp: SIGN_UP,
   signIn: SIGN_IN,
   results: RESULTS,
-  logout: LOGOUT,
+  logout: LOG_OUT,
   user: USER,
   userDetail: (id) => {
     if (id) {
@@ -36,7 +36,12 @@ const routes = {
   changePassword: CHANGE_PASSWORD,
   video: VIDEO,
   upload: VIDEO_UPLOAD,
-  detail: VIDEO_DETAIL,
+  detail: (id) => {
+    if (id) {
+      return `${VIDEO}/${id}`;
+    }
+    return VIDEO_DETAIL;
+  },
   edit: EDIT_VIDEO,
   delete: DELETE_VIDEO,
   shootVideo: SHOOT_VIDEO,

@@ -2,6 +2,7 @@ import express from "express";
 import {
   getSignIn,
   getSignUp,
+  logout,
   postSignIn,
   postSignUp,
 } from "../controllers/userController";
@@ -18,4 +19,5 @@ globalRouter.post(routes.signUp, postSignUp);
 globalRouter.get(routes.signIn, getSignIn);
 globalRouter.post(routes.signIn, postSignIn);
 
+globalRouter.get(routes.logout, logout);
 export default globalRouter;
