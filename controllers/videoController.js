@@ -72,11 +72,11 @@ export const postVideoEdit = async (req, res) => {
   const {
     params: { id },
     body: { title, description },
+    files: { thumbnailFile },
   } = req;
-  const thumbnailFile = req.files.thumbnailFile[0];
   try {
-    if (thumbnailFile) {
-      const thumbnailFileUrl = thumbnailFile.path;
+    if (thumbnailFile !== undefined) {
+      const thumbnailFileUrl = thumbnailFile[0].path;
       await Video.findByIdAndUpdate(id, {
         title,
         description,
