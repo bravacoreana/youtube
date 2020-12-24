@@ -12,7 +12,6 @@ import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 
 const app = express();
-
 // Apply Middlewares
 app.use(
   helmet({
@@ -20,6 +19,7 @@ app.use(
   })
 );
 app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());

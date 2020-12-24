@@ -37,23 +37,61 @@ export const postVideoUpload = async (req, res) => {
     description,
   });
   res.redirect(routes.detail(newVideo.id));
-  // console.log(title, description, videoTest, thumbnailTest);
-
-  // TODO: Upload and Save video
-  // res.render("videoDetail", { pageTitle: "Upload Video" });
-  // res.redirect(routes.detail(123123));
 };
 
 export const shootVideo = (req, res) => {
   res.render("shootVideo", { pageTitle: "Shoot Video" });
 };
 
-export const videoDetail = (req, res) => {
-  res.render("videoDetail", { pageTitle: "Video Detail" });
+export const videoDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    res.render("videoDetail", { pageTitle: "Video Detail", video });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
-export const videoEdit = (req, res) => {
-  res.render("videoEdit", { pageTitle: "Edit Video" });
+export const getVideoEdit = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    res.render("videoEdit", { pageTitle: `Edit ${video.title}`, video });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postVideoEdit = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description },
+  } = req;
+  const thumbnailFile = req.files.thumbnailFile[0];
+  try {
+    if (thumbnailFile) {
+      const thumbnailFileUrl = thumbnailFile.path;
+      await Video.findByIdAndUpdate(id, {
+        title,
+        description,
+        thumbnailFile: thumbnailFileUrl,
+      });
+    } else {
+      await Video.findByIdAndUpdate(id, {
+        title,
+        description,
+      });
+    }
+    res.redirect(routes.detail(id));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const videoDelete = (req, res) => {

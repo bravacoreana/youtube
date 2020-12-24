@@ -42,7 +42,12 @@ const routes = {
     }
     return VIDEO_DETAIL;
   },
-  edit: EDIT_VIDEO,
+  edit: (id) => {
+    if (id) {
+      return `/video/${id}/edit`;
+    }
+    return EDIT_VIDEO;
+  },
   delete: DELETE_VIDEO,
   shootVideo: SHOOT_VIDEO,
 };
