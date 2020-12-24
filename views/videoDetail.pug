@@ -1,4 +1,13 @@
 extends layouts/main
 
 block content
-    p video Detail
+    .video__player
+        video(src=`/${video.videoFile}`)
+    .video__info
+        if(user)
+            a(href=routes.edit(video.id))
+                button Edit Video
+        h5.video__title=video.title
+        span.video__views=video.views
+        p.video__description=video.description
+        

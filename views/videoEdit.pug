@@ -1,11 +1,13 @@
 extends layouts/main
 
 block content
+    img.thumbnail(src=`/${video.thumbnailFile}`)
     .form-container
-        form(action=routes.edit, method="post")
-            label(for="thumbnail") Update Thumbnail
+        form(action=routes.edit(video.id), method="post", enctype="multipart/form-data")
+            label(for="thumbnail") Change Thumbnail
             input(type="file", id="thumbnailFile", name="thumbnailFile")
-            input(type="title", name="title", placeholder="Title")
-            textarea(name="description", placeholder="Description")
+
+            input(type="title", name="title", placeholder="Title", value=video.title)
+            textarea(name="description", placeholder="Description")=video.description
             input(type="submit", value="Save")
-        a(href=routes.video+routes.delete) Delete Video
+        a(href=routes.video+routes.delete) Delete Videoc
