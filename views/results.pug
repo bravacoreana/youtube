@@ -5,11 +5,11 @@ block content
     .results__header
         h2 Searching results for: #{searchQuery}
     .search__videos
+        if videos.length === 0
+            h5 No Videos Found!
         each video in videos
             +videoBlock({
+                id: video.id,
                 title: video.title,
-                thumbnail:  video.thumbnail,
-                avatar: video.creator.avatar,
-                name: video.creator.name,
-                views: video.views
+                thumbnail: video.thumbnailFile
             })

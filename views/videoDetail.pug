@@ -8,6 +8,16 @@ block content
             a(href=routes.edit(video.id))
                 button Edit Video
         h5.video__title=video.title
-        span.video__views=video.views
+        if video.views === 0 || 1
+            span.video__views=video.views
+            |  view
+        else
+            span.video__views=video.views
+            |  views
+        h5.video__date=video.createdAt
         p.video__description=video.description
-        
+    .video__comments
+        if video.comments.length === 0 || 1 
+            span.video__comment-number #{video.comments.length} comment
+        else
+            span.video__comment-number #{video.comments.length} comments
