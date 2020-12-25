@@ -48,7 +48,12 @@ const routes = {
     }
     return EDIT_VIDEO;
   },
-  delete: DELETE_VIDEO,
+  delete: (id) => {
+    if (id) {
+      return `${VIDEO}/${id}/delete`;
+    }
+    return DELETE_VIDEO;
+  },
   shootVideo: SHOOT_VIDEO,
 };
 
