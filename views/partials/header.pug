@@ -1,37 +1,56 @@
 header.header
-    .header__column
-        a(href=routes.home)
-            i.fab.fa-youtube
-    .header__column
-        form(action=routes.results, method="get")
-            input(type="text", placeholder="Search", name="search_query")
-            button(type="submit")
-                i.fas.fa-search
-    .header__column
-        a(href=routes.video+routes.shootVideo)
-            i.fas.fa-video
-    .header__column
-        .dropdown
-            button.dropbtn User Account
-            if !user.isAuthenticated
-                .dropdown-content
-                    a(href=routes.signUp)
-                        i.fas.fa-user
-                        span Sign Up
-                    a(href=routes.signIn)
-                        i.fas.fa-user
-                        span Sign In
-            else
-                .dropdown-content
-                    a(href=routes.video+routes.upload)
-                        i.fas.fa-film
-                        span Upload Video
-                    a(href=routes.userDetail(user.id))
-                        i.fas.fa-user
-                        span Profile
-                    a(href=routes.logout)
-                        i.fas.fa-user
-                        span Logout
+    .header__container
+        .header__column
+            a(href=routes.home)
+                .header-logo
+                    i.fab.fa-youtube
+                    span #{siteName}
+        .header__column
+            form(action=routes.results, method="get")
+                input(type="text", placeholder="Search", name="search_query")
+                button(type="submit")
+                    i.fas.fa-search
+        .header__column
+            a(href=routes.video+routes.shootVideo)
+                i.fas.fa-video
+            ul.dropdown
+                li.dropbtn
+                    i.fas.fa-user
+                if !user.isAuthenticated
+                    ul.dropdown-content
+                        li
+                            a(href=routes.signUp)
+                                i.fas.fa-user
+                                span  Sign Up
+                        li
+                            a(href=routes.signIn)
+                                i.fas.fa-user
+                                span  Sign In
+                        li
+                            a(href="#")
+                                i.fas.fa-adjust
+                                span  Light Mode
+                else
+                    ul.dropdown-content
+                        li
+                            a(href=routes.userDetail)
+                                span NAME
+                        li
+                            a(href=routes.video+routes.upload)
+                                i.fas.fa-film
+                                span  Upload
+                        li
+                            a(href=routes.userDetail(user.id))
+                                i.fas.fa-user
+                                span  Profile
+                        li
+                            a(href="#")
+                                i.fas.fa-adjust
+                                span  Dark Mode
+                        li
+                            a(href=routes.logout)
+                                i.fas.fa-user
+                                span  Sign Out
 
             //- ul
         //-     li
