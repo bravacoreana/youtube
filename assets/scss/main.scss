@@ -1,0 +1,22 @@
+html, 
+body {
+    height: 100%;
+}
+
+body {
+    background-color: $bgColor;
+}
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(90px, 1fr));
+}
+
+button {
+    padding:7px;
+    border: 1px solid rgba(96,96,96, 0.3);
+    color: $black;
+}
