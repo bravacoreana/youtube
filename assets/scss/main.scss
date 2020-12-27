@@ -9,10 +9,9 @@ body {
 
 main {
     width: 100%;
-    max-width: 1200px;
+    max-width: 2560px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(90px, 1fr));
+    min-height: 70vh;
 }
 
 button {
