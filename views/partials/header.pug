@@ -7,7 +7,7 @@ header.header
                     span #{siteName}
         .header__column
             form(action=routes.results, method="get")
-                input(type="text", placeholder="Search", name="search_query")
+                input(type="text", placeholder="Search", name="search_query", autocomplete="off")
                 button(type="submit")
                     i.fas.fa-search
         .header__column
@@ -18,37 +18,37 @@ header.header
                     i.fas.fa-user
                 if !user.isAuthenticated
                     ul.dropdown-content
-                        li
-                            a(href=routes.signUp)
+                        a(href=routes.signUp)
+                            li
                                 i.fas.fa-user
                                 span  Sign Up
-                        li
-                            a(href=routes.signIn)
+                        a(href=routes.signIn)
+                            li
                                 i.fas.fa-user
                                 span  Sign In
-                        li
-                            a(href="#")
+                        a(href="#")
+                            li
                                 i.fas.fa-adjust
                                 span  Light Mode
                 else
                     ul.dropdown-content
-                        li
-                            a(href=routes.userDetail)
+                        a(href=routes.userDetail)
+                            li
                                 span NAME
-                        li
-                            a(href=routes.video+routes.upload)
+                        a(href=routes.video+routes.upload)
+                            li
                                 i.fas.fa-film
                                 span  Upload
-                        li
-                            a(href=routes.userDetail(user.id))
+                        a(href=routes.userDetail(user.id))
+                            li
                                 i.fas.fa-user
                                 span  Profile
-                        li
-                            a(href="#")
+                        a(href="#")
+                            li
                                 i.fas.fa-adjust
                                 span  Dark Mode
-                        li
-                            a(href=routes.logout)
+                        a(href=routes.logout)
+                            li
                                 i.fas.fa-user
                                 span  Sign Out
 

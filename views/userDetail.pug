@@ -1,4 +1,14 @@
 extends layouts/main
+include mixins/videoBlock
+
 
 block content
-    p user DETAIL
+    .user-profile
+        .user-profile__header
+            img.u-avatar(src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png")
+            h4.profile__username=user.name
+            .user-profile__btns
+                a(href=routes.editProfile)
+                    button Edit Profile
+                a(href=routes.users+routes.changePassword)
+                    button Change Password
