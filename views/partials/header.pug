@@ -16,7 +16,7 @@ header.header
             ul.dropdown
                 li.dropbtn
                     i.fas.fa-user
-                if !user.isAuthenticated
+                if !loggedUser
                     ul.dropdown-content
                         a(href=routes.signUp)
                             li
@@ -39,7 +39,7 @@ header.header
                             li
                                 i.fas.fa-film
                                 span  Upload
-                        a(href=routes.userDetail(user.id))
+                        a(href=routes.myProfile)
                             li
                                 i.fas.fa-user
                                 span  Profile
@@ -51,13 +51,3 @@ header.header
                             li
                                 i.fas.fa-user
                                 span  Sign Out
-
-            //- ul
-        //-     li
-        //-         a(href=routes.signUp)
-        //-             i.material-icons account_circle
-        //-             | Sign Up
-        //-     li
-        //-         a(href=routes.signIn)
-        //-             i.material-icons account_circle
-        //-             | Sign In
