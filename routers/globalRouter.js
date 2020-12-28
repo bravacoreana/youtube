@@ -1,24 +1,42 @@
 import express from "express";
+import passport from "passport";
+import routes from "../routes";
+import { home, results } from "../controllers/videoController";
 import {
   getSignIn,
   getSignUp,
+  githubSignIn,
   logout,
+  myProfile,
+  postGithubSignIn,
   postSignIn,
   postSignUp,
 } from "../controllers/userController";
-import { home, results } from "../controllers/videoController";
-import { multerUploadAvatar } from "../middlewares";
-import routes from "../routes";
+import { multerUploadAvatar, onlyPublic } from "../middlewares";
 
 const globalRouter = express.Router();
 
+globalRouter.get(routes.signUp, onlyPublic, getSignUp);
+globalRouter.post(
+  routes.signUp,
+  onlyPublic,
+  multerUploadAvatar,
+  postSignUp,
+  postSignIn
+);
+globalRouter.get(routes.signIn, onlyPublic, getSignIn);
+globalRouter.post(routes.signIn, onlyPublic, postSignIn);
+
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.results, results);
-
-globalRouter.get(routes.signUp, getSignUp);
-globalRouter.post(routes.signUp, multerUploadAvatar, postSignUp);
-globalRouter.get(routes.signIn, getSignIn);
-globalRouter.post(routes.signIn, postSignIn);
-
 globalRouter.get(routes.logout, logout);
+
+globalRouter.get(routes.github, githubSignIn);
+globalRouter.get(
+  routes.githubCallback,
+  passport.authenticate("github", { failureRedirect: routes.signIn }),
+  postGithubSignIn
+);
+globalRouter.get(routes.myProfile, myProfile);
+
 export default globalRouter;

@@ -8,14 +8,24 @@ const multerAvatar = multer({ dest: "uploads/avatars" });
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "NewTube";
   res.locals.routes = routes;
-  res.locals.user = {
-    isAuthenticated: true,
-    id: 1234,
-  };
-  res.locals.video = {
-    id: 4321,
-  };
+  res.locals.loggedUser = req.user || null;
   next();
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (!req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
 };
 
 export const multerUploadVideo = multerVideo.fields([
@@ -23,5 +33,4 @@ export const multerUploadVideo = multerVideo.fields([
   { name: "thumbnailFile", maxCount: 1 },
 ]);
 export const multerUploadThumbnail = multerThumbnail.single("thumbnailFile");
-
-export const multerUploadAvatar = multerAvatar.single("multerAvatar");
+export const multerUploadAvatar = multerAvatar.single("avatar");
