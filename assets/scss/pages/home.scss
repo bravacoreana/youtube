@@ -1,28 +1,29 @@
 
 .home-videos {
-    // width: 100%;
-    // display: grid;
-    // grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-    // justify-items: center;
-    // align-items: center;
-    // .videoBlock{
-    //     width: 100%;
-    //     display: grid;
-    //     // grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-    //     justify-items: center;
-    //     grid-gap: 5px;
-    //     grid-row-gap: 0px;
-    //     a {
-    //         .videoBlock__thumbnail {
-    //             width: 100%;
-    //             height: 100%;
-    //             margin: 5px;
-    //         }
-    //         .videoBlock__avatar{
-    //             width: 40px;
-    //             height: 40px;
-    //             border-radius: 50%;
-    //         }
-    //     }
-    // }
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+    justify-items: center;
+    align-items: center;
+    .videoBlock{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+        justify-items: center;
+        grid-gap: 5px;
+        grid-row-gap: 0px;
+        a {
+            .videoBlock__thumbnail {
+                width: 100%;
+                height: 100%;
+                margin: 5px;
+            }
+            .videoBlock__avatar{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+        }
+    }
 }
