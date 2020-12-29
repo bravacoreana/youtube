@@ -12,6 +12,11 @@
     "build:assets": "cross-env WEBPACK_ENV=production webpack"
   },
   "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
@@ -26,15 +31,11 @@
     "passport-github": "^1.1.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "pug": "^3.0.0"
+    "pug": "^3.0.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
-    "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.12.11",
     "autoprefixer": "^10.1.0",
-    "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "eslint": "^7.16.0",
