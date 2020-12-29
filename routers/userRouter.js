@@ -6,7 +6,7 @@ import {
   postEditProfile,
   userDetail,
 } from "../controllers/userController";
-import { multerUploadAvatar, onlyPrivate } from "../middlewares";
+import { onlyPrivate } from "../middlewares";
 
 const userRouter = express.Router();
 

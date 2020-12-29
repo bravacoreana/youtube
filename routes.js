@@ -9,11 +9,11 @@ const LOG_OUT = "/logout";
 const USERS = "/users";
 const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/editprofile";
-const CHANGE_PASSWORD = "/:id/changePassword";
+const CHANGE_PASSWORD = "/changePassword";
 const MY_PROFILE = "/myprofile";
 
 // VIDEOS
-const VIDEO = "/video";
+const VIDEOS = "/videos";
 const VIDEO_UPLOAD = "/upload";
 const SHOOT_VIDEO = "/shootVideo";
 const VIDEO_DETAIL = "/:id";
@@ -39,23 +39,23 @@ const routes = {
   },
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
-  video: VIDEO,
+  videos: VIDEOS,
   upload: VIDEO_UPLOAD,
   detail: (id) => {
     if (id) {
-      return `${VIDEO}/${id}`;
+      return `${VIDEOS}/${id}`;
     }
     return VIDEO_DETAIL;
   },
   edit: (id) => {
     if (id) {
-      return `/video/${id}/edit`;
+      return `/videos/${id}/edit`;
     }
     return EDIT_VIDEO;
   },
   delete: (id) => {
     if (id) {
-      return `${VIDEO}/${id}/delete`;
+      return `${VIDEOS}/${id}/delete`;
     }
     return DELETE_VIDEO;
   },

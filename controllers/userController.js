@@ -85,8 +85,12 @@ export const getEditProfile = (req, res) => {
   res.render("editProfile", { pageTitle: "Edit Profile" });
 };
 
-export const postEditProfile = (req, res) => {
-  console.log(req.body);
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file,
+  } = req;
+  console.log(name, email);
   // try {
   //   await User.findByIdAndUpdate(req.user.id, {
   //     name,
