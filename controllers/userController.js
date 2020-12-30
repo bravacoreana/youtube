@@ -1,4 +1,5 @@
 import passport from "passport";
+import bcrypt from "bcryptjs";
 import routes from "../routes";
 import User from "../models/User";
 
@@ -83,6 +84,7 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
+    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
@@ -94,24 +96,41 @@ export const getEditProfile = (req, res) => {
 };
 
 export const postEditProfile = async (req, res) => {
-  console.log(req.user.id);
-  console.log(req.body);
   const {
     body: { name, email },
+    file,
   } = req;
-  console.log(name, email);
-  // try {
-  //   await User.findByIdAndUpdate(req.user.id, {
-  //     name,
-  //     email,
-  //     avatarUrl: file ? file.path : req.user.avatarUrl,
-  //   });
-  //   res.redirect(routes.myProfile);
-  // } catch (error) {
-  //   res.redirect(routes.home);
-  // }
+  console.log(name, email, file);
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      name,
+      email,
+      avatarUrl: file ? file.path : req.user.avatarUrl,
+    });
+    res.redirect(routes.myProfile);
+  } catch (error) {
+    res.redirect(routes.home);
+  }
 };
 
-export const changePassword = (req, res) => {
-  res.render("changePassword", { pageTitle: "Chage Password" });
+export const getChangePassword = (req, res) => {
+  res.render("changePassword", { pageTitle: "Change Password" });
+};
+
+export const postChangePassword = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword, newPasswordVerify },
+  } = req;
+  try {
+    if (newPassword !== newPasswordVerify) {
+      res.status(400);
+      res.redirect(routes.users + routes.changePassword);
+      return;
+    }
+    await req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.myProfile);
+  } catch (error) {
+    res.status(400);
+    res.redirect(routes.users + routes.changePassword);
+  }
 };

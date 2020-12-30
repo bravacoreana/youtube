@@ -8,9 +8,9 @@ const LOG_OUT = "/logout";
 // USER
 const USERS = "/users";
 const USER_DETAIL = "/:id";
+const MY_PROFILE = "/myprofile";
 const EDIT_PROFILE = "/editprofile";
 const CHANGE_PASSWORD = "/changePassword";
-const MY_PROFILE = "/myprofile";
 
 // VIDEOS
 const VIDEOS = "/videos";
