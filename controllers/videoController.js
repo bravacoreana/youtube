@@ -33,17 +33,23 @@ export const getVideoUpload = (req, res) => {
 export const postVideoUpload = async (req, res) => {
   const {
     body: { title, description },
+    files,
   } = req;
-  const videoFile = req.files.videoFile[0].path;
-  const thumbnailFile = req.files.thumbnailFile[0].path;
-
-  const newVideo = await Video.create({
-    videoFile,
-    thumbnailFile,
-    title,
-    description,
-  });
-  res.redirect(routes.detail(newVideo.id));
+  console.log(title, description, files);
+  const videoFile = files.videoFile[0].path;
+  const thumbnailFile = files.thumbnailFile[0].path;
+  try {
+    const newVideo = await Video.create({
+      videoFile,
+      thumbnailFile,
+      title,
+      description,
+    });
+    res.redirect(routes.detail(newVideo.id));
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
 export const shootVideo = (req, res) => {

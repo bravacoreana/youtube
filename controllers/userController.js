@@ -8,7 +8,7 @@ export const getSignUp = (req, res) => {
 
 export const postSignUp = async (req, res, next) => {
   const {
-    body: { name, email, password, password2, avatar },
+    body: { name, email, password, password2 },
   } = req;
   // TODO: Give Avatar Url
   if (password !== password2) {
@@ -16,7 +16,7 @@ export const postSignUp = async (req, res, next) => {
     res.render("signUp", { pageTitle: "Sign Up" });
   } else {
     try {
-      const user = await User({ name, email, avatar });
+      const user = await User({ name, email });
       await User.register(user, password);
       next();
     } catch (error) {
@@ -77,8 +77,16 @@ export const myProfile = (req, res) => {
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
-export const userDetail = (req, res) => {
-  res.render("userDetail", { pageTitle: "User Detail" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id).populate("videos");
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
 };
 
 export const getEditProfile = (req, res) => {
@@ -86,9 +94,10 @@ export const getEditProfile = (req, res) => {
 };
 
 export const postEditProfile = async (req, res) => {
+  console.log(req.user.id);
+  console.log(req.body);
   const {
     body: { name, email },
-    file,
   } = req;
   console.log(name, email);
   // try {
