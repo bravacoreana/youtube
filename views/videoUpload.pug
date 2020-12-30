@@ -3,10 +3,12 @@ extends layouts/main
 block content
     .form-container
         form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
-            lable(for="Thumbnail") Choose a thumbnail
-            input(type="file", id="thumbnailFile", name="thumbnailFile" required=true, accept="image/*")
-            label(for="Video") Choose a video         
-            input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")
+            .fileUpload
+                lable(for="Thumbnail") Thumbnail
+                input(type="file", id="thumbnailFile", name="thumbnailFile" required=true, accept="image/*")
+            .fileUpload
+                label(for="Video") Video         
+                input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")
             input(type="title", name="title", placeholder="Title" required=true)
             textarea(name="description", placeholder="Description" required=true)
             input(type="submit", value="Upload")
