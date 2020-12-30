@@ -1,21 +1,21 @@
-html, 
+html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    background-color: $bgColor;
+  background-color: $bgColor;
 }
 
 main {
-    width: 100%;
-    max-width: 2560px;
-    margin: 0 auto;
-    min-height: 70vh;
+  width: 100%;
+  max-width: 1194px;
+  margin: 0 auto;
+  min-height: 70vh;
 }
 
 button {
-    padding:7px;
-    border: 1px solid rgba(96,96,96, 0.3);
-    color: $black;
+  padding: 7px;
+  border: 1px solid rgba(96, 96, 96, 0.3);
+  color: $black;
 }

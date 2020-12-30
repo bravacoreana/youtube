@@ -1,86 +1,84 @@
 .header {
-    border-bottom: 1px solid $lightGrey;
-    padding: 5px;
-    .header__container {
-        padding: 5px 0px;
-        width: 100%;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 2fr 0.5fr;
+  border-bottom: 1px solid $lightGrey;
+  padding: 5px;
+  .header__container {
+    padding: 5px 0px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.5fr;
+    align-items: center;
+    .header__column:first-child {
+      .header-logo {
+        font-size: 30px;
+        display: flex;
         align-items: center;
-        .header__column:first-child {
-            .header-logo {
-                font-size: 30px;
-                display:flex;
-                align-items: center;
-                margin-left: 25px;
-                color: $red;
-                span {
-                    font-size: 20px;
-                    margin-left: 2px;
-                    color: $black;
-                }
-            }
+        margin-left: 25px;
+        color: $red;
+        span {
+          font-size: 20px;
+          margin-left: 2px;
+          color: $black;
         }
-        .header__column:nth-child(2) {
-            form {
-                input {
-                    min-width: 75%;
-                    max-width: 500px;
-                    padding: 5px 0px;
-                }
-                button {
-                    width: 45px;
-                }
-            }
-        }
-        .header__column:last-child {
-            display: flex;
-            align-items: center;
-            color: $grey;
-            position:sticky;
-            .dropdown {
-                margin-left: 10px;
-                position: relative;
-                .dropbtn {
-                    cursor: pointer;
-                    i {
-                    padding: 7px;
-                    }
-                }
-                .dropdown-content {
-                    display:none;
-                    width: 150px;
-                    left:auto;
-                    right: 1px;
-                    font-size: 13px;
-                    z-index:1;
-                }
-                &:hover {
-                    .dropbtn {
-                        i {
-                        background-color: wheat;
-                        border-radius: 50%;
-                        transition: background 0.4s ease-in ;
-                        }
-                    }
-                    .dropdown-content {
-                        display: inline-block;
-                        position: absolute;
-                        background-color: $bgColor;
-                        border: 1px solid $lightGrey;
-                        color: black;
-                        li {
-                            padding: 10px 20px;
-                            cursor: pointer;
-                            &:hover {
-                                background-color: wheat;
-                            }
-                        }
-                        
-                    }
-                }
-            }
-        }
+      }
     }
+    .header__column:nth-child(2) {
+      form {
+        input {
+          min-width: 75%;
+          max-width: 500px;
+          padding: 5px 0px;
+        }
+        button {
+          width: 45px;
+        }
+      }
+    }
+    .header__column:last-child {
+      display: flex;
+      align-items: center;
+      color: $grey;
+      position: sticky;
+      i {
+        padding: 12px;
+      }
+      .dropdown {
+        position: relative;
+        .dropbtn {
+          cursor: pointer;
+        }
+        .dropdown-content {
+          display: none;
+          width: 150px;
+          left: auto;
+          right: 1px;
+          font-size: 13px;
+          z-index: 1;
+        }
+        &:hover {
+          .dropbtn {
+            i {
+              background-color: wheat;
+              border-radius: 50%;
+              transition: background 0.4s ease-in;
+            }
+          }
+          .dropdown-content {
+            display: inline-block;
+            position: absolute;
+            background-color: $bgColor;
+            border: 1px solid $lightGrey;
+            color: black;
+            li {
+              padding: 10px 20px;
+              cursor: pointer;
+              &:hover {
+                background-color: wheat;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
