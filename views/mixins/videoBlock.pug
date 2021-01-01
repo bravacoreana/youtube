@@ -1,13 +1,17 @@
-//- views > mixins > videoBlock.pug
-
 mixin videoBlock(video={})
     .videoBlock
         a(href=routes.detail(video.id))
-            img.videoBlock__thumbnail(src=`/${video.thumbnail}`) 
-            h4.videoBlock__title=video.title
-            //- h6.videoBlock__creator=video.name
-            //- h6.videoBlock__views=video.views
-        //- .avatarBlock
-        //-     a(href=routes.userDetail(user.id))
-        //-         img.videoBlock__avatar(src=user.avatarUrl)
-            
+            img.video__thumbnail(src=`/${video.thumbnail}`) 
+            .videoBlock__column
+                img.video__creator-img(src=`/${video.creator}`)
+                .videoBlock-info
+                    h4.video__title=video.title
+                    .videoBlock-details
+                        h6.video__creator-name=video.name
+                        span.video__append · 
+                        if video.views === 0 || 1
+                            span.video__views=video.views
+                            span.video__append view
+                        else
+                            span.video__views=video.views
+                            span.video__append views

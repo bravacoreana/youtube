@@ -1,6 +1,8 @@
 header.header
     .header__container
         .header__column
+            a(href="#")
+                i.fas.fa-bars
             a(href=routes.home)
                 .header-logo
                     i.fab.fa-youtube
@@ -10,6 +12,8 @@ header.header
                 input(type="text", placeholder="Search", name="search_query", autocomplete="off")
                 button(type="submit")
                     i.fas.fa-search
+            a(href="#")
+                i.fas.fa-microphone
         .header__column
             a(href=routes.video+routes.shootVideo)
                 i.fas.fa-video
@@ -55,3 +59,59 @@ header.header
                             li
                                 i.fas.fa-user
                                 span  Sign Out
+
+        //- .header__column
+        //-     a(href=routes.home)
+        //-         .header-logo
+        //-             i.fab.fa-youtube
+        //-             span #{siteName}
+        //- .header__column
+        //-     form(action=routes.results, method="get")
+        //-         input(type="text", placeholder="Search", name="search_query", autocomplete="off")
+        //-         button(type="submit")
+        //-             i.fas.fa-search
+        //- .header__column
+        //-     a(href=routes.video+routes.shootVideo)
+        //-         i.fas.fa-video
+        //-     a(href="#")
+        //-         i.fas.fa-th
+        //-     a(href="#")
+        //-         i.fas.fa-bell
+        //-     ul.dropdown
+        //-         li.dropbtn
+        //-             i.fas.fa-user
+        //-         if !loggedUser
+        //-             ul.dropdown-content
+        //-                 a(href=routes.signUp)
+        //-                     li
+        //-                         i.fas.fa-user
+        //-                         span  Sign Up
+        //-                 a(href=routes.signIn)
+        //-                     li
+        //-                         i.fas.fa-user
+        //-                         span  Sign In
+        //-                 a(href="#")
+        //-                     li
+        //-                         i.fas.fa-adjust
+        //-                         span  Light Mode
+        //-         else
+        //-             ul.dropdown-content
+        //-                 a(href=routes.userDetail)
+        //-                     li
+        //-                         span NAME
+        //-                 a(href=routes.videos+routes.upload)
+        //-                     li
+        //-                         i.fas.fa-film
+        //-                         span  Upload
+        //-                 a(href=routes.myProfile)
+        //-                     li
+        //-                         i.fas.fa-user
+        //-                         span  Profile
+        //-                 a(href="#")
+        //-                     li
+        //-                         i.fas.fa-adjust
+        //-                         span  Dark Mode
+        //-                 a(href=routes.logout)
+        //-                     li
+        //-                         i.fas.fa-user
+        //-                         span  Sign Out
