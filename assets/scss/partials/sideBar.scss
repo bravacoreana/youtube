@@ -1,50 +1,70 @@
-.sidebar__container {
-  width: 200px;
-  height: 100vh;
-  display: none;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  background-color: #fff;
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin: 0 auto;
-    padding: 16px 0px;
-    border-bottom: 1px solid $lightGrey;
-    font-size: 16px;
-    i {
-      cursor: pointer;
-    }
-    .header-logo {
-      color: $black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      i {
-        font-size: 24px;
-        color: red;
+.sidebar__container-mini {
+  table {
+    position: relative;
+    tr {
+      &:hover {
+        background-color: rgba(100, 100, 100, 0.1);
+      }
+      &:first-child {
+        td {
+          color: red;
+        }
+      }
+      td {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 3px;
+        font-size: 10px;
+        color: $grey;
+        cursor: pointer;
+        i {
+          font-size: 14px;
+          margin-bottom: 7px;
+        }
+        span {
+          transform: scaleX(0.95);
+        }
       }
     }
   }
+}
+
+.sidebar__container {
+  height: 100vh;
+  display: none;
+  position: relative;
+  background-color: #fff;
+  padding-top: 10px;
+  color: $grey;
+  i {
+    cursor: pointer;
+    font-size: 14px;
+  }
   .sidebar-rows {
     width: 100%;
-    position: absolute;
-    background-color: #fff;
+    padding: 5px 100px 5px auto;
     .sidebar-row {
+      cursor: pointer;
       display: flex;
       flex-direction: row;
       justify-self: center;
-      padding: 10px 0px 10px 20px;
-      &:hover {
+      padding: 15px 80px 15px 20px;
+      &:first-child {
         background-color: $lightGrey;
+      }
+      &:hover {
+        background-color: $bgColor;
       }
       i {
         margin-right: 10px;
       }
       span {
         font-size: 13px;
+      }
+      &:nth-child(3) {
+        border-bottom: 1px solid $lightGrey;
       }
     }
   }
