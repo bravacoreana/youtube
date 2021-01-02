@@ -1,25 +1,10 @@
 extends layouts/main
 include mixins/videoBlock
+include mixins/sideBar 
 
 block content
     .home
-        table.home-sidebar
-            tr.homeSideBar__icon.homeSideBar-home
-                td
-                    i.fas.fa-home
-                    span Home
-            tr.homeSideBar__icon.homeSideBar-trending
-                td
-                    i.fas.fa-fire
-                    span Trending
-            tr.homeSideBar__icon.homeSideBar-subscriptions
-                td
-                    i.fas.fa-film
-                    span Subscriptions
-            tr.homeSideBar__icon.homeSideBar-library
-                td
-                    i.fas.fa-book-open
-                    span Library
+        +sideBar
         .home-videos
             each video in videos
                 +videoBlock({
@@ -30,3 +15,4 @@ block content
                     name: video.creator.name,
                     views: video.views,
                 })
+        
