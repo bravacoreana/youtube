@@ -1,5 +1,4 @@
 import passport from "passport";
-import bcrypt from "bcryptjs";
 import routes from "../routes";
 import User from "../models/User";
 
