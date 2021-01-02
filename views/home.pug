@@ -2,13 +2,31 @@ extends layouts/main
 include mixins/videoBlock
 
 block content
-    .home-videos
-        each video in videos
-            +videoBlock({
-                id: video.id,
-                title: video.title,
-                thumbnail: video.thumbnailFile,
-                creator: video.creator.avatarUrl,
-                name: video.creator.name,
-                views: video.views,
-            })
+    .home
+        table.home-sidebar
+            tr.homeSideBar__icon.homeSideBar-home
+                td
+                    i.fas.fa-home
+                    span Home
+            tr.homeSideBar__icon.homeSideBar-trending
+                td
+                    i.fas.fa-fire
+                    span Trending
+            tr.homeSideBar__icon.homeSideBar-subscriptions
+                td
+                    i.fas.fa-film
+                    span Subscriptions
+            tr.homeSideBar__icon.homeSideBar-library
+                td
+                    i.fas.fa-book-open
+                    span Library
+        .home-videos
+            each video in videos
+                +videoBlock({
+                    id: video.id,
+                    title: video.title,
+                    thumbnail: video.thumbnailFile,
+                    creator: video.creator.avatarUrl,
+                    name: video.creator.name,
+                    views: video.views,
+                })
