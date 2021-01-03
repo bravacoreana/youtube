@@ -32,6 +32,13 @@
             font-size: 24px;
             color: red;
           }
+          .countryCode {
+            vertical-align: super;
+            position: absolute;
+            left: 165px;
+            top: 15px;
+            font-size: 10px;
+          }
         }
       }
       &:nth-child(2) {

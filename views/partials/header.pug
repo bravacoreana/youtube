@@ -5,8 +5,9 @@ header.header
                 i.fas.fa-bars#sidebarBtn-js
             a(href=routes.home)
                 .header-logo
-                    i.fab.fa-youtube
+                    i.fab.fa-youtube      
                     span #{siteName}
+                    span.countryCode#countryCode-js
         .header__column
             form(action=routes.results, method="get")
                 input(type="text", placeholder="Search", name="search_query", autocomplete="off")
