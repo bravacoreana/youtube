@@ -1,0 +1,111 @@
+.video__container {
+  display: flex;
+}
+.video__wrapper {
+  width: 40%;
+  min-width: 400px;
+  margin-left: 20%;
+  margin-top: 20px;
+  color: $grey;
+  font-size: 13px;
+  .video__player {
+    video {
+      width: 100%;
+    }
+  }
+  .video__info {
+    margin: 20px 0px;
+    .video__details {
+      margin-bottom: 20px;
+      color: $grey;
+      .video__details-editBtn {
+        margin-bottom: 20px;
+      }
+      .video__title {
+        color: $black;
+        font-size: 16px;
+      }
+      .video__detail {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .video__detail-btns {
+          i {
+            margin-left: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .video__title {
+      margin-bottom: 20px;
+    }
+    .video__views,
+    .video__createdDate {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .video__creator-detail {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid $lightGrey;
+      padding-top: 20px;
+      a {
+        color: $black;
+      }
+      .video__creator-detail-btns {
+        i {
+          margin-left: 20px;
+        }
+        button {
+          border: none;
+        }
+      }
+    }
+    .video__description {
+      border-bottom: 1px solid $lightGrey;
+      padding-bottom: 20px;
+    }
+  }
+  .video__comments {
+    margin: 20px 0px;
+  }
+  .video__comments-create {
+    form {
+      color: $grey;
+      input:not([type="submit"]) {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid $lightGrey;
+        &:focus {
+          border-bottom: 2px solid $black;
+        }
+      }
+      .video__comments-submit {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+      input:not([type="text"]) {
+        border: none;
+        color: $white;
+        background-color: $grey;
+        padding: 7px;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      button {
+        border: none;
+        background-color: transparent;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 695px) {
+  .video__wrapper {
+    margin: auto;
+  }
+} ;

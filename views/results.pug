@@ -1,15 +1,22 @@
 extends layouts/main
 include mixins/videoBlock
+include mixins/sideBar
 
 block content
-    .results__header
-        h2 Searching results for: #{searchQuery}
-    .search__videos
-        if videos.length === 0
-            h5 No Videos Found!
-        each video in videos
-            +videoBlock({
-                id: video.id,
-                title: video.title,
-                thumbnail: video.thumbnailFile
-            })
+    .results__container
+        +sideBar
+        .results__wrapper
+            .results__header
+                h2 Searching results for: #{searchQuery}
+            .search__videos
+                if videos.length === 0
+                    h5 No Videos Found!
+                each video in videos
+                    +videoBlock({
+                        id: video.id,
+                        title: video.title,
+                        thumbnail: video.thumbnailFile,
+                        creator: video.creator.avatarUrl,
+                        name: video.creator.name,
+                        views: video.views,
+                    })

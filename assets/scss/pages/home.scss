@@ -8,7 +8,7 @@
   height: 100vh;
   background-color: $bgColor;
   display: grid;
-  grid-template-columns: repeat(12, 72px);
+  grid-template-columns: repeat(6, 222px);
   column-gap: 30px;
   offset: center;
   grid-auto-flow: column;
@@ -17,26 +17,32 @@
     margin: 0px 2px;
   }
   .videoBlock {
+    a {
+      color: $grey;
+    }
     .video__thumbnail {
       min-width: 240px;
       height: auto;
     }
     .videoBlock__column {
       display: flex;
+      margin-top: 5px;
       .video__creator-img {
-        border-radius: 30px;
-        width: 35px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
       }
       .videoBlock-info {
         margin-left: 10px;
         .video__title {
           color: black;
           font-size: 14px;
+          margin-bottom: 10px;
+          @include ellipsis;
         }
         .videoBlock-details {
           display: flex;
-          margin-top: 5px;
-          font-size: 13px;
+          font-size: 12px;
         }
       }
     }

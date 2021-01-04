@@ -2,7 +2,7 @@ extends layouts/main
 
 block content
     .form-container
-        form(action=routes.signUp, method="post")
+        form(action=routes.signUp, method="post", enctype="multipart/form-data")
             .fileUpload
                 label(for="avatar") Avatar
                 input(type="file", id="avatar", name="avatar" accept="image/*")

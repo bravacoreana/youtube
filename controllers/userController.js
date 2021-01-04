@@ -9,14 +9,20 @@ export const getSignUp = (req, res) => {
 export const postSignUp = async (req, res, next) => {
   const {
     body: { name, email, password, password2 },
+    file,
   } = req;
-  // TODO: Give Avatar Url
+
   if (password !== password2) {
     res.status(400);
     res.render("signUp", { pageTitle: "Sign Up" });
   } else {
     try {
-      const user = await User({ name, email });
+      const user = await User({
+        name,
+        email,
+        avatarUrl: file ? file.path : "",
+      });
+      console.log(user);
       await User.register(user, password);
       next();
     } catch (error) {
@@ -73,8 +79,13 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const myProfile = (req, res) => {
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+export const myProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate("videos");
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
 };
 
 export const userDetail = async (req, res) => {
@@ -83,7 +94,6 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
-    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
@@ -99,7 +109,6 @@ export const postEditProfile = async (req, res) => {
     body: { name, email },
     file,
   } = req;
-  console.log(name, email, file);
   try {
     await User.findByIdAndUpdate(req.user.id, {
       name,

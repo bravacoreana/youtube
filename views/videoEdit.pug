@@ -7,7 +7,7 @@ block content
             label(for="thumbnail") Change Thumbnail
             input(type="file", id="thumbnailFile", name="thumbnailFile")
 
-            input(type="title", name="title", placeholder="Title", value=video.title)
+            input(type="title", name="title", placeholder="Title", maxlength="100" value=video.title)
             textarea(name="description", placeholder="Description")=video.description
             input(type="submit", value="Save")
         a(href=routes.delete(video.id)) Delete Video

@@ -42,7 +42,7 @@
         }
       }
       &:nth-child(2) {
-        width: 70%;
+        width: 67%;
         form {
           display: flex;
           width: 40%;
@@ -54,8 +54,13 @@
         }
       }
       &:last-child {
-        width: 100px;
+        width: 120px;
         padding-right: 25px;
+        button {
+          border: none;
+          background-color: transparent;
+          display: none;
+        }
         i {
           margin: 0px 2px;
         }
@@ -70,31 +75,25 @@
             min-width: 200px;
             z-index: 1;
             display: none;
-            background-color: yellowgreen;
-            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 3px;
             a {
               margin: 0px;
-              &:first-child {
-                li {
-                  border-top-left-radius: 5px;
-                  border-top-right-radius: 5px;
+              li {
+                font-size: 13px;
+                padding: 10px 20px;
+                i {
+                  margin-right: 7px;
                 }
-                &:last-child {
-                  li {
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
+                &:hover {
+                  background-color: $lightGrey;
+                  &:first-child {
+                    border-top-left-radius: 3px;
+                    border-top-right-radius: 3px;
+                    border-bottom-left-radius: 3px;
+                    border-bottom-right-radius: 3px;
                   }
                 }
-              }
-            }
-            li {
-              font-size: 13px;
-              padding: 10px 20px;
-              i {
-                margin-right: 7px;
-              }
-              &:hover {
-                background-color: $lightGrey;
               }
             }
           }
@@ -107,9 +106,16 @@
 @media (max-width: 652px) {
   .header {
     .header__container {
-      .header__column:nth-child(2) {
-        form {
-          visibility: hidden;
+      .header__column {
+        &:nth-child(2) {
+          form {
+            display: none;
+          }
+        }
+        &:last-child {
+          button {
+            display: block;
+          }
         }
       }
     }

@@ -7,7 +7,10 @@ export const home = async (req, res) => {
     res.render("home", { pageTitle: "Welcome", videos });
   } catch (error) {
     console.log(error);
-    res.render("home", { pageTitle: "Welcome", videos: [] });
+    res.render("home", {
+      pageTitle: "Welcome",
+      videos: [],
+    });
   }
 };
 
@@ -77,7 +80,7 @@ export const getVideoEdit = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
+    if (String(video.creator) !== req.user.id) {
       throw Error();
     } else {
       res.render("videoEdit", { pageTitle: `Edit ${video.title}`, video });
