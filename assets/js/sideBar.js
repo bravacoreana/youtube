@@ -6,12 +6,34 @@ const mediaQueryListSmall = window.matchMedia("(max-width:1200px)");
 const mediaQueryListLarge = window.matchMedia("(min-width:1200px)");
 
 const handleSidebar = () => {
-  if (sidebar.style.display === "none" || !sidebar.style.display) {
+  if (sidebar.style.display === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
+  } else if (
+    sidebar.style.display === "block" &&
+    mediaQueryListXSmall.matches
+  ) {
+    sidebar.style.display = "none";
+    sidebarMini.style.display = "none";
+  } else if (sidebar.style.display === "block" && mediaQueryListSmall.matches) {
+    sidebar.style.display = "none";
+    sidebarMini.style.display = "block";
   } else {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
+  }
+};
+
+const firstLoading = () => {
+  if (mediaQueryListXSmall.matches) {
+    sidebarMini.style.display = "none";
+    sidebar.style.display = "none";
+  } else if (mediaQueryListSmall.matches) {
+    sidebarMini.style.display = "block";
+    sidebar.style.display = "none";
+  } else {
+    sidebarMini.style.display = "none";
+    sidebar.style.display = "block";
   }
 };
 
@@ -41,6 +63,7 @@ const mediaQuerySmall = (event) => {
 };
 
 const init = () => {
+  firstLoading();
   sidebarBtn.addEventListener("click", handleSidebar);
   mediaQueryListXSmall.addEventListener("change", mediaQueryXSmall, false);
   mediaQueryListSmall.addEventListener("change", mediaQuerySmall, false);
