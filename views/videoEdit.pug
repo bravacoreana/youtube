@@ -1,13 +1,17 @@
 extends layouts/main
+include mixins/sideBar 
 
 block content
-    img.thumbnail(src=`/${video.thumbnailFile}`)
-    .form-container
-        form(action=routes.edit(video.id), method="post", enctype="multipart/form-data")
-            label(for="thumbnail") Change Thumbnail
-            input(type="file", id="thumbnailFile", name="thumbnailFile")
-
-            input(type="title", name="title", placeholder="Title", maxlength="100" value=video.title)
-            textarea(name="description", placeholder="Description")=video.description
-            input(type="submit", value="Save")
-        a(href=routes.delete(video.id)) Delete Video
+    +sideBar
+    .video__container
+        .video__wrapper
+            img.thumbnail(src=`/${video.thumbnailFile}`)
+            .imgPreview#previewThumbnail
+            .form-container
+                form(action=routes.edit(video.id), method="post", enctype="multipart/form-data")
+                    label(for="thumbnail") Change Thumbnail
+                    input(type="file", id="thumbnailFile", name="thumbnailFile")
+                    input(type="title", name="title", placeholder="Title", maxlength="100" value=video.title)
+                    textarea(name="description", placeholder="Description", rows="20")=video.description
+                    input(type="submit", value="Save")
+                a(href=routes.delete(video.id)) Delete Video
