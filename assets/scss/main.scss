@@ -1,15 +1,12 @@
 html,
 body {
-  height: 100%;
-}
-
-body {
+  height: 100vh;
+  background-color: $bgColor;
 }
 
 main {
   width: 100%;
   margin: 0 auto;
-  min-height: 70vh;
 }
 
 button {

@@ -1,9 +1,9 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   background-color: white;
   width: 100%;
-  height: 50px;
+  height: 55px;
   color: $grey;
   z-index: 100;
   display: flex;
@@ -19,12 +19,17 @@
 .header__column {
   display: flex;
   align-items: center;
-  margin-left: 20px;
-
+  margin-left: 24px;
+  i {
+    font-size: 18px;
+  }
   &:first-child {
     a {
       display: flex;
       align-items: center;
+    }
+    .header-sidebar {
+      transform: scale(1.2, 0.9);
     }
     .header-logo {
       position: relative;
@@ -63,18 +68,22 @@
       input {
         flex: 1;
         border: none;
+        font-size: 16px;
+        padding: 5px 10px;
       }
       button {
         border: none;
+        color: $grey;
+        padding: 5px 3%;
       }
     }
   }
 
   &:last-child {
-    margin-right: 20px;
+    margin-right: 24px;
     > a,
     ul {
-      margin-left: 20px;
+      margin-left: 30px;
     }
     .dropdown {
       position: relative;
