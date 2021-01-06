@@ -1,123 +1,123 @@
 .header {
+  position: sticky;
+  top: 0;
+  background-color: white;
   width: 100%;
   height: 50px;
-  display: block;
-  border-bottom: 0.01em solid $lightGrey;
+  color: $grey;
+  z-index: 100;
+  display: flex;
   .header__container {
-    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
-    .header__column {
+    margin: 10px auto;
+  }
+}
+
+.header__column {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+
+  &:first-child {
+    a {
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: 0px 20px;
-      a,
-      ul {
+    }
+    .header-logo {
+      position: relative;
+      padding: 0px 5px;
+      margin-left: 10px;
+      i {
+        color: $red;
+        font-size: 24px;
+      }
+      .siteName {
+        transform: scale(0.95, 1.3);
+        font-weight: 600;
+        letter-spacing: -0.05em;
         color: $black;
+      }
+      .countryCode {
+        vertical-align: super;
+        font-size: 10px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+    }
+  }
+
+  &:nth-child(2) {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    form {
+      margin-right: 10px;
+      flex: 1;
+      border: 1px solid $lightGrey;
+      display: flex;
+      max-width: 700px;
+      input {
+        flex: 1;
+        border: none;
+      }
+      button {
+        border: none;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-right: 20px;
+    > a,
+    ul {
+      margin-left: 20px;
+    }
+    .dropdown {
+      position: relative;
+      cursor: pointer;
+    }
+  }
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  border: 1px solid $lightGrey;
+  border-radius: 2px;
+  width: 200px;
+  right: 0px;
+  top: 25px;
+  background-color: $white;
+  a {
+    li {
+      padding: 10px 0px;
+      &:hover {
+        background-color: $lightGrey;
+      }
+      i {
+        width: 20px;
+        text-align: center;
         margin: 0px 10px;
-      }
-      &:first-child {
-        .header-sidebar {
-          cursor: pointer;
-          margin-left: 5px;
-          margin-right: 25px;
-        }
-        .header-logo {
-          display: flex;
-          align-items: center;
-          i {
-            font-size: 24px;
-            color: red;
-          }
-          .countryCode {
-            vertical-align: super;
-            position: absolute;
-            left: 165px;
-            top: 15px;
-            font-size: 10px;
-          }
-        }
-      }
-      &:nth-child(2) {
-        width: 67%;
-        form {
-          display: flex;
-          width: 40%;
-          input {
-            width: 100%;
-            max-width: 700px;
-            padding: 7px;
-          }
-        }
-      }
-      &:last-child {
-        width: 120px;
-        padding-right: 25px;
-        button {
-          border: none;
-          background-color: transparent;
-          display: none;
-        }
-        i {
-          margin: 0px 2px;
-        }
-        .dropdown {
-          position: relative;
-          display: inline-block;
-          cursor: pointer;
-          .dropdown-content {
-            position: absolute;
-            right: -10px;
-            top: 25px;
-            min-width: 200px;
-            z-index: 1;
-            display: none;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 3px;
-            a {
-              margin: 0px;
-              li {
-                font-size: 13px;
-                padding: 10px 20px;
-                i {
-                  margin-right: 7px;
-                }
-                &:hover {
-                  background-color: $lightGrey;
-                  &:first-child {
-                    border-top-left-radius: 3px;
-                    border-top-right-radius: 3px;
-                    border-bottom-left-radius: 3px;
-                    border-bottom-right-radius: 3px;
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
 }
 
 @media (max-width: 652px) {
-  .header {
-    .header__container {
-      .header__column {
-        &:nth-child(2) {
-          form {
-            display: none;
-          }
-        }
-        &:last-child {
-          button {
-            display: block;
-          }
-        }
-      }
+  .header__column:nth-child(2) {
+    justify-content: flex-end;
+    form {
+      display: none;
     }
+  }
+}
+
+@media (min-width: 652px) {
+  .search {
+    display: none;
   }
 }

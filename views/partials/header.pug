@@ -3,10 +3,10 @@ header.header
         .header__column
             .header-sidebar
                 i.fas.fa-bars#sidebarBtn-js
-            a(href=routes.home)
-                .header-logo
+            .header-logo
+                a(href=routes.home)
                     i.fab.fa-youtube      
-                    span #{siteName}
+                    span.siteName #{siteName}
                     span.countryCode#countryCode-js
         .header__column
             form(action=routes.results, method="get")
@@ -16,7 +16,7 @@ header.header
             a(href="#")
                 i.fas.fa-microphone
         .header__column
-            button.search
+            .search
                 i.fas.fa-search
             a(href=routes.video+routes.shootVideo)
                 i.fas.fa-video
