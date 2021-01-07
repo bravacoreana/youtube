@@ -1,29 +1,59 @@
 const sidebar = document.getElementById("sidebar-js");
 const sidebarBtn = document.getElementById("sidebarBtn-js");
 const sidebarMini = document.getElementById("sidebarMini-js");
-const mediaQueryListXSmall = window.matchMedia("(max-width:750px)");
-const mediaQueryListSmall = window.matchMedia("(max-width:1200px)");
-const mediaQueryListLarge = window.matchMedia("(min-width:1200px)");
+const mediaQueryListXSmall = window.matchMedia("screen and (max-width:750px)");
+const mediaQueryListSmall = window.matchMedia("screen and (max-width:1200px)");
+const mediaQueryListLarge = window.matchMedia("screen and (min-width:1200px)");
 
 const handleSidebar = () => {
-  if (sidebar.style.display === "none") {
+  if (mediaQueryListXSmall.matches && sidebar.style.display === "block") {
+    sidebar.style.display = "none";
+    sidebarMini.style.display = "none";
+  } else if (mediaQueryListXSmall.matches && sidebar.style.display === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
-  } else if (
-    sidebar.style.display === "block" &&
-    mediaQueryListXSmall.matches
-  ) {
+  } else if (mediaQueryListSmall.matches && sidebar.style.display === "block") {
     sidebar.style.display = "none";
+    sidebarMini.style.display = "block";
+    sidebarMini.style.visibility = "visible";
+  } else if (mediaQueryListSmall.matches && sidebar.style.display === "none") {
+    sidebar.style.display = "block";
+    sidebarMini.style.display = "block";
+    sidebarMini.style.visibility = "hidden";
+  } else if (mediaQueryListLarge.matches && sidebar.style.display === "block") {
+    sidebar.style.display = "none";
+    sidebarMini.style.display = "block";
+    sidebarMini.style.visibility = "visible";
+  } else if (mediaQueryListLarge.matches && sidebar.style.display === "none") {
+    sidebar.style.display = "block";
     sidebarMini.style.display = "none";
-  } else if (sidebar.style.display === "block" && mediaQueryListSmall.matches) {
-    sidebar.style.display = "none";
-    sidebarMini.style.display = "block";
   } else {
-    sidebar.style.display = "none";
-    sidebarMini.style.display = "block";
+    console.log("OH GOD NO, NO GOD PLEASE NOOOOOOOOOO");
   }
 };
+// const handleSidebar = () => {
+//   if (sidebar.style.display === "none") {
+//     sidebar.style.display = "block";
+//     sidebarMini.style.display = "none";
+//   } else if (
+//     sidebar.style.display === "block" &&
+//     mediaQueryListXSmall.matches
+//   ) {
+//     sidebar.style.display = "none";
+//     sidebarMini.style.display = "none";
+//   } else if (sidebar.style.display === "block" && mediaQueryListSmall.matches) {
+//     sidebar.style.display = "none";
+//     sidebarMini.style.display = "block";
+//   } else {
+//     sidebar.style.display = "none";
+//     sidebarMini.style.display = "block";
+//   }
+// };
 
+// else if (sidebar.style.display === "none" && mediaQueryListSmall.matches) {
+//     sidebar.style.display = "block";
+//     sidebarMini.style.display = "block";
+//   }
 const firstLoading = () => {
   if (mediaQueryListXSmall.matches) {
     sidebarMini.style.display = "none";
@@ -45,20 +75,21 @@ const mediaQueryXSmall = (event) => {
   }
 };
 
+const mediaQuerySmall = (event) => {
+  if (event.matches) {
+    sidebarMini.style.display = "block";
+  }
+  // } else {
+  //   sidebarMini.style.display = "none";
+  // }
+};
+
 const mediaQueryLarge = (event) => {
   if (event.matches) {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
   } else {
     sidebar.style.display = "none";
-  }
-};
-
-const mediaQuerySmall = (event) => {
-  if (event.matches) {
-    sidebarMini.style.display = "block";
-  } else {
-    sidebarMini.style.display = "none";
   }
 };
 
