@@ -5,14 +5,14 @@ include mixins/sideBar
 block content
     .main-container
         +sideBar
-        .home-videos
-            each video in videos
-                +videoBlock({
-                    id: video.id,
-                    title: video.title,
-                    thumbnail: video.thumbnailFile,
-                    creator: video.creator.avatarUrl,
-                    name: video.creator.name,
-                    createdAt: video.createdAt,
-                    views: video.views,
-                })
+        .video-container#homeContainer-js
+            .video-wrap#videoWrap-js
+                each video in videos
+                    +videoBlock({
+                        id: video.id,
+                        title: video.title,
+                        thumbnail: video.thumbnailFile,
+                        creator: video.creator,
+                        createdAt: video.createdAt,
+                        views: video.views,
+                    })
