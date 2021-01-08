@@ -6,7 +6,7 @@
   justify-content: center;
   width: 100%;
   margin-top: 75px;
-  font-size: min(max(13px, 1.4vw), 14px);
+  @include fontSize;
 }
 .video-wrap {
   grid-column: 2/-1;
@@ -17,12 +17,12 @@
   justify-content: center;
   margin: 1%;
   max-height: 450px;
+  max-width: 3100px;
   .videoBlock {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: 1fr 1fr 1fr 0.5fr 0.5fr;
-    // min-height: 300px;
     max-height: 450px;
     max-width: 500px;
     margin: 1%;
@@ -40,10 +40,7 @@
         align-items: center;
         margin-top: 3px;
         .video__creator-img {
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          margin-right: 10px;
+          @include avatar;
         }
         .videoBlock-title {
           width: 100%;
@@ -61,94 +58,3 @@
     }
   }
 }
-
-// .main-container {
-//   display: flex;
-//   color: $grey;
-//   width: 100%;
-//   font-size: min(max(13px, 1.4vw), 14px);
-// }
-// .home-videos {
-//   width: 100%;
-//   margin-top: 55px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   // justify-content: stretch;
-//   justify-content: center;
-//   .videoBlock {
-//     width: 49%;
-//     margin: 0px 0.5%;
-//     max-width: 320px;
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(1fr, 320px));
-//     max-height: 270px;
-//     object-fit: cover;
-//     .videoBlock__column:first-child {
-//       width: 100%;
-//       background-color: $black;
-//       position: relative;
-//       overflow: hidden;
-//       width: 100%;
-//       padding-top: 56.25%;
-//       img {
-//         position: absolute;
-//         top: 0;
-//         left: 0;
-//         bottom: 0;
-//         right: 0;
-//         width: 100%;
-//         height: 100%;
-//       }
-//     }
-//     .videoBlock__column:nth-child(2) {
-//       display: flex;
-//       width: 100%;
-//       margin: 5px 0px;
-//       align-items: center;
-//       .video__creator-img {
-//         border-radius: 50%;
-//         width: 40px;
-//         height: 40px;
-//         margin-right: 10px;
-//       }
-//       .videoBlock-title {
-//         width: 100%;
-//         .video__title {
-//           @include ellipsis();
-//           width: 100%;
-//           margin-bottom: 5px;
-//         }
-//       }
-//     }
-//     .videoBlock__column:last-child {
-//       width: 100%;
-//       display: flex;
-//       flex-direction: column;
-//       padding-left: 50px;
-//       margin-bottom: 10px;
-//     }
-//   }
-// }
-
-// .home-videos__adMusic {
-//   @include ads;
-//   color: $white;
-//   background-color: $black;
-//   button {
-//     color: $white;
-//     border: 2px solid $white;
-//   }
-// }
-
-// .home-videos__adPremium {
-//   @include ads;
-//   color: $black;
-//   background-color: $white;
-//   button {
-//     color: blue;
-//     border: 2px solid blue;
-//   }
-//   // .closeBtn {
-//   //   color: $black;
-//   // }
-// }

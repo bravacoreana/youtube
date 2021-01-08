@@ -11,16 +11,18 @@ const mediaQueryListMedium = window.matchMedia(
 const mediaQueryListLarge = window.matchMedia("screen and (min-width:1730px)");
 
 const handleMainBox = () => {
-  if (boxContainer.offsetWidth > 2100) {
-    wrap.style.gridTemplateColumns = "repeat(6,1fr)";
-  } else if (boxContainer.offsetWidth > 1800) {
-    wrap.style.gridTemplateColumns = "repeat(5,1fr)";
-  } else if (boxContainer.offsetWidth > 1300) {
-    wrap.style.gridTemplateColumns = "repeat(4,1fr)";
-  } else if (boxContainer.offsetWidth > 1000) {
-    wrap.style.gridTemplateColumns = "repeat(3,1fr)";
-  } else if (boxContainer.offsetWidth > 700) {
-    wrap.style.gridTemplateColumns = "repeat(2,1fr)";
+  if (boxContainer) {
+    if (boxContainer.offsetWidth > 2100) {
+      wrap.style.gridTemplateColumns = "repeat(6,1fr)";
+    } else if (boxContainer.offsetWidth > 1800) {
+      wrap.style.gridTemplateColumns = "repeat(5,1fr)";
+    } else if (boxContainer.offsetWidth > 1300) {
+      wrap.style.gridTemplateColumns = "repeat(4,1fr)";
+    } else if (boxContainer.offsetWidth > 1000) {
+      wrap.style.gridTemplateColumns = "repeat(3,1fr)";
+    } else if (boxContainer.offsetWidth > 700) {
+      wrap.style.gridTemplateColumns = "repeat(2,1fr)";
+    }
   }
 };
 
@@ -29,32 +31,34 @@ const mainBox = () => {
 };
 
 const firstLoad = () => {
-  if (window.innerWidth < "480") {
-    wrap.style.gridTemplateColumns = "repeat(1,1fr)";
-  } else if (window.innerWidth < "768") {
-    wrap.style.gridTemplateColumns = "repeat(2,1fr)";
-  } else if (window.innerWidth < "1128") {
-    wrap.style.gridTemplateColumns = "repeat(3,1fr)";
-  } else if (window.innerWidth < "1952") {
-    wrap.style.gridTemplateColumns = "repeat(4,1fr)";
-  } else if (window.innerWidth < "2288") {
-    wrap.style.gridTemplateColumns = "repeat(5,1fr)";
-  } else if (window.innerWidth > "2288") {
-    wrap.style.gridTemplateColumns = "repeat(6,1fr)";
-  } else {
-    console.log("AKAKAKAKK");
+  if (wrap) {
+    if (window.innerWidth < "480") {
+      wrap.style.gridTemplateColumns = "repeat(1,1fr)";
+    } else if (window.innerWidth < "768") {
+      wrap.style.gridTemplateColumns = "repeat(2,1fr)";
+    } else if (window.innerWidth < "1128") {
+      wrap.style.gridTemplateColumns = "repeat(3,1fr)";
+    } else if (window.innerWidth < "1952") {
+      wrap.style.gridTemplateColumns = "repeat(4,1fr)";
+    } else if (window.innerWidth < "2288") {
+      wrap.style.gridTemplateColumns = "repeat(5,1fr)";
+    } else if (window.innerWidth > "2288") {
+      wrap.style.gridTemplateColumns = "repeat(6,1fr)";
+    } else {
+      console.log("ERROR AT LOADING GRID TEMPLATE COLUMNS");
+    }
+    if (window.innerWidth < 1056) {
+      sidebarMini.style.display = "none";
+      sidebar.style.display = "none";
+    } else if (window.innerWidth < 1730) {
+      sidebarMini.style.display = "block";
+      sidebar.style.display = "none";
+    } else {
+      sidebarMini.style.display = "none";
+      sidebar.style.display = "block";
+    }
+    mainBox();
   }
-  if (window.innerWidth < 1056) {
-    sidebarMini.style.display = "none";
-    sidebar.style.display = "none";
-  } else if (window.innerWidth < 1730) {
-    sidebarMini.style.display = "block";
-    sidebar.style.display = "none";
-  } else {
-    sidebarMini.style.display = "none";
-    sidebar.style.display = "block";
-  }
-  mainBox();
 };
 
 const handleSidebar = () => {
@@ -82,10 +86,7 @@ const handleSidebar = () => {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
   } else {
-    console.log("OH GOD NO, NO GOD PLEASE NOOOOOOOOOO");
-    console.log(`
-    bar: ${sidebar.style.display}
-    mini: ${sidebarMini.style.display}`);
+    console.log("ERROR AT LOADING SIDEBAR");
   }
   mainBox();
   handleMainBox();
