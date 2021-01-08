@@ -5,7 +5,7 @@
   width: 100%;
   height: 55px;
   color: $grey;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   .header__container {
     width: 100%;
@@ -27,9 +27,6 @@
     a {
       display: flex;
       align-items: center;
-    }
-    .header-sidebar {
-      transform: scale(1.2, 0.9);
     }
     .header-logo {
       position: relative;
@@ -96,10 +93,11 @@
   display: none;
   position: absolute;
   border: 1px solid $lightGrey;
+  border-top: none;
   border-radius: 2px;
-  width: 200px;
-  right: 0px;
-  top: 25px;
+  width: 300px;
+  right: -2px;
+  top: 28px;
   background-color: $white;
   a {
     li {
@@ -111,6 +109,28 @@
         width: 20px;
         text-align: center;
         margin: 0px 10px;
+      }
+    }
+  }
+  .dropdown-row__divide {
+    @include rowDivide;
+  }
+  .dropdown__user {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    .dropdown__user-avatar {
+      @include avatar;
+      margin-left: 10px;
+    }
+    .dropdown__user-info {
+      display: flex;
+      flex-direction: column;
+      span {
+        margin: 3px 0px;
+        &:first-child {
+          font-weight: 600;
+        }
       }
     }
   }
