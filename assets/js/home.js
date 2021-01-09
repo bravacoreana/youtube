@@ -14,14 +14,16 @@ const handleMainBox = () => {
   if (boxContainer) {
     if (boxContainer.offsetWidth > 2100) {
       wrap.style.gridTemplateColumns = "repeat(6,1fr)";
-    } else if (boxContainer.offsetWidth > 1800) {
+    } else if (boxContainer.offsetWidth > 1566) {
       wrap.style.gridTemplateColumns = "repeat(5,1fr)";
-    } else if (boxContainer.offsetWidth > 1300) {
+    } else if (boxContainer.offsetWidth > 1180) {
       wrap.style.gridTemplateColumns = "repeat(4,1fr)";
-    } else if (boxContainer.offsetWidth > 1000) {
+    } else if (boxContainer.offsetWidth > 873) {
       wrap.style.gridTemplateColumns = "repeat(3,1fr)";
-    } else if (boxContainer.offsetWidth > 700) {
+    } else if (boxContainer.offsetWidth > 400) {
       wrap.style.gridTemplateColumns = "repeat(2,1fr)";
+    } else {
+      wrap.style.gridTemplateColumns = "repeat(1,1fr)";
     }
   }
 };
