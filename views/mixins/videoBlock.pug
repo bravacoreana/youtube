@@ -1,22 +1,26 @@
 mixin videoBlock(video={})
     .videoBlock
-        a(href=routes.detail(video.id))
-            img.video__thumbnail(src=`/${video.thumbnail}`) 
-            .videoBlock__column
-                if !video.creator
-                    img.video__creator-img(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
+        .videoBlock__column#videoBlockThumbnail-js
+            a(href=routes.detail(video.id))
+                img.video__thumbnail(src=`/${video.thumbnail}`) 
+        .videoBlock__column
+            a(href=routes.userDetail(video.creator._id))
+                if video.creator.avatarUrl
+                    img.video__creator-img(src=`/${video.creator.avatarUrl}`)
                 else
-                    img.video__creator-img(src=`/${video.creator}`)
-                .videoBlock-info
+                    img.video__creator-img(src=`/${user.avatarUrl}`)
+            .videoBlock-title
+                a(href=routes.detail(video.id))
                     h4.video__title=video.title
-                    .videoBlock-details
-                        h6.video__creator-name=video.name
-                        span.video__append · 
-                        if video.views === 0 || 1
-                            span.video__views=video.views
-                            span.video__append view
-                        else
-                            span.video__views=video.views
-                            span.video__append views
-                    .videoBlock-details
-                        h6.video__createdAt=video.createdAt
+        .videoBlock__column
+            .video-creator
+                a(href=routes.userDetail(video.creator._id))
+                    h6.video__creator=video.creator.name
+            .video-details
+                if video.views === 0 || 1
+                    span.video__views=video.views
+                    span.video__append   view ·  
+                else
+                    span.video__views=video.views
+                    span.video__append   views ·  
+                span.video__createdAt=video.createdAt

@@ -26,7 +26,7 @@ header.header
                 i.fas.fa-bell
             ul.dropdown
                 li.dropbtn#dropdown-js
-                    i.fas.fa-user
+                    img.header-avatar(src=`/${loggedUser.avatarUrl}`)
                 if !loggedUser
                     ul.dropdown-content#dropdownContent-js
                         a(href=routes.signUp)
@@ -43,9 +43,14 @@ header.header
                                 span  Light Mode
                 else
                     ul.dropdown-content#dropdownContent-js
-                        a(href=routes.userDetail)
+                        a(href=routes.userDetail(loggedUser.id))
                             li
-                                span NAME
+                                .dropdown__user
+                                    img.dropdown__user-avatar(src=`/${loggedUser.avatarUrl}`)
+                                    .dropdown__user-info
+                                        span.username=loggedUser.name
+                                        span=loggedUser.email
+                        .dropdown-row__divide
                         a(href=routes.videos+routes.upload)
                             li
                                 i.fas.fa-film
