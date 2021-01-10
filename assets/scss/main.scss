@@ -3,6 +3,10 @@ body {
   height: 100%;
 }
 
+body {
+  background-color: var(--clr-background);
+}
+
 main {
   width: 100%;
   height: inherit;
@@ -11,12 +15,7 @@ main {
 
 button {
   padding: 7px;
-  border: 1px solid rgba(96, 96, 96, 0.3);
-  color: $black;
-}
-
-@include darkMode {
-  body {
-    background-color: $darkmodeBody;
-  }
+  border: none;
+  color: var(--clr-text);
+  background-color: var(--clr-lightGrey);
 }
