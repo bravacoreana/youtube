@@ -6,7 +6,7 @@ const wrap = document.getElementById("videoWrap-js");
 
 const mediaQueryListXSmall = window.matchMedia("screen and (max-width:1056px)");
 const mediaQueryListMedium = window.matchMedia(
-  "screen and (min-width:1056px) and (max-width:1729px)"
+  "screen and (min-width:1057px) and (max-width:1729px)"
 );
 const mediaQueryListLarge = window.matchMedia("screen and (min-width:1730px)");
 
@@ -64,31 +64,36 @@ const firstLoad = () => {
 };
 
 const handleSidebar = () => {
-  if (mediaQueryListXSmall.matches && sidebar.style.display === "block") {
+  const MQ_XS = mediaQueryListXSmall.matches;
+  const MQ_MD = mediaQueryListMedium.matches;
+  const MQ_LG = mediaQueryListLarge.matches;
+  const SIDEBAR = sidebar.style.display;
+  if (MQ_XS && SIDEBAR === "block") {
     sidebar.style.display = "none";
     sidebarMini.style.display = "none";
-  } else if (mediaQueryListXSmall.matches && sidebar.style.display === "none") {
+  } else if (MQ_XS && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
-  } else if (
-    mediaQueryListMedium.matches &&
-    sidebar.style.display === "block"
-  ) {
+  } else if (MQ_MD && SIDEBAR === "block") {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
-    sidebarMini.style.visibility = "visible";
-  } else if (mediaQueryListMedium.matches && sidebar.style.display === "none") {
+    // sidebarMini.style.visibility = "visible";
+  } else if (MQ_MD && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
-  } else if (mediaQueryListLarge.matches && sidebar.style.display === "block") {
+  } else if (MQ_LG && SIDEBAR === "block") {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
-    sidebarMini.style.visibility = "visible";
-  } else if (mediaQueryListLarge.matches && sidebar.style.display === "none") {
+    // sidebarMini.style.visibility = "visible";
+  } else if (MQ_LG && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
   } else {
     console.log("ERROR AT LOADING SIDEBAR");
+    console.log(`MQ_XS : ${MQ_XS}`);
+    console.log(`MQ_MD : ${MQ_MD}`);
+    console.log(`MQ_LG : ${MQ_LG}`);
+    console.log(`SIDEBAR : ${SIDEBAR}`);
   }
   mainBox();
   handleMainBox();
@@ -123,5 +128,8 @@ const init = () => {
   mediaQueryListMedium.addEventListener("change", mediaQueryMedium, false);
   mediaQueryListLarge.addEventListener("change", mediaQueryLarge, false);
   handleMainBox();
+  if (!sidebar.style.display) {
+    sidebar.style.display = "none";
+  }
 };
 init();
