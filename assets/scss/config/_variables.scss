@@ -1,7 +1,30 @@
-$bgColor: #f5f5f5;
-$white: #ffffff;
-$black: #000000;
-$green: #1b321b;
-$grey: #606060;
-$red: #ff0102;
-$lightGrey: #e5e5e5;
+// LIGHT MODE
+:root {
+  --clr-background: #f5f5f5;
+  --clr-sideBar: #ffffff;
+  --clr-input: #ffffff;
+  --clr-logo: #ff0102;
+  --clr-text: #000000;
+  --clr-subtext: #606060;
+  --clr-icon: #606060;
+  --clr-iconHover: #ff2b2b;
+  --clr-lightGrey: #e5e5e5;
+}
+
+// DARK MODE
+.darkmode {
+  --clr-background: #191919;
+  --clr-sideBar: #202020;
+  --clr-input: #000000;
+  --clr-logo: #ff0102;
+  --clr-text: #ffffff;
+  --clr-subtext: #606060;
+  --clr-icon: #606060;
+  --clr-iconHover: #ff2b2b;
+  --clr-lightGrey: #454545;
+}
+
+// AVATAR SIZE
+$avatarS: 35px;
+$avatarM: 40px;
+$avatarL: 50px;
