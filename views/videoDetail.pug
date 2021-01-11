@@ -1,68 +1,68 @@
 extends layouts/main
-include mixins/sideBar
-include mixins/videoBlock
+include mixins/videoPlayer
 
 block content
-    .main-container
-        +sideBar
-        .video__wrapper
-            .video__player
-                video(src=`/${video.videoFile}`)
-            .video__details
-                .video__column
-                    .video-creatorOnly
-                    if loggedUser
-                        if video.creator.id === loggedUser.id
-                            a(href=routes.edit(video.id))
-                                button.video__details-editBtn Edit Video
-                .video__column
-                    h1.video__title=video.title
-                    .video__detail
-                        .video__detail-views
-                            if video.views === 0 || 1
-                                span.video__views=video.views
-                                span.video__views   view · 
-                            else
-                                span.video__views=video.views
-                                span.video__views   views · 
-                            span.video__createdDate#createdDate-js=video.createdAt
-                        .video__detail-btns
-                            .video__detail-btn
-                                i.fas.fa-thumbs-up
-                                span 123
-                            .video__detail-btn    
-                                i.fas.fa-thumbs-down
-                                span 1
-                            .video__detail-btn
-                                i.fas.fa-share
-                                span SHARE
-                            .video__detail-btn
-                                i.fas.fa-archive
-                                span SAVE
-                            .video__detail-btn
-                                i.fas.fa-ellipsis-h
-                .video__column
-                    .video__detail
-                        img(src=`/${video.creator.avatarUrl}`)
-                        a(href=routes.userDetail(video.creator.id))=video.creator.name
-                            p.video__creator
-                    .video__detail
-                        .video__creator-detail-btns
-                            button.video__subscribe SUBSCRIBE
-                            i.fas.fa-bell
-                .video__column
-                    .video__detail
-                        p.video__description=video.description
-            .video__comments
-                .comments-view
-                    if video.comments.length === 0 || 1 
-                        span.video__comment-number #{video.comments.length} comment
-                    else
-                        span.video__comment-number #{video.comments.length} comments
-                .comments-create
+    .video__wrapper
+        +videoPlayer({
+            src:video.videoFile
+        })
+        //- .video__player
+        //-     video(src=`/${video.videoFile}`)
+        .video__details
+            .video__column
+                .video-creatorOnly
+                if loggedUser
+                    if video.creator.id === loggedUser.id
+                        a(href=routes.edit(video.id))
+                            button.video__editBtn Edit Video
+            .video__column
+                h1.video__title=video.title
+                .video__detail
+                    .video__detail-views
+                        if video.views === 0 || 1
+                            span.video__views=video.views
+                            span.video__views   view · 
+                        else
+                            span.video__views=video.views
+                            span.video__views   views · 
+                        span.video__createdDate#createdDate-js=video.createdAt
+                    .video__detail-btns
+                        .video__detail-btn
+                            i.fas.fa-thumbs-up
+                            span 123
+                        .video__detail-btn    
+                            i.fas.fa-thumbs-down
+                            span 1
+                        .video__detail-btn
+                            i.fas.fa-share
+                            span SHARE
+                        .video__detail-btn
+                            i.fas.fa-archive
+                            span SAVE
+                        .video__detail-btn
+                            i.fas.fa-ellipsis-h
+            .video__column
+                .video__detail
                     img(src=`/${video.creator.avatarUrl}`)
-                    form(action="", method="post")
-                        input(type="text", name="comment", placeholder="Add a public comment...")
-                        .video__comments-submit
-                            button CANCEL
-                            input(type="submit", value="COMMENT")
+                    a(href=routes.userDetail(video.creator.id))=video.creator.name
+                        p.video__creator
+                .video__detail
+                    .video__creator-detail-btns
+                        button.video__subscribe SUBSCRIBE
+                        i.fas.fa-bell
+            .video__column
+                .video__detail
+                    p.video__description=video.description
+        .video__comments
+            .comments-view
+                if video.comments.length === 0 || 1 
+                    span.video__comment-number #{video.comments.length} comment
+                else
+                    span.video__comment-number #{video.comments.length} comments
+            .comments-create
+                img(src=`/${video.creator.avatarUrl}`)
+                form(action="", method="post")
+                    input(type="text", name="comment", placeholder="Add a public comment...")
+                    .video__comments-submit
+                        button CANCEL
+                        input(type="submit", value="COMMENT")

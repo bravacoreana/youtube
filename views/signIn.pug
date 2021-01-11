@@ -2,8 +2,7 @@ extends layouts/main
 include mixins/sideBar 
 
 block content
-    .main-container
-        +sideBar
+    .form-wrapper
         .form-container
             form(action=routes.signIn, method="post")
                 input(type="email", name="email", placeholder="Email" required=true)
