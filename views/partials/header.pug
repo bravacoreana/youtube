@@ -1,3 +1,5 @@
+include ../mixins/dropdowns/theme
+
 header.header
     .header__container
         .header__column
@@ -26,7 +28,10 @@ header.header
                 i.fas.fa-bell
             ul.dropdown
                 li.dropbtn#dropdown-js
-                    img.header-avatar(src=`/${loggedUser.avatarUrl}`)
+                    if !loggedUser
+                        img.header-avatar(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
+                    else
+                        img.header-avatar(src=`/${loggedUser.avatarUrl}`)
                 if !loggedUser
                     ul.dropdown-content#dropdownContent-js
                         a(href=routes.signUp)
@@ -38,9 +43,10 @@ header.header
                                 i.fas.fa-user
                                 span  Sign In
                         a(href="#")
-                            li
+                            li#themeBtn-js
                                 i.fas.fa-adjust
-                                span  Light Mode
+                                span  Dark Mode
+                    +theme
                 else
                     ul.dropdown-content#dropdownContent-js
                         a(href=routes.userDetail(loggedUser.id))
@@ -60,10 +66,12 @@ header.header
                                 i.fas.fa-user
                                 span  Profile
                         a(href="#")
-                            li
+                            li#themeBtn-js
                                 i.fas.fa-adjust
                                 span  Dark Mode
                         a(href=routes.logout)
                             li
                                 i.fas.fa-user
                                 span  Sign Out
+
+                    +theme
