@@ -5,6 +5,6 @@ import "./timeCalc";
 import "./dateCalc";
 import "./preview";
 import "./videoPlayer";
-
+import "./videoRecorder";
 import "./dropdowns/dropdown";
 import "./dropdowns/theme";
