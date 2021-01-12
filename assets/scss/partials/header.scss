@@ -1,12 +1,13 @@
 .header {
   position: fixed;
   top: 0;
-  background-color: white;
+  background-color: var(--clr-sideBar);
   width: 100%;
   height: 55px;
-  color: $grey;
+  color: var(--clr-icon);
   z-index: 1000;
   display: flex;
+
   .header__container {
     width: 100%;
     display: flex;
@@ -15,11 +16,11 @@
     margin: 10px auto;
   }
 }
-
 .header__column {
   display: flex;
   align-items: center;
   margin-left: 24px;
+
   i {
     font-size: 18px;
   }
@@ -33,14 +34,14 @@
       padding: 0px 5px;
       margin-left: 10px;
       i {
-        color: $red;
+        color: var(--clr-logo);
         font-size: 24px;
       }
       .siteName {
         transform: scale(0.95, 1.3);
         font-weight: 600;
         letter-spacing: -0.05em;
-        color: $black;
+        color: var(--clr-text);
       }
       .countryCode {
         vertical-align: super;
@@ -59,7 +60,7 @@
     form {
       margin-right: 10px;
       flex: 1;
-      border: 1px solid $lightGrey;
+      border: 1px solid var(--clr-background);
       display: flex;
       max-width: 700px;
       input {
@@ -67,11 +68,21 @@
         border: none;
         font-size: 16px;
         padding: 5px 10px;
+        color: var(--clr-text);
+        background-color: var(--clr-input);
       }
       button {
         border: none;
-        color: $grey;
+        color: var(--clr-icon);
+        background-color: var(--clr-background);
         padding: 5px 3%;
+        i {
+          font-size: 14px;
+          color: var(--clr-search);
+          &:hover {
+            color: var(--clr-subtext);
+          }
+        }
       }
     }
   }
@@ -85,52 +96,8 @@
     .dropdown {
       position: relative;
       cursor: pointer;
-    }
-  }
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  border: 1px solid $lightGrey;
-  border-top: none;
-  border-radius: 2px;
-  width: 300px;
-  right: -2px;
-  top: 28px;
-  background-color: $white;
-  a {
-    li {
-      padding: 10px 0px;
-      &:hover {
-        background-color: $lightGrey;
-      }
-      i {
-        width: 20px;
-        text-align: center;
-        margin: 0px 10px;
-      }
-    }
-  }
-  .dropdown-row__divide {
-    @include rowDivide;
-  }
-  .dropdown__user {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    .dropdown__user-avatar {
-      @include avatar;
-      margin-left: 10px;
-    }
-    .dropdown__user-info {
-      display: flex;
-      flex-direction: column;
-      span {
-        margin: 3px 0px;
-        &:first-child {
-          font-weight: 600;
-        }
+      .header-avatar {
+        @include avatar($avatarS);
       }
     }
   }
