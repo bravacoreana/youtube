@@ -1,0 +1,24 @@
+.video__upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  .imgBox {
+    width: 320px;
+    height: 180px;
+    border: 1px solid black;
+    .imgPreview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 320px;
+      height: 180px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
