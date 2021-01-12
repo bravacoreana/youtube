@@ -20,10 +20,10 @@ mixin videoBlock(video={})
                 a(href=routes.userDetail(video.creator._id))
                     h6.video__creator=video.creator.name
             .videoBlock__details
-                if video.views === 0 || 1
+                if video.views > 1 
                     span.video__views=video.views
-                    span.video__append   view ·  
+                    span.video__view-text   views ·  
                 else
                     span.video__views=video.views
-                    span.video__append   views ·  
+                    span.video__view-text   view ·  
                 span.video__createdAt=video.createdAt

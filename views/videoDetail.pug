@@ -6,8 +6,7 @@ block content
         +videoPlayer({
             src:video.videoFile
         })
-        //- .video__player
-        //-     video(src=`/${video.videoFile}`)
+
         .video__details
             .video__column
                 .video-creatorOnly
@@ -19,12 +18,12 @@ block content
                 h1.video__title=video.title
                 .video__detail
                     .video__detail-views
-                        if video.views === 0 || 1
+                        if video.views > 1
                             span.video__views=video.views
-                            span.video__views   view · 
+                            span.video__view-text   views · 
                         else
                             span.video__views=video.views
-                            span.video__views   views · 
+                            span.video__view-text   view ·
                         span.video__createdDate#createdDate-js=video.createdAt
                     .video__detail-btns
                         .video__detail-btn
