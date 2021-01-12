@@ -22,7 +22,6 @@ export const postSignUp = async (req, res, next) => {
         email,
         avatarUrl: file ? file.path : "",
       });
-      console.log(user);
       await User.register(user, password);
       next();
     } catch (error) {
@@ -55,6 +54,7 @@ export const githubSignInCallback = async (
     const user = await User.findOne({ email });
     if (user) {
       user.githubId = id;
+      user.name = name;
       user.save();
       return cb(null, user);
     }

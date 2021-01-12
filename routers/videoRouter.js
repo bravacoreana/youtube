@@ -1,11 +1,11 @@
 import express from "express";
 import routes from "../routes";
 import {
+  getShootVideo,
   getVideoEdit,
   getVideoUpload,
   postVideoEdit,
   postVideoUpload,
-  shootVideo,
   videoDelete,
   videoDetail,
 } from "../controllers/videoController";
@@ -20,7 +20,13 @@ videoRouter.post(
   multerUploadVideo,
   postVideoUpload
 );
-videoRouter.get(routes.shootVideo, onlyPrivate, shootVideo);
+videoRouter.get(routes.shootVideo, onlyPrivate, getShootVideo);
+videoRouter.post(
+  routes.shootVideo,
+  onlyPrivate,
+  multerUploadVideo,
+  getShootVideo
+);
 videoRouter.get(routes.detail(), videoDetail);
 videoRouter.get(routes.edit(), onlyPrivate, getVideoEdit);
 videoRouter.post(routes.edit(), onlyPrivate, multerUploadVideo, postVideoEdit);

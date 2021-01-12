@@ -57,8 +57,15 @@ export const postVideoUpload = async (req, res) => {
   }
 };
 
-export const shootVideo = (req, res) => {
+export const getShootVideo = (req, res) => {
   res.render("shootVideo", { pageTitle: "Shoot Video" });
+};
+
+export const postShootVideo = (req, res) => {
+  const {
+    body: { title, description },
+  } = req;
+  console.log(title, description);
 };
 
 export const videoDetail = async (req, res) => {

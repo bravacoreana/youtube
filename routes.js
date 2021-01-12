@@ -59,6 +59,7 @@ const routes = {
     }
     return DELETE_VIDEO;
   },
+  // shootVideo: SHOOT_VIDEO,
   shootVideo: SHOOT_VIDEO,
   myProfile: MY_PROFILE,
   github: GITHUB,

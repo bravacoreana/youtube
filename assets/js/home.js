@@ -81,6 +81,7 @@ const handleSidebar = () => {
   } else if (MQ_MD && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
+    // sidebarMini.style.visibility = "hidden";
   } else if (MQ_LG && SIDEBAR === "block") {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
