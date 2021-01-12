@@ -7,6 +7,8 @@ const goBackBtns = document.querySelectorAll(".goBack-js");
 const preferBtn = document.getElementById("preferColorScheme-js");
 const darkModeBtn = document.getElementById("darkColorScheme-js");
 const lightModeBtn = document.getElementById("lightColorScheme-js");
+const themeShow = document.getElementById("themeShow-js");
+
 const userPrefersDark =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -27,16 +29,25 @@ const handlePreferMode = () => {
   } else {
     document.body.classList.remove("darkmode");
   }
+  if (themeShow) {
+    themeShow.innerText = "Appearance: Device theme";
+  }
 };
 
 const handleDarkMode = () => {
   document.body.classList.add("darkmode");
   localStorage.setItem("darkMode", "enabled");
+  if (themeShow) {
+    themeShow.innerText = "Appearance: Dark theme";
+  }
 };
 
 const handleLightMode = () => {
   document.body.classList.remove("darkmode");
   localStorage.setItem("darkMode", "disabled");
+  if (themeShow) {
+    themeShow.innerText = "Appearance: Light theme";
+  }
 };
 
 const handleTheme = () => {
