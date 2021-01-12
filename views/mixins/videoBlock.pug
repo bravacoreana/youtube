@@ -2,21 +2,24 @@ mixin videoBlock(video={})
     .videoBlock
         .videoBlock__column#videoBlockThumbnail-js
             a(href=routes.detail(video.id))
-                img.video__thumbnail(src=`/${video.thumbnail}`) 
+                img.video__thumbnail(src=`/${video.thumbnail}`)
+                .video__playBtn
+                    span
+                        i.fas.fa-play
         .videoBlock__column
             a(href=routes.userDetail(video.creator._id))
                 if video.creator.avatarUrl
                     img.video__creator-img(src=`/${video.creator.avatarUrl}`)
                 else
                     img.video__creator-img(src=`/${user.avatarUrl}`)
-            .videoBlock-title
+            .videoBlock__title
                 a(href=routes.detail(video.id))
                     h4.video__title=video.title
         .videoBlock__column
-            .video-creator
+            .videoBlock__creator
                 a(href=routes.userDetail(video.creator._id))
                     h6.video__creator=video.creator.name
-            .video-details
+            .videoBlock__details
                 if video.views === 0 || 1
                     span.video__views=video.views
                     span.video__append   view ·  

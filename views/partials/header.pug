@@ -20,7 +20,7 @@ header.header
         .header__column
             .search
                 i.fas.fa-search
-            a(href=routes.video+routes.shootVideo)
+            a(href=routes.videos+routes.shootVideo)
                 i.fas.fa-video
             a(href="#")
                 i.fas.fa-th
@@ -37,15 +37,15 @@ header.header
                         a(href=routes.signUp)
                             li
                                 i.fas.fa-user
-                                span  Sign Up
+                                span Sign Up
                         a(href=routes.signIn)
                             li
                                 i.fas.fa-user
-                                span  Sign In
+                                span Sign In
                         a(href="#")
                             li#themeBtn-js
                                 i.fas.fa-adjust
-                                span  Dark Mode
+                                span Dark Mode
                     +theme
                 else
                     ul.dropdown-content#dropdownContent-js
@@ -60,18 +60,18 @@ header.header
                         a(href=routes.videos+routes.upload)
                             li
                                 i.fas.fa-film
-                                span  Upload
+                                span Upload
                         a(href=routes.myProfile)
                             li
                                 i.fas.fa-user
-                                span  Profile
+                                span Profile
                         a(href="#")
                             li#themeBtn-js
                                 i.fas.fa-adjust
-                                span  Dark Mode
+                                span#themeShow-js
                         a(href=routes.logout)
                             li
                                 i.fas.fa-user
-                                span  Sign Out
+                                span Sign Out
 
                     +theme

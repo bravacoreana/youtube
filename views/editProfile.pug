@@ -1,14 +1,11 @@
 extends layouts/main
-include mixins/sideBar
 
 block content
-    .main-container
-        +sideBar
-        .form-container
-            form(action=routes.users+routes.editProfile, method="post", enctype="multipart/form-data")
-                .fileUpload
-                    label(for="avatar") Avatar
-                    input(type="file", id="avatar", name="avatar", accept="image/*")
-                input(type="text", name="name", value=loggedUser.name)
-                input(type="email", name="email", value=loggedUser.email)
-                input(type="submit", value="Update Profile")
+    .form-container
+        form(action=routes.users+routes.editProfile, method="post", enctype="multipart/form-data")
+            .fileUpload
+                label(for="avatar") Avatar
+                input(type="file", id="avatar", name="avatar", accept="image/*")
+            input(type="text", name="name", value=loggedUser.name)
+            input(type="email", name="email", value=loggedUser.email)
+            input(type="submit", value="Update Profile")

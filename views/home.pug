@@ -1,18 +1,15 @@
 extends layouts/main
 include mixins/videoBlock
-include mixins/sideBar 
 
 block content
-    .main-container
-        +sideBar
-        .video-container#homeContainer-js
-            .video-wrap#videoWrap-js
-                each video in videos
-                    +videoBlock({
-                        id: video.id,
-                        title: video.title,
-                        thumbnail: video.thumbnailFile,
-                        creator: video.creator,
-                        createdAt: video.createdAt,
-                        views: video.views,
-                    })
+    .video-container#homeContainer-js
+        .video-wrap#videoWrap-js
+            each video in videos
+                +videoBlock({
+                    id: video.id,
+                    title: video.title,
+                    thumbnail: video.thumbnailFile,
+                    creator: video.creator,
+                    createdAt: video.createdAt,
+                    views: video.views,
+                })
