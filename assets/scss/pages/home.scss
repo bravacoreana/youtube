@@ -1,60 +1,80 @@
-.main-container {
-  display: flex;
-}
 .video-container {
   display: flex;
   justify-content: center;
   width: 100%;
   margin-top: 75px;
   @include fontSize;
-}
-.video-wrap {
-  grid-column: 2/-1;
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2px;
-  justify-content: center;
-  margin: 1%;
-  max-height: 450px;
-  max-width: 3100px;
-  .videoBlock {
-    width: 100%;
+  .video-wrap {
+    grid-column: 2/-1;
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: 1fr 1fr 1fr 0.5fr 0.5fr;
-    max-height: 450px;
-    max-width: 500px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2px;
+    justify-content: center;
     margin: 1%;
-    .videoBlock__column {
-      &:first-child {
-        grid-row: 1/4;
-        .video__thumbnail {
-          width: 100%;
-          height: 100%;
-        }
+    max-height: 450px;
+    max-width: 3100px;
+  }
+}
+
+.videoBlock {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 1fr 1fr 1fr 0.5fr 0.5fr;
+  max-height: 450px;
+  max-width: 500px;
+  margin: 1%;
+  &__column {
+    &:first-child {
+      grid-row: 1/4;
+      position: relative;
+      .video__thumbnail {
+        width: 100%;
+        height: 100%;
       }
-      &:nth-child(2) {
-        grid-row: 4;
+      .video__playBtn {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        font-size: min(max(52px, 2vw), 112px);
+        color: white;
+        bottom: 0;
         display: flex;
+        justify-content: center;
         align-items: center;
-        margin-top: 3px;
-        .video__creator-img {
-          @include avatar;
+        opacity: 0;
+        transition: opacity 0.4s linear;
+      }
+      &:hover {
+        .video__playBtn {
+          opacity: 1;
         }
-        .videoBlock-title {
+      }
+    }
+    &:nth-child(2) {
+      grid-row: 4;
+      display: flex;
+      align-items: center;
+      margin-top: 3px;
+      .video__creator-img {
+        @include avatar($avatarM);
+      }
+      .videoBlock__title {
+        width: 100%;
+        .video__title {
+          @include ellipsis();
+          color: var(--clr-text);
           width: 100%;
-          .video__title {
-            @include ellipsis();
-            width: 100%;
-            margin-bottom: 5px;
-          }
+          margin-bottom: 5px;
         }
       }
-      &:nth-child(3) {
-        grid-row: 5;
-        padding-left: 50px;
-      }
+    }
+    &:nth-child(3) {
+      grid-row: 5;
+      padding-left: 50px;
+      color: var(--clr-subtext);
+      font-weight: 300;
     }
   }
 }

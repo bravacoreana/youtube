@@ -1,19 +1,25 @@
 .sidebar__container-mini {
   z-index: 99;
+  width: 70px;
   height: 100vh;
-  position: sticky;
-  padding-top: 55px;
-  background-color: white;
+  background-color: var(--clr-sideBar);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 25px;
+  overflow: hidden;
+
   table {
     position: relative;
-    margin-top: 4px;
+    margin-top: 30px;
     tr {
       &:hover {
         background-color: rgba(100, 100, 100, 0.1);
       }
       &:first-child {
         td {
-          color: red;
+          color: var(--clr-iconHover);
         }
       }
       td {
@@ -21,9 +27,9 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 20px 3px;
+        padding: 20px 5px;
         font-size: 10px;
-        color: $grey;
+        color: var(--clr-icon);
         cursor: pointer;
         i {
           font-size: 14px;
@@ -38,20 +44,24 @@
 }
 
 .sidebar__container {
-  z-index: 99;
-  height: 100vh;
+  z-index: 100;
   width: 270px;
-  padding-top: 65px;
-  display: none;
+  background-color: var(--clr-sideBar);
+  // height: 100vh;
+  display: block;
   position: sticky;
-  background-color: #fff;
-  color: $grey;
+  position: -webkit-sticky;
+  top: 0;
+  left: 0;
+  padding-top: 55px;
+  overflow: hidden;
   i {
     cursor: pointer;
     font-size: 16px;
   }
   .sidebar-rows {
     width: 100%;
+    margin-top: 7px;
     padding: 5px 100px 5px auto;
     &:hover {
       overflow: visible;
@@ -63,19 +73,19 @@
       justify-self: center;
       padding: 12px 80px 12px 20px;
       span {
-        color: $black;
+        color: var(--clr-text);
       }
       > &:first-child {
-        background-color: $lightGrey;
+        background-color: var(--clr-lightGrey);
         i {
-          color: red;
+          color: var(--clr-icon);
         }
         span {
           font-weight: 600;
         }
       }
       &:hover {
-        background-color: $bgColor;
+        background-color: var(--clr-background);
       }
       i {
         margin-right: 25px;
@@ -88,23 +98,46 @@
     }
   }
   .sidebar-row__divide {
-    border-top: 1px solid $lightGrey;
-    width: 100%;
-    height: 1px;
-    margin: 10px 0px;
+    @include rowDivide;
   }
   .sidebar-row__category {
+    color: var(--clr-text);
     font-size: 14px;
     font-weight: 600;
     margin: 20px;
   }
 }
 
+@media (max-width: 1056px) {
+  .sidebar__container,
+  .sidebar__container-mini {
+    display: none;
+  }
+  .wrap {
+    grid-column: 1/-1;
+  }
+}
+
+@media (min-width: 1056px) and (max-width: 1730px) {
+  .sidebar__container-mini {
+    display: block;
+  }
+  .sidebar__container {
+    display: none;
+  }
+}
+
+@media (min-width: 1730px) {
+  .sidebar__container-mini {
+    display: none;
+  }
+  .sidebar__container {
+    display: block;
+  }
+}
+
 @media (max-width: 1200px) {
   .sidebar__container {
-    position: fixed;
-  }
-  .sidebar__container-mini {
     position: fixed;
   }
 }

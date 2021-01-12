@@ -1,0 +1,190 @@
+.videoPlayer {
+  @include headerGap;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    .videoPlayer__controls,
+    .playBtnLg,
+    .playBar {
+      opacity: 1;
+    }
+  }
+  video {
+    width: 100%;
+    max-width: 1300px;
+  }
+  .playBtnLg {
+    position: absolute;
+    font-size: 72px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .playBar {
+    width: 97%;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 35px;
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    font-size: 72px;
+  }
+  &__controls {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    color: white;
+    position: absolute;
+    z-index: 10;
+    bottom: -1px;
+    right: 0px;
+    width: 100%;
+    // background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px 2.5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    .videoPlayer__column:first-child {
+      display: flex;
+      align-items: center;
+      i {
+        margin-right: 15px;
+        @include fontSize;
+      }
+    }
+  }
+}
+
+.videoPlayer__volume {
+  display: flex;
+  align-items: center;
+  i {
+    width: 15px;
+  }
+  .video__volume {
+    z-index: 10;
+    width: 80px;
+    margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+
+    // &::-webkit-slider-runnable-track {
+    //   background-color: white;
+    //   height: 3px;
+    // }
+    // &::-webkit-slider-thumb {
+    //   // all: unset;
+    //   -webkit-appearance: none;
+    //   border: none;
+    //   background-color: var(--clr-icon);
+    //   height: 6px;
+    //   width: 6px;
+    //   border-radius: 50%;
+    //   position: relative;
+    //   top: -6px;
+    // }
+  }
+
+  &:hover {
+    .video__volume {
+      display: block;
+    }
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+  margin-top: -4px;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+input[type="range"] {
+  /* fix for FF unable to apply focus style bug  */
+  border: 1px solid white;
+  /*required for proper track sizing in FF*/
+  width: 300px;
+}
+input[type="range"]::-moz-range-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+}
+
+/*hide the outline behind the border*/
+input[type="range"]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+input[type="range"]:focus::-moz-range-track {
+  background: #ccc;
+}
+
+/* for ie */
+
+input[type="range"]::-ms-track {
+  width: 300px;
+  height: 5px;
+
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #777;
+  border-radius: 10px;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+input[type="range"]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #888;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #ccc;
+}
