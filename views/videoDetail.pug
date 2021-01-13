@@ -60,8 +60,14 @@ block content
                     span.video__comment-number #{video.comments.length} comments
             .comments-create
                 img(src=`/${video.creator.avatarUrl}`)
-                form(action="", method="post")
+                form(action="", method="post")#addComment-js
                     input(type="text", name="comment", placeholder="Add a public comment...")
                     .video__comments-submit
                         button CANCEL
                         input(type="submit", value="COMMENT")
+            .comments-block
+                ul.video__comments-list#commentList-js
+                    //- span=video.comments
+                    each comment in video.comments
+                        li
+                            span=comment.text
