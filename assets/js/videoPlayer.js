@@ -5,10 +5,16 @@ const playBtnLg = document.getElementById("playBtnLg-js");
 const volumeBtn = document.getElementById("volumeBtn-js");
 const volumeRange = document.getElementById("volume-js");
 const fullScreenBtn = document.getElementById("fullScreenBtn-js");
-const playBar = document.getElementById("playBar-js");
-
-const currentTime = document.getElementById("currentTime-js");
+const basedBar = document.getElementById("videoBar-js");
+const progressBar = document.getElementById("videoProgressBar-js");
+const videoCurrentTime = document.getElementById("currentTime-js");
 const totalTime = document.getElementById("totalTime-js");
+let updateBar;
+
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, { method: "POST" });
+};
 
 const formatDate = (seconds) => {
   const secondsNumber = parseInt(seconds, 10);
@@ -30,47 +36,48 @@ const formatDate = (seconds) => {
   return `${hours}:${minutes}:${totalSeconds}`;
 };
 
-function getCurrentTime() {
-  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
-}
+const getCurrentTime = () => {
+  videoCurrentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
+};
 
-function setTotalTime() {
+const setTotalTime = () => {
   const totalTimeString = formatDate(videoPlayer.duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000);
-}
+};
 
-// const handlePlayBar = () => {
-//   const a = playBar.offsetWidth / videoPlayer.duration;
-//   if (videoPlayer.currentTime === 0) {
-//     videoPlayer.currentTime = 1;
-//   }
-//   const PlayedBar = videoPlayer.currentTime * a;
-//   console.log(PlayedBar);
-// };
+const handleVideoMove = (event) => {
+  if (!videoPlayer.ended) {
+    const mouseX = event.pageX - basedBar.offsetLeft;
+    const newTime = (mouseX * videoPlayer.duration) / basedBar.offsetWidth;
+    videoPlayer.currentTime = newTime;
+    progressBar.style.width = `${mouseX}px`;
+  }
+};
 
-// const handleProgressBar = () => {
-//   const max = Math.floor(videoPlayer.duration);
-//   const current = Math.floor(videoPlayer.currentTime);
-//   const percent = 100 * (current / max);
-//   const progressBar = document.createElement("div");
-//   progressBar.style.height = "5px";
-//   progressBar.style.backgroundColor = "red";
-//   progressBar.style.width = `${percent}%`;
-//   playBar.appendChild(progressBar);
-//   console.log(max, current, percent, progressBar.style.width);
-// };
+const handleFillBar = () => {
+  if (!videoPlayer.ended) {
+    const size =
+      (videoPlayer.currentTime * basedBar.offsetWidth) / videoPlayer.duration;
+    progressBar.style.width = `${size}px`;
+  } else {
+    progressBar.style.width = "0px";
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    window.clearInterval(updateBar);
+  }
+};
 
 const handlePlayClick = () => {
   if (videoPlayer.paused) {
     videoPlayer.play();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
     playBtnLg.innerHTML = '<i class="fas fa-pause"></i>';
-    // handlePlayBar();
+    updateBar = setInterval(handleFillBar, 1);
   } else {
     videoPlayer.pause();
     playBtn.innerHTML = '<i class="fas fa-play"></i>';
     playBtnLg.innerHTML = '<i class="fas fa-play"></i>';
+    window.clearInterval(updateBar);
   }
 };
 
@@ -85,6 +92,7 @@ const handleVolumeClick = () => {
     volumeRange.value = 0;
   }
 };
+
 const handleVolumeDrag = (event) => {
   const {
     target: { value },
@@ -100,6 +108,7 @@ const handleVolumeDrag = (event) => {
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 };
+
 const exitFullScreen = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -133,35 +142,21 @@ const handleFullScreen = () => {
 };
 
 const handleEnded = () => {
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
   playBtnLg.innerHTML = '<i class="fas fa-play"></i>';
 };
 
-// const videoAutoPlay = (event) => {
-//   const promise = videoPlayer.play();
-//   if (promise !== undefined) {
-//     promise
-//       .catch((error) => {
-//         console.log("Auto-play failed");
-//         // Auto-play was failed
-//       })
-//       .then(() => {
-//         console.log("Auto-play started");
-//         // Auto-play started
-//       });
-//   }
-// };
 const init = () => {
   playBtn.addEventListener("click", handlePlayClick);
   playBtnLg.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScreenBtn.addEventListener("click", handleFullScreen);
-  // videoPlayer.addEventListener("timeupdate", handleProgressBar);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleVolumeDrag);
-  // document.addEventListener("DOMContentLoaded", videoAutoPlay);
+  basedBar.addEventListener("click", handleVideoMove);
 };
 
 if (videoContainer) {
