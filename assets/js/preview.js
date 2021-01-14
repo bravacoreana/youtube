@@ -1,5 +1,5 @@
-const thumbnailFile = document.querySelector("#thumbnailFile");
-const previewThumbnail = document.querySelector("#previewThumbnail");
+const thumbnailFile = document.querySelector(".image");
+const previewThumbnail = document.querySelector("#previewImg");
 
 const handleThumbnail = (event) => {
   const file = event.target.files;
