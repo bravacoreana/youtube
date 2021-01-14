@@ -1,7 +1,6 @@
 .upload-container {
   display: flex;
   justify-content: center;
-  //   align-items: center;
   width: 100%;
   height: 100%;
   .video__upload {
@@ -9,8 +8,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .imgBox {
-    border: 1px solid var(--clr-lightGrey);
   }
 }
