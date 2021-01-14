@@ -59,7 +59,7 @@ block content
                 else
                     span.video__comment-number #{video.comments.length} comments
             .comments-create
-                img(src=`/${video.creator.avatarUrl}`)
+                img(src=`/${loggedUser.avatarUrl}`)
                 form(action="", method="post")#addComment-js
                     input(type="text", name="comment", placeholder="Add a public comment...")
                     .video__comments-submit
@@ -67,7 +67,13 @@ block content
                         input(type="submit", value="COMMENT")
             .comments-block
                 ul.video__comments-list#commentList-js
-                    //- span=video.comments
-                    each comment in video.comments
-                        li
-                            span=comment.text
+                    each item in comments
+                        li.comment
+                            .comment__creator-avatar
+                                img(src=`/${item.creator.avatarUrl}`)
+                            .comment__details
+                                .comment__creator-info
+                                    span=item.creator.name
+                                    span.video__createdAt=item.createdAt
+                                .comment__text
+                                    span=item.text

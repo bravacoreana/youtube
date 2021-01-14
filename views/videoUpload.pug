@@ -3,13 +3,14 @@ extends layouts/main
 block content
     .upload-container
         .video__upload
-            .imgBox
-                .imgPreview#previewThumbnail
             .form-container
+                include ./partials/previewImg
+                //- .imgBox
+                //-     .imgPreview#previewThumbnail
                 form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
                     .fileUpload
                         lable(for="Thumbnail") Thumbnail
-                        input(type="file", id="thumbnailFile", name="thumbnailFile" required=true, accept="image/*")
+                        input(type="file", id="thumbnailFile", class="image", name="thumbnailFile" required=true, accept="image/*")
                     .fileUpload
                         label(for="Video") Video         
                         input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")

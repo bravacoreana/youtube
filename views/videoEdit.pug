@@ -3,12 +3,13 @@ extends layouts/main
 block content
     .video__container
         .video__wrapper
+            //- .imgPreview#previewThumbnail
             img.thumbnail(src=`/${video.thumbnailFile}`)
-            .imgPreview#previewThumbnail
             .form-container
+                include ./partials/previewImg
                 form(action=routes.edit(video.id), method="post", enctype="multipart/form-data")
-                    label(for="thumbnail") Change Thumbnail
-                    input(type="file", id="thumbnailFile", name="thumbnailFile")
+                    label(for="thumbnail") Thumbnail
+                    input(type="file", id="thumbnailFile", name="thumbnailFile" accept="image/*")
                     input(type="title", name="title", placeholder="Title", maxlength="100" value=video.title)
                     textarea(name="description", placeholder="Description", rows="20")=video.description
                     input(type="submit", value="Save")
