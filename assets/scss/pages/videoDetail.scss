@@ -153,6 +153,7 @@
     display: flex;
     margin-bottom: 15px;
     @include fontSize();
+    position: relative;
     &__creator-avatar {
       img {
         @include avatar(40px);
@@ -167,6 +168,54 @@
         color: var(--clr-subtext);
         margin-left: 10px;
       }
+    }
+    &__edit {
+      position: absolute;
+      right: 0;
+      top: 10px;
+      font-size: 14px;
+      opacity: 0;
+    }
+    &:hover {
+      .comment__edit {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.comment {
+  position: relative;
+}
+.comment__edit {
+  position: absolute;
+  z-index: 100;
+  &-options {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background-color: var(--clr-subtext);
+    width: 120px;
+    border-radius: 2px;
+    display: none;
+    li {
+      padding: 10px;
+      cursor: pointer;
+      i {
+        width: 30px;
+      }
+      &:hover {
+        background-color: var(--clr-lightGrey);
+      }
+    }
+  }
+}
+
+.comment__edit {
+  i:focus {
+    .comment__edit-options {
+      display: block;
     }
   }
 }
