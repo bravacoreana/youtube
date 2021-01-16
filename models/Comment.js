@@ -13,8 +13,12 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  videos: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video",
+  },
+  isDeleted: { type: Boolean },
 });
 
 const model = mongoose.model("Comment", CommentSchema);
-
 export default model;

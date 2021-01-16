@@ -20,7 +20,9 @@ export const postSignUp = async (req, res, next) => {
       const user = await User({
         name,
         email,
-        avatarUrl: file ? file.path : "",
+        avatarUrl: file
+          ? file.path
+          : "https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w",
       });
       await User.register(user, password);
       next();

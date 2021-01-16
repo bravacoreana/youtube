@@ -1,4 +1,4 @@
-import "./home";
+import "./sideBar";
 import "../scss/styles.scss";
 import "./countryCode";
 import "./timeCalc";
@@ -8,4 +8,5 @@ import "./videoPlayer";
 import "./videoRecorder";
 import "./dropdowns/dropdown";
 import "./dropdowns/theme";
-import "./addComment";
+import "./comments/addComment";
+import "./comments/editComments";
