@@ -3,7 +3,7 @@
   width: 70px;
   height: 100vh;
   background-color: var(--clr-sideBar);
-  display: block;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -47,10 +47,9 @@
   z-index: 100;
   width: 270px;
   background-color: var(--clr-sideBar);
-  // height: 100vh;
-  display: block;
-  position: sticky;
-  position: -webkit-sticky;
+  height: 100vh;
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   padding-top: 55px;

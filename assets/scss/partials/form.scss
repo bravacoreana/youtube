@@ -1,13 +1,16 @@
 .form-wrapper {
   width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .form-container {
-  width: 100%;
+  // width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 85px;
   color: var(--clr-text);
   form {
     width: 100%;
