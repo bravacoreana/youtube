@@ -1,14 +1,16 @@
 extends layouts/main
 
 block content
-    .form-container
-        form(action=routes.signUp, method="post", enctype="multipart/form-data")
-            .fileUpload
-                label(for="avatar") Avatar
-                input(type="file", id="avatar", name="avatar" accept="image/*")
-            input(type="text", name="name", placeholder="Full Name" required=true)
-            input(type="email", name="email", placeholder="Email" required=true)
-            input(type="password", name="password", placeholder="Password" required=true)
-            input(type="password", name="password2", placeholder="Verify Password" required=true)
-            input(type="submit", value="Sign Up")
-        include ./partials/socialLogin
+    .form-wrapper
+        .form-container
+            form(action=routes.signUp, method="post", enctype="multipart/form-data")
+                include ./partials/previewImg
+                .fileUpload
+                    label(for="avatar") Avatar
+                    input(type="file", id="avatar", class="image" name="avatar" accept="image/*")
+                input(type="text", name="name", placeholder="Full Name" required=true)
+                input(type="email", name="email", placeholder="Email" required=true)
+                input(type="password", name="password", placeholder="Password" required=true)
+                input(type="password", name="password2", placeholder="Verify Password" required=true)
+                input(type="submit", value="Sign Up")
+            include ./partials/socialLogin

@@ -5,8 +5,6 @@ block content
         .video__upload
             .form-container
                 include ./partials/previewImg
-                //- .imgBox
-                //-     .imgPreview#previewThumbnail
                 form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
                     .fileUpload
                         lable(for="Thumbnail") Thumbnail
@@ -15,5 +13,5 @@ block content
                         label(for="Video") Video         
                         input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")
                     input(type="title", name="title", placeholder="Title", maxlength="100" required=true)
-                    textarea(name="description", placeholder="Description" required=true)
+                    textarea(name="description", placeholder="Description" row="50" required=true)
                     input(type="submit", value="Upload")

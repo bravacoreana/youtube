@@ -1,6 +1,5 @@
 extends layouts/main
 include mixins/videoBlock
-include mixins/sideBar
 
 block content
     .results__wrapper
@@ -9,7 +8,7 @@ block content
         .search__videos
             if videos.length === 0
                 h5 No Videos Found!
-            .video-container#homeContainer-js
+            .video-container#videoContainer-js
                 .video-wrap#videoWrap-js
                     each video in videos
                         +videoBlock({

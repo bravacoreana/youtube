@@ -1,12 +1,13 @@
 extends layouts/main
 
 block content
-    .form-container
-        form(action=routes.users+routes.editProfile, method="post", enctype="multipart/form-data")
-            include ./partials/previewImg
-            .fileUpload
-                label(for="avatar") Avatar
-                input(type="file", id="avatar", class="image" name="avatar", accept="image/*")
-            input(type="text", name="name", value=loggedUser.name)
-            input(type="email", name="email", value=loggedUser.email)
-            input(type="submit", value="Update Profile")
+    .form-wrapper
+        .form-container
+            form(action=routes.users+routes.editProfile, method="post", enctype="multipart/form-data")
+                include ./partials/previewImg
+                .fileUpload
+                    label(for="avatar") Avatar
+                    input(type="file", id="avatar", class="image" name="avatar", accept="image/*")
+                input(type="text", name="name", value=loggedUser.name)
+                input(type="email", name="email", value=loggedUser.email)
+                input(type="submit", value="Update Profile")

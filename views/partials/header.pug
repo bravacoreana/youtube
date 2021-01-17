@@ -29,9 +29,9 @@ header.header
             ul.dropdown
                 li.dropbtn#dropdown-js
                     if !loggedUser
-                        img.header-avatar(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
-                    else
-                        img.header-avatar(src=`/${loggedUser.avatarUrl}`)
+                        img.header-avatar(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w") 
+                    else 
+                        img.header-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
                 if !loggedUser
                     ul.dropdown-content#dropdownContent-js
                         a(href=routes.signUp)
@@ -45,16 +45,16 @@ header.header
                         a(href="#")
                             li#themeBtn-js
                                 i.fas.fa-adjust
-                                span Dark Mode
+                                span#themeShow-js
                     +theme
                 else
                     ul.dropdown-content#dropdownContent-js
-                        a(href=routes.userDetail(loggedUser.id))
+                        a(href=routes.userDetail(loggedUser.id))#userDetail
                             li
                                 .dropdown__user
-                                    img.dropdown__user-avatar(src=`/${loggedUser.avatarUrl}`)
+                                    img.dropdown__user-avatar#userAvatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
                                     .dropdown__user-info
-                                        span.username=loggedUser.name
+                                        span.username#username=loggedUser.name
                                         span=loggedUser.email
                         .dropdown-row__divide
                         a(href=routes.videos+routes.upload)
@@ -74,4 +74,4 @@ header.header
                                 i.fas.fa-user
                                 span Sign Out
 
-                    +theme
+                    +theme 

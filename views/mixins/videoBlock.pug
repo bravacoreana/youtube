@@ -9,9 +9,9 @@ mixin videoBlock(video={})
         .videoBlock__column
             a(href=routes.userDetail(video.creator._id))
                 if video.creator.avatarUrl
-                    img.video__creator-img(src=`/${video.creator.avatarUrl}`)
+                    img.video__creator-img(src=`${video.creator.avatarUrl.includes("http") ? video.creator.avatarUrl : `/${video.creator.avatarUrl}`}`)
                 else
-                    img.video__creator-img(src=`/${user.avatarUrl}`)
+                    img.video__creator-img(src=`${user.avatarUrl.includes("http") ? user.avatarUrl : `/${user.avatarUrl}`}`)
             .videoBlock__title
                 a(href=routes.detail(video.id))
                     h4.video__title=video.title
