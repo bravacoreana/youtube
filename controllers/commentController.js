@@ -23,3 +23,20 @@ export const postAddComment = async (req, res) => {
     res.end();
   }
 };
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { commentId },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.comments.remove(commentId);
+    video.save();
+    await Comment.findOneAndRemove({ _id: commentId });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};

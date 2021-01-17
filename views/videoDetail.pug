@@ -2,78 +2,104 @@ extends layouts/main
 include mixins/videoPlayer
 
 block content
-    .video__wrapper
-        +videoPlayer({
-            src:video.videoFile
-        })
-
-        .video__details
-            .video__column
-                .video-creatorOnly
-                if loggedUser
-                    if video.creator.id === loggedUser.id
-                        a(href=routes.edit(video.id))
-                            button.video__editBtn Edit Video
-            .video__column
-                h1.video__title=video.title
-                .video__detail
-                    .video__detail-views
-                        if video.views > 1
-                            span.video__views=video.views
-                            span.video__view-text   views · 
-                        else
-                            span.video__views=video.views
-                            span.video__view-text   view ·
-                        span.video__createdDate#createdDate-js=video.createdAt
-                    .video__detail-btns
-                        .video__detail-btn
-                            i.fas.fa-thumbs-up
-                            span 123
-                        .video__detail-btn    
-                            i.fas.fa-thumbs-down
-                            span 1
-                        .video__detail-btn
-                            i.fas.fa-share
-                            span SHARE
-                        .video__detail-btn
-                            i.fas.fa-archive
-                            span SAVE
-                        .video__detail-btn
-                            i.fas.fa-ellipsis-h
-            .video__column
-                .video__detail
-                    img(src=`/${video.creator.avatarUrl}`)
-                    a(href=routes.userDetail(video.creator.id))=video.creator.name
-                        p.video__creator
-                .video__detail
-                    .video__creator-detail-btns
-                        button.video__subscribe SUBSCRIBE
-                        i.fas.fa-bell
-            .video__column
-                .video__detail
-                    p.video__description=video.description
-        .video__comments
-            .comments-view
-                if video.comments.length === 0 || 1 
-                    span.video__comment-number #{video.comments.length} comment
-                else
-                    span.video__comment-number #{video.comments.length} comments
-            .comments-create
-                img(src=`/${loggedUser.avatarUrl}`)
-                form(action="", method="post")#addComment-js
-                    input(type="text", name="comment", placeholder="Add a public comment...")
-                    .video__comments-submit
-                        button CANCEL
-                        input(type="submit", value="COMMENT")
-            .comments-block
-                ul.video__comments-list#commentList-js
-                    each item in comments
-                        li.comment
-                            .comment__creator-avatar
-                                img(src=`/${item.creator.avatarUrl}`)
-                            .comment__details
-                                .comment__creator-info
-                                    span=item.creator.name
-                                    span.video__createdAt=item.createdAt
-                                .comment__text
-                                    span=item.text
+    .video-container#videoContainer-js
+        .video__wrapper
+            +videoPlayer({
+                src:video.videoFile
+            })
+            .video__details
+                .video__column
+                    .video-creatorOnly
+                    if loggedUser
+                        if video.creator.id === loggedUser.id
+                            a(href=routes.edit(video.id))
+                                button.video__editBtn Edit Video
+                .video__column
+                    h1.video__title=video.title
+                    .video__detail
+                        .video__detail-views
+                            if video.views > 1
+                                span.video__views=video.views
+                                span.video__view-text   views · 
+                            else
+                                span.video__views=video.views
+                                span.video__view-text   view ·
+                            span.video__createdDate#createdDate-js=video.createdAt
+                        .video__detail-btns
+                            .video__detail-btn
+                                i.fas.fa-thumbs-up
+                                span 123
+                            .video__detail-btn    
+                                i.fas.fa-thumbs-down
+                                span 1
+                            .video__detail-btn
+                                i.fas.fa-share
+                                span SHARE
+                            .video__detail-btn
+                                i.fas.fa-archive
+                                span SAVE
+                            .video__detail-btn
+                                i.fas.fa-ellipsis-h
+                .video__column
+                    .video__detail
+                        img(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                        a(href=routes.userDetail(video.creator.id))=video.creator.name
+                            p.video__creator
+                    .video__detail
+                        .video__creator-detail-btns
+                            button.video__subscribe SUBSCRIBE
+                            i.fas.fa-bell
+                .video__column
+                    .video__detail
+                        p.video__description=video.description
+            .video__comments
+                .comments-view
+                    if video.comments.length > 1 
+                        span.video__comment-number#countComment-js #{video.comments.length}
+                        span   comments
+                    else
+                        span.video__comment-number#countComment-js #{video.comments.length}
+                        span   comment
+                .comments-create
+                    if !loggedUser
+                        img(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
+                        form(action="", method="post")
+                            input(type="text", name="comment", placeholder="Add a public comment..." disabled="disabled" autocomplete="off")
+                            .video__comments-submit
+                                button CANCEL
+                                input(type="submit", value="COMMENT")
+                    else
+                        img(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                        form(action="", method="post")#addComment-js
+                            input(type="text", name="comment", class="comment-js" placeholder="Add a public comment..." autocomplete="off")
+                            .video__comments-submit
+                                button CANCEL
+                                input(type="submit", value="COMMENT")                   
+                .comments-block
+                    ul.video__comments-list#commentContainer-js
+                        each item in comments.reverse()
+                            li.comment__list(id=item.id)
+                                .comment__creator
+                                    .comment__creator-avatar
+                                        a(href=routes.userDetail(item.creator.id))
+                                            img(src=`${item.creator.avatarUrl.includes("http") ? item.creator.avatarUrl : `/${item.creator.avatarUrl}`}`)
+                                    .comment__creator-details
+                                        .comment__creator-info
+                                            span.comment__creator-name=item.creator.name
+                                            span.video__createdAt.comment__creator-time=item.createdAt
+                                        .comment__text
+                                            span=item.text
+                                if loggedUser && item.creator.id === loggedUser.id
+                                    .comment__edit
+                                        .comment__edit__btn.commentBtn-js
+                                            i.fas.fa-ellipsis-v
+                                        .comment__edit__container.commentOptions-js
+                                            ul.comment__edit-options
+                                                li.commentEditBtn-js
+                                                    i.fas.fa-pen
+                                                    span Edit
+                                        
+                                                li.commentDeleteBtn-js
+                                                    i.fas.fa-trash
+                                                    span Delete
+                                            //- input(type="text", name="comment", class="editComment-js" value=item.text)
