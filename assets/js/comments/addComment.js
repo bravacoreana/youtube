@@ -2,10 +2,12 @@ import axios from "axios";
 
 const addCommentForm = document.getElementById("addComment-js");
 const commentContainer = document.getElementById("commentContainer-js");
+const countComment = document.getElementById("countComment-js");
+const commentBtns = document.querySelectorAll(".commentBtn-js");
 
 const increaseCountComment = () => {
+  countComment.textContent++;
   // window.location.reload();
-  //   document.getElementById("myFrame").reload();
 };
 
 const createComment = (comment) => {
@@ -74,10 +76,67 @@ const handleSubmit = (event) => {
   commentInput.value = "";
 };
 
-const init = () => {
-  addCommentForm.addEventListener("submit", handleSubmit);
+// const handleCancel = () => {
+//   // TODO: HIDE BUTTONS
+// };
+
+// Comment Edit Start //
+const processDeleteComment = (commentList) => {
+  commentList.parentNode.removeChild(commentList);
+  // TODO: Decrease Count of Comment
 };
 
-if (addCommentForm) {
-  init();
-}
+const handleDeleteBtn = async (target) => {
+  const commentList = target.parentNode.parentNode.parentNode.parentNode;
+  const commentId = commentList.id;
+  const videoId = window.location.href.split("/videos/")[1];
+  await axios({
+    url: `/api/${videoId}/comment/delete`,
+    method: "POST",
+    data: {
+      commentId,
+    },
+  })
+    .then(() => {
+      processDeleteComment(commentList);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const handleEditBtn = (target) => {
+  // TODO: EDIT COMMENT
+
+  console.log(target);
+  const creatorDetails = document.querySelectorAll(".commentEdit-js");
+  const editForm = document.querySelector("#editComment");
+  creatorDetails.forEach((creatorDetail) => {
+    creatorDetail.classList.add("hide");
+  });
+  editForm.style.display = "block";
+};
+
+const handleOption = (event) => {
+  if (event.target.innerText.includes("Edit")) handleEditBtn(event.target);
+  if (event.target.innerText.includes("Delete")) handleDeleteBtn(event.target);
+};
+
+const openOptions = (event) => {
+  const optionList = event.target.parentNode.nextElementSibling;
+  optionList.classList.toggle("show");
+  optionList.addEventListener("mouseleave", () => {
+    optionList.classList.remove("show");
+  });
+  optionList.addEventListener("click", handleOption);
+};
+// Comment Edit End
+
+const init = () => {
+  addCommentForm.addEventListener("submit", handleSubmit);
+  commentBtns.forEach((commentBtn) => {
+    commentBtn.addEventListener("click", openOptions);
+  });
+};
+
+if (addCommentForm) init();
