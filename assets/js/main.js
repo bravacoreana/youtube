@@ -10,3 +10,4 @@ import "./dropdowns/dropdown";
 import "./dropdowns/theme";
 import "./comments/addComment";
 import "./comments/editComments";
+import "./likeBtn";
