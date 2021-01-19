@@ -1,0 +1,19 @@
+.advise-login__container {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  right: 0px;
+  .advise-login__box {
+    color: var(--clr-text);
+    background-color: var(--clr-modal);
+    box-shadow: 0 1px 5px var(--clr-boxShadow);
+    min-width: 200px;
+    max-width: 25em;
+    height: 100px;
+    border-radius: 2px;
+  }
+}
+
+.hidden {
+  display: none;
+}

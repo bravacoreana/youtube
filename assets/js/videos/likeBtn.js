@@ -75,7 +75,7 @@ const handleClickDislike = () => {
     dislikeClicked = false;
     count.textContent--;
     dislikeBtn.classList.remove("selectedVideo");
-    dislikeBtn.style.pointerEvents = "";
+    likeBtn.style.pointerEvents = "";
     cancelDislikeCount(count.textContent);
   }
 };
@@ -127,9 +127,42 @@ const getDislike = async () => {
   }
 };
 
+const adviseLoginDislike = () => {
+  const modal = document.getElementById("adviseLoginDislike-js");
+  modal.classList.remove("hidden");
+  document.addEventListener("click", (event) => {
+    const isClickInside = modal.contains(event.target);
+    if (!isClickInside) modal.classList.add("hidden");
+  });
+};
+
+const adviseLoginLike = () => {
+  const modal = document.getElementById("adviseLoginLike-js");
+  modal.classList.remove("hidden");
+  document.addEventListener("click", (event) => {
+    const isClickInside = modal.contains(event.target);
+    if (!isClickInside) modal.classList.add("hidden");
+  });
+};
+
+const postAccessPermission = async (event) => {
+  event.preventDefault();
+  const response = await axios({
+    url: "/api/access-permission",
+    method: "POST",
+  });
+  if (response.status === 200) {
+    if (event.target.parentNode === likeBtn) handleClickLike();
+    if (event.target.parentNode === dislikeBtn) handleClickDislike();
+  } else if (response.status === 204) {
+    if (event.target.parentNode === likeBtn) adviseLoginLike();
+    if (event.target.parentNode === dislikeBtn) adviseLoginDislike();
+  }
+};
+
 const init = () => {
-  likeBtn.addEventListener("click", handleClickLike);
-  dislikeBtn.addEventListener("click", handleClickDislike);
+  likeBtn.addEventListener("click", postAccessPermission);
+  dislikeBtn.addEventListener("click", postAccessPermission);
   getLike();
   getDislike();
 };

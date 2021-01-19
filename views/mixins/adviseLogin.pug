@@ -1,0 +1,20 @@
+mixin adviseLogin-like
+    .advise-login__container.hidden#adviseLoginLike-js
+        .advise-login__box
+            h3 Like this video?
+            p Sign in to make your opinion count.
+            a(href=routes.signIn) SIGN IN
+
+mixin adviseLogin-dislike
+    .advise-login__container.hidden#adviseLoginDislike-js
+        .advise-login__box
+            h3 Don't you like this video?
+            p Sign in to make your opinion count.
+            a(href=routes.signIn) SIGN IN
+
+mixin adviseLogin-save
+    .advise-login__container.hidden#adviseLoginDislike-js
+        .advise-login__box
+            h3 Want to watch this again later?
+            p Sign in to add this video to a playlist.
+            a(href=routes.signIn) SIGN IN
