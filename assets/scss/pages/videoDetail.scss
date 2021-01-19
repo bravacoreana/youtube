@@ -48,9 +48,6 @@
         i:not(:last-child) {
           padding: 0px 5px;
         }
-        &:hover {
-          color: skyblue;
-        }
       }
     }
   }
@@ -114,7 +111,7 @@
   form {
     flex-grow: 1;
     margin-left: 10px;
-    input:not([type="submit"]) {
+    input[type="text"] {
       color: var(--clr-text);
       width: 100%;
       padding: 3px 5px;
@@ -129,19 +126,21 @@
       font-size: 16px;
       color: var(--clr-icon);
       cursor: pointer;
-      button {
-        background-color: transparent;
-        border: none;
-        padding: 9px 16px;
-        &:focus {
-          background-color: var(--clr-lightGrey);
-        }
-      }
+      // button {
+      //   background-color: transparent;
+      //   border: none;
+      //   padding: 9px 16px;
+      //   cursor: pointer;
+      //   &:focus {
+      //     background-color: var(--clr-lightGrey);
+      //   }
+      // }
       input {
         border: none;
         background-color: var(--clr-lightGrey);
         margin-left: 10px;
         padding: 9px 16px;
+        cursor: pointer;
       }
     }
   }
@@ -153,7 +152,8 @@
     display: flex;
     margin-bottom: 15px;
     position: relative;
-    justify-content: space-between;
+    // justify-content: space-between;
+    width: 100%;
     @include fontSize;
     &:hover {
       .comment__edit__btn {
@@ -165,7 +165,7 @@
 
 .comment__creator {
   display: flex;
-  align-items: center;
+  width: 100%;
   img {
     @include avatar(40px);
     margin-right: 20px;
@@ -173,7 +173,22 @@
   &-details {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    width: 100%;
+    form {
+      display: none;
+      width: 100%;
+      input:not([type="submit"]) {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid black;
+        background-color: transparent;
+      }
+      .video__comments-submit {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
   }
   &-info {
     margin-bottom: 10px;
@@ -217,10 +232,28 @@
   }
 }
 
+.comment__btns {
+  display: flex;
+  margin-top: 10px;
+  .comment__btn {
+    display: flex;
+    margin-right: 20px;
+    cursor: pointer;
+    i {
+      margin-right: 7px;
+    }
+  }
+}
 .show {
   display: block;
 }
 
+.hide {
+  display: none;
+}
+.selectedVideo {
+  color: #017ffe;
+}
 // .comments-block {
 //   color: var(--clr-text);
 //   .comment {

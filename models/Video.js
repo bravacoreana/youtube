@@ -18,15 +18,20 @@ const VideoSchema = new mongoose.Schema({
     default: 0,
   },
 
-  likes: {
-    type: Number,
-    default: 0,
+  preferences: {
+    like: { type: Number, default: 0 },
+    dislike: { type: Number, default: 0 },
   },
 
-  dislikes: {
-    type: Number,
-    default: 0,
-  },
+  // likes: {
+  //   type: Number,
+  //   default: 0,
+  // },
+
+  // dislikes: {
+  //   type: Number,
+  //   default: 0,
+  // },
 
   createdAt: {
     type: Date,

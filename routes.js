@@ -29,7 +29,11 @@ const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
 const EDIT_COMMENT = "/:id/comment-edit";
-const DELETE_COMMENT = "/:id/deleteComment";
+const DELETE_COMMENT = "/:id/comment/delete";
+const LIKE = "/:id/like";
+const LIKE_UNDO = "/:id/undo-like";
+const DISLIKE = "/:id/dislike";
+const DISLIKE_UNDO = "/:id/undo-dislike";
 
 const routes = {
   home: HOME,
@@ -76,6 +80,10 @@ const routes = {
   addComment: ADD_COMMENT,
   editComment: EDIT_COMMENT,
   deleteComment: DELETE_COMMENT,
+  like: LIKE,
+  likeUndo: LIKE_UNDO,
+  dislike: DISLIKE,
+  dislikeUndo: DISLIKE_UNDO,
 };
 
 export default routes;

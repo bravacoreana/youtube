@@ -1,7 +1,8 @@
 import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
-// import User from "../models/User";
+import User from "../models/User";
+// import LikeDislike from "../models/LikeDislike";
 
 export const home = async (req, res) => {
   try {
@@ -89,10 +90,10 @@ export const videoDetail = async (req, res) => {
     });
 
   // try {
-  //   const video = await Video.findById(id)
-  //     .populate("creator")
-  //     .populate("comments");
+  //   const video = await Video.findById(id).populate("creator");
+  //   // .populate("comments");
   //   res.render("videoDetail", { pageTitle: video.title, video });
+  //   console.log(video.comments[0].creator);
   // } catch (error) {
   //   console.log(error);
   //   res.redirect(routes.home);
@@ -152,6 +153,9 @@ export const videoDelete = async (req, res) => {
     } else {
       await Video.findOneAndRemove({ _id: id });
     }
+    const user = await User.findOne(req.user.id);
+    user.likeVideo.splice(id, 1);
+    user.save();
   } catch (error) {
     console.log(error);
   }
@@ -174,24 +178,115 @@ export const postRegisterView = async (req, res) => {
   }
 };
 
-// export const postAddComment = async (req, res) => {
-//   const {
-//     params: { id },
-//     body: { comment },
-//     user,
-//   } = req;
-//   try {
-//     const video = await Video.findById(id);
-//     const newComment = await Comment.create({
-//       text: comment,
-//       creator: user.id,
-//       videos: video,
-//     });
-//     video.comments.push(newComment.id);
-//     video.save();
-//   } catch (error) {
-//     res.status(400);
-//   } finally {
-//     res.end();
-//   }
-// };
+export const getLike = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(req.user.id);
+    if (user.likeVideo.includes(id)) {
+      res.send("true");
+    } else {
+      res.send("false");
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const getDislike = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const user = await User.findById(req.user.id);
+    if (user.dislikeVideo.includes(id)) {
+      res.send("true");
+      console.log("TRUEEEEE");
+    } else {
+      res.send("false");
+      console.log("BOGGG");
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const postLike = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.preferences.like += 1;
+    video.save();
+    const user = await User.findById(req.user.id);
+    if (!user.likeVideo.includes(id)) req.user.likeVideo.push(id);
+    req.user.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postLikeUndo = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.preferences.like -= 1;
+    video.save();
+    req.user.likeVideo.splice(id, 1);
+    req.user.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDislike = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.preferences.dislike += 1;
+    video.save();
+    const user = await User.findById(req.user.id);
+    if (!user.dislikeVideo.includes(id)) req.user.dislikeVideo.push(id);
+    req.user.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDislikeUndo = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.preferences.dislike -= 1;
+    video.save();
+    req.user.dislikeVideo.splice(id, 1);
+    req.user.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
