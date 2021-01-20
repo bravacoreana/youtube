@@ -27,7 +27,7 @@ header.header
             a(href="#")
                 i.fas.fa-bell
             ul.dropdown
-                li.dropbtn#dropdown-js
+                li.dropbtn#dropdownBtn-js
                     if !loggedUser
                         img.header-avatar(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w") 
                     else 
@@ -69,9 +69,9 @@ header.header
                             li#themeBtn-js
                                 i.fas.fa-adjust
                                 span#themeShow-js
+                                
                         a(href=routes.logout)
                             li
                                 i.fas.fa-user
                                 span Sign Out
-
-                    +theme 
+                    +theme

@@ -1,30 +1,48 @@
-const dropdown = document.getElementById("dropdown-js");
-const dropdownContent = document.getElementById("dropdownContent-js");
+const dropdownBtn = document.getElementById("dropdownBtn-js");
+const dropdownMain = document.getElementById("dropdownContent-js");
+const themeBtn = document.getElementById("themeBtn-js");
 const themeBox = document.getElementById("dropdownTheme-js");
+const themeGoBack = document.getElementById("themeGoBack-js");
 
-const handleDropdown = () => {
-  if (!dropdownContent.style.display) {
-    dropdownContent.style.display = "block";
-  } else if (dropdownContent.style.display === "none") {
-    if (themeBox.style.display === "block") {
-      dropdownContent.style.display = "none";
-      themeBox.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  } else {
-    dropdownContent.style.display = "none";
+const closeAll = (event) => {
+  const isClickMain = dropdownMain.contains(event.target);
+  const isClickTheme = themeBox.contains(event.target);
+  const isClickBtn = dropdownBtn.contains(event.target);
+  if (!isClickMain && !isClickTheme && !isClickBtn) {
+    dropdownMain.classList.remove("open-dropdown");
+    dropdownBtn.addEventListener("click", openDropdown);
   }
 };
 
-// const test = (event) => {
-//   const targetElement = event.target;
-//   console.log(targetElement);
-// };
-
-const init = () => {
-  dropdown.addEventListener("click", handleDropdown);
-  // document.addEventListener("click", test);
+const backToMain = () => {
+  dropdownMain.classList.add("open-dropdown");
+  themeBox.classList.remove("open-dropdown");
 };
 
+const openThemeBox = () => {
+  if (themeBox) themeBox.classList.add("open-dropdown");
+  dropdownMain.classList.remove("open-dropdown");
+  themeGoBack.addEventListener("click", backToMain);
+};
+
+const closeDropdown = () => {
+  dropdownMain.classList.remove("open-dropdown");
+  if (themeBox.classList.contains("open-dropdown")) {
+    themeBox.classList.remove("open-dropdown");
+  }
+  dropdownBtn.removeEventListener("click", closeDropdown);
+  dropdownBtn.addEventListener("click", openDropdown);
+};
+
+const openDropdown = () => {
+  dropdownMain.classList.add("open-dropdown");
+  themeBtn.addEventListener("click", openThemeBox);
+  dropdownBtn.removeEventListener("click", openDropdown);
+  dropdownBtn.addEventListener("click", closeDropdown);
+};
+
+const init = () => {
+  dropdownBtn.addEventListener("click", openDropdown);
+  document.addEventListener("click", closeAll);
+};
 init();
