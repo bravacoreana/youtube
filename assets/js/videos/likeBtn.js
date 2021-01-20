@@ -64,7 +64,7 @@ const sendLikeCount = async (count) => {
 };
 
 const handleClickDislike = () => {
-  const count = dislikeBtn.children[1];
+  const count = dislikeBtn.querySelector(".dislikeCount-js");
   if (!dislikeClicked) {
     dislikeClicked = true;
     count.textContent++;
@@ -81,7 +81,7 @@ const handleClickDislike = () => {
 };
 
 const handleClickLike = () => {
-  const count = likeBtn.children[1];
+  const count = likeBtn.querySelector(".likeCount-js");
   if (!likeClicked) {
     likeClicked = true;
     count.textContent++;
