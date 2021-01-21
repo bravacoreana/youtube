@@ -144,3 +144,23 @@ export const postChangePassword = async (req, res) => {
     res.redirect(routes.users + routes.changePassword);
   }
 };
+
+export const postAccessPermission = (req, res) => {
+  const { user } = req;
+  user ? res.status(200) : res.status(204);
+  res.end();
+};
+
+export const userInfo = (req, res) => {
+  const { user } = req;
+  if (user) {
+    res.json({
+      username: user.name,
+      avatarUrl: user.avatarUrl,
+    });
+    res.status(200);
+  } else {
+    res.status(204);
+  }
+  res.end();
+};

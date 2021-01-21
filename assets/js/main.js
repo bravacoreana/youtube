@@ -12,6 +12,6 @@ import "./videos/preview";
 import "./videos/videoPlayer";
 import "./videos/videoRecorder";
 import "./videos/likeBtn";
+// import "./videos/socialMedia";
 
-import "./comments/addComment";
-import "./comments/editComments";
+import "./videos/comments";

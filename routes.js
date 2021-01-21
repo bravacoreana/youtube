@@ -35,6 +35,7 @@ const LIKE_UNDO = "/:id/undo-like";
 const DISLIKE = "/:id/dislike";
 const DISLIKE_UNDO = "/:id/undo-dislike";
 const ACCESS_PERMISSION = "/access-permission";
+const USER_INFO = "/user-info";
 
 const routes = {
   home: HOME,
@@ -86,6 +87,7 @@ const routes = {
   dislike: DISLIKE,
   dislikeUndo: DISLIKE_UNDO,
   accessPermission: ACCESS_PERMISSION,
+  userInfo: USER_INFO,
 };
 
 export default routes;

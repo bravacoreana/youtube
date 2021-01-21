@@ -15,6 +15,7 @@ export const postAddComment = async (req, res) => {
       creator: user.id,
       videos: video,
     });
+    res.json({ id: newComment.id });
     video.comments.push(newComment.id);
     video.save();
   } catch (error) {
@@ -22,6 +23,14 @@ export const postAddComment = async (req, res) => {
   } finally {
     res.end();
   }
+};
+
+export const editComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { commentId },
+  } = req;
+  console.log(id, commentId, res);
 };
 
 export const deleteComment = async (req, res) => {
