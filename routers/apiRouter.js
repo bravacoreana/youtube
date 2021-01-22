@@ -12,6 +12,7 @@ import {
 import {
   deleteComment,
   postAddComment,
+  postEditComment,
 } from "../controllers/commentController";
 import { postAccessPermission, userInfo } from "../controllers/userController";
 
@@ -20,6 +21,7 @@ const apiRouter = express.Router();
 apiRouter.post(routes.registerView, postRegisterView);
 apiRouter.post(routes.accessPermission, postAccessPermission);
 apiRouter.post(routes.addComment, postAddComment);
+apiRouter.post(routes.commentUpdate, postEditComment);
 apiRouter.post(routes.userInfo, userInfo);
 apiRouter.get(routes.like, getLike);
 apiRouter.post(routes.like, postLike);

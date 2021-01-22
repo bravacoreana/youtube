@@ -208,7 +208,6 @@ export const getDislike = async (req, res) => {
       console.log("TRUEEEEE");
     } else {
       res.send("false");
-      console.log("BOGGG");
     }
   } catch (error) {
     console.log(error);

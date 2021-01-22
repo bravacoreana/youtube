@@ -6,9 +6,33 @@ const commentInput = document.getElementById("comment-js");
 const mainCmtBtns = document.querySelector(".createCommentBtns-js");
 const commentBtns = document.querySelectorAll(".commentBtn-js");
 
+const downCmntCount = () => {
+  const cmntCount = document.getElementById("countComment-js");
+  const downCount = parseInt(cmntCount.innerText, 10) - 1;
+  const countCmntText = document.getElementById("countCmntText-js");
+  cmntCount.innerText = downCount;
+  if (cmntCount.innerText === "1" || cmntCount.innerText === "0") {
+    countCmntText.innerText = " comment";
+  } else {
+    countCmntText.innerText = " comments";
+  }
+};
+
 const processDeleteComment = (commentList) => {
   commentList.parentNode.removeChild(commentList);
-  // TODO: Decrease Count of Comment
+  downCmntCount();
+};
+
+const upCmntCount = () => {
+  const cmntCount = document.getElementById("countComment-js");
+  const upCount = parseInt(cmntCount.innerText, 10) + 1;
+  const countCmntText = document.getElementById("countCmntText-js");
+  cmntCount.innerText = upCount;
+  if (cmntCount.innerText === "1" || cmntCount.innerText === "0") {
+    countCmntText.innerText = " comment";
+  } else {
+    countCmntText.innerText = " comments";
+  }
 };
 
 const handleDeleteBtn = async (target) => {
@@ -30,14 +54,58 @@ const handleDeleteBtn = async (target) => {
     });
 };
 
+const closeEdit = (commentDeta, commentText, editForm, ellipsisBtns) => {
+  commentDeta.classList.remove("hide");
+  commentText.style.display = "block";
+  editForm.style.display = "none";
+  [].forEach.call(ellipsisBtns, (btn) => {
+    btn.classList.remove("hide");
+  });
+};
+
+const editComment = async (commentText, commentId) => {
+  const videoId = window.location.href.split("/videos/")[1];
+  const comment = document.querySelector("#newComment").value;
+  await axios({
+    url: `/api/${videoId}/comment-update`,
+    method: "POST",
+    data: {
+      comment,
+      commentId,
+    },
+  });
+  console.log(commentText);
+  console.log(comment);
+  const oldComment = document.querySelector(".commentText-js span");
+  oldComment.innerText = comment;
+};
+
 const handleEditBtn = (target) => {
   // TODO: EDIT COMMENT
-  const creatorDetails = document.querySelectorAll(".commentEdit-js");
-  const editForm = document.querySelector("#editComment");
-  creatorDetails.forEach((creatorDetail) => {
-    creatorDetail.classList.add("hide");
-  });
+  const targetComme = target.parentNode.parentNode.parentNode.parentNode;
+  const commentDeta = targetComme.querySelector(".commentDeta-js");
+  const commentText = targetComme.querySelector(".commentText-js");
+  const editForm = targetComme.querySelector(".cmntEditForm-js");
+  const cancelBtn = editForm.querySelector("button");
+  commentDeta.classList.add("hide");
+  // commentText.classList.add("hide");
+  commentText.style.display = "none";
   editForm.style.display = "block";
+  const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
+  [].forEach.call(ellipsisBtns, (btn) => {
+    btn.classList.add("hide");
+  });
+
+  if (cancelBtn)
+    cancelBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      closeEdit(commentDeta, commentText, editForm, ellipsisBtns);
+    });
+  const commentId = targetComme.id;
+  editForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    editComment(commentText, commentId);
+  });
 };
 
 const handleOption = (event) => {
@@ -54,12 +122,10 @@ const openOptions = (event) => {
   optionList.addEventListener("click", handleOption);
 };
 
-///
-
 const createComment = (username, avatarUrl, comment, commentId) => {
-  const li = document.createElement("li");
-  li.classList.add("comment__list");
-  li.id = commentId;
+  const liCmntList = document.createElement("li");
+  liCmntList.classList.add("comment__list");
+  liCmntList.id = commentId;
 
   const divCmtCreator = document.createElement("div");
   divCmtCreator.classList.add("comment__creator");
@@ -79,25 +145,32 @@ const createComment = (username, avatarUrl, comment, commentId) => {
 
   const divCmtCreatorInfo = document.createElement("div");
   divCmtCreatorInfo.classList.add("comment__creator-info");
-  divCmtCreatorInfo.classList.add("commentEdit-js");
+  divCmtCreatorInfo.classList.add("commentDeta-js");
 
   const spanCmtCreatorName = document.createElement("span");
   spanCmtCreatorName.classList.add("comment__creator-name");
   spanCmtCreatorName.innerHTML = username;
 
   const spanCmtCreatedTime = document.createElement("span");
+  spanCmtCreatedTime.classList.add("video__createdAt");
   spanCmtCreatedTime.classList.add("comment__creator-time");
   spanCmtCreatedTime.innerHTML = "Just now";
 
   const divCmtText = document.createElement("div");
-  divCmtText.classList.add("commentEdit-js");
+  divCmtText.classList.add("comment__text");
+  divCmtText.classList.add("commentText-js");
 
   const spanCmtText = document.createElement("span");
   spanCmtText.innerHTML = comment;
 
+  const divCmtEditForm = document.createElement("div");
+  divCmtEditForm.classList.add("comment__edit-form");
+  divCmtEditForm.classList.add("cmntEditForm-js");
+
   const formCmt = document.createElement("form");
   formCmt.setAttribute("method", "post");
   formCmt.id = "editComment";
+  formCmt.classList.add("edit-comment");
 
   const inputCmt = document.createElement("input");
   inputCmt.setAttribute("type", "text");
@@ -152,8 +225,8 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   const spanCmtDeleteBtn = document.createElement("span");
   spanCmtDeleteBtn.innerHTML = "Delete";
 
-  commentsContainer.insertAdjacentElement("afterbegin", li);
-  li.appendChild(divCmtCreator);
+  commentsContainer.insertAdjacentElement("afterbegin", liCmntList);
+  liCmntList.appendChild(divCmtCreator);
   divCmtCreator.appendChild(divCmtCreatorAvatar);
   divCmtCreator.appendChild(divCmtCreatorDetails);
   divCmtCreatorAvatar.appendChild(aAvatarUrl);
@@ -163,13 +236,14 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   divCmtCreatorInfo.appendChild(spanCmtCreatedTime);
   divCmtCreatorDetails.appendChild(divCmtText);
   divCmtText.appendChild(spanCmtText);
-  divCmtCreatorDetails.appendChild(formCmt);
+  divCmtCreatorDetails.appendChild(divCmtEditForm);
+  divCmtEditForm.appendChild(formCmt);
   formCmt.appendChild(inputCmt);
   formCmt.appendChild(divCmtSubmit);
   divCmtSubmit.appendChild(btnCancel);
   divCmtSubmit.appendChild(inputSubmit);
   //
-  li.appendChild(divCmtEdit);
+  liCmntList.appendChild(divCmtEdit);
   divCmtEdit.appendChild(divCmtEditBtn);
   divCmtEditBtn.appendChild(iEllipsis);
   divCmtEdit.appendChild(divCmtEditContainer);
@@ -195,6 +269,7 @@ const sendComment = async (username, avatarUrl, comment) => {
   });
   if (response.status === 200) {
     createComment(username, avatarUrl, comment, response.data.id);
+    upCmntCount();
   }
 };
 
@@ -216,8 +291,6 @@ const requestInfo = (event) => {
 };
 
 const closeComment = () => {
-  // const isClickInside = commentForm.contains(event.target);
-  // if (!isClickInside)
   mainCmtBtns.classList.remove("button__show");
 };
 

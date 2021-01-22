@@ -29,6 +29,7 @@ const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
 const EDIT_COMMENT = "/:id/comment-edit";
+const COMMENT_UPDATE = "/:id/comment-update";
 const DELETE_COMMENT = "/:id/comment/delete";
 const LIKE = "/:id/like";
 const LIKE_UNDO = "/:id/undo-like";
@@ -88,6 +89,7 @@ const routes = {
   dislikeUndo: DISLIKE_UNDO,
   accessPermission: ACCESS_PERMISSION,
   userInfo: USER_INFO,
+  commentUpdate: COMMENT_UPDATE,
 };
 
 export default routes;
