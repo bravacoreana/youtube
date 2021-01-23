@@ -54,58 +54,69 @@ const handleDeleteBtn = async (target) => {
     });
 };
 
-const closeEdit = (commentDeta, commentText, editForm, ellipsisBtns) => {
+const closeEdit = (commentDeta, commentText, editFormBox) => {
+  const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
   commentDeta.classList.remove("hide");
-  commentText.style.display = "block";
-  editForm.style.display = "none";
+  commentText.classList.remove("hide");
+  editFormBox.classList.remove("show");
   [].forEach.call(ellipsisBtns, (btn) => {
     btn.classList.remove("hide");
   });
 };
 
-const editComment = async (commentText, commentId) => {
+const updateComment = async (event) => {
+  event.preventDefault();
   const videoId = window.location.href.split("/videos/")[1];
-  const comment = document.querySelector("#newComment").value;
+  const newComment = event.target.querySelector("#newComment").value;
+  const cmntList = event.target.parentNode.parentNode.parentNode.parentNode;
+  const commentId = cmntList.id;
+  console.log("updated");
   await axios({
     url: `/api/${videoId}/comment-update`,
     method: "POST",
     data: {
-      comment,
+      newComment,
       commentId,
     },
+  }).then((response) => {
+    if (response.status === 200) {
+      const comment = cmntList.querySelector(".commentText-js");
+      console.log("YEAY!");
+      comment.innerText = newComment;
+      const commentDeta = cmntList.querySelector(".commentDeta-js");
+      const commentText = cmntList.querySelector(".commentText-js");
+      const editFormBox = event.target.parentNode;
+      const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
+      closeEdit(commentDeta, commentText, editFormBox, ellipsisBtns);
+    }
   });
-  console.log(commentText);
-  console.log(comment);
-  const oldComment = document.querySelector(".commentText-js span");
-  oldComment.innerText = comment;
 };
 
 const handleEditBtn = (target) => {
-  // TODO: EDIT COMMENT
   const targetComme = target.parentNode.parentNode.parentNode.parentNode;
   const commentDeta = targetComme.querySelector(".commentDeta-js");
   const commentText = targetComme.querySelector(".commentText-js");
-  const editForm = targetComme.querySelector(".cmntEditForm-js");
-  const cancelBtn = editForm.querySelector("button");
-  commentDeta.classList.add("hide");
-  // commentText.classList.add("hide");
-  commentText.style.display = "none";
-  editForm.style.display = "block";
+  const editFormBox = targetComme.querySelector(".cmntEditForm-js");
+  const editForm = editFormBox.querySelector("form");
   const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
+  commentDeta.classList.add("hide");
+  commentText.classList.add("hide");
+  editFormBox.classList.add("show");
   [].forEach.call(ellipsisBtns, (btn) => {
     btn.classList.add("hide");
   });
-
-  if (cancelBtn)
+  const cancelBtn = editFormBox.querySelector("button");
+  if (cancelBtn) {
     cancelBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      closeEdit(commentDeta, commentText, editForm, ellipsisBtns);
+      closeEdit(commentDeta, commentText, editFormBox);
     });
-  const commentId = targetComme.id;
-  editForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    editComment(commentText, commentId);
-  });
+  }
+  // const submitBtn = targetComme.querySelector('input[type="submit"]');
+  editForm.addEventListener("submit", updateComment);
+  // editForm.addEventListener("keydown", (e) => {
+  //   if (e.key === "Enter") updateComment();
+  // });
 };
 
 const handleOption = (event) => {

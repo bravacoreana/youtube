@@ -25,13 +25,46 @@ export const postAddComment = async (req, res) => {
   }
 };
 
-export const editComment = async (req, res) => {
+export const postEditComment = async (req, res) => {
   const {
     params: { id },
-    body: { commentId },
+    body: { newComment, commentId },
   } = req;
-  console.log(id, commentId, res);
+  try {
+    const video = await Video.findById(id).populate("comment");
+    const comment = await Comment.findById(commentId).populate("creator");
+    if (comment.creator.id !== req.user.id) {
+      throw Error();
+    } else {
+      await Comment.findByIdAndUpdate(commentId, {
+        text: newComment,
+      });
+      // await video.comment.findByIdAndUpdate(commentId);
+    }
+  } catch (error) {
+    // res.status(204);
+    console.log("It's not working");
+    console.log(error);
+  } finally {
+    res.end();
+  }
 };
+
+// try {
+//   // const video = await Video.findById(id);
+//   const comment = await Comment.findById(commentId).populate("creator");
+//   if (comment.creator.id !== req.user.id) {
+//     // throw Error();
+//     console.log("hhzzz");
+//   } else {
+//     // await Comment.findByIdAndUpdate(commentId, {
+//     //   text,
+//     // });
+//     console.log("hh");
+//   }
+// } catch (error) {
+//   console.log(error);
+// }
 
 export const deleteComment = async (req, res) => {
   const {
