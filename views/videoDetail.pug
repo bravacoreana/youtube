@@ -1,5 +1,7 @@
 extends layouts/main
 include mixins/videoPlayer
+include mixins/adviseLogin
+include mixins/socialMedia
 
 block content
     .video-container#videoContainer-js
@@ -26,14 +28,17 @@ block content
                                 span.video__view-text   view ·
                             span.video__createdDate#createdDate-js=video.createdAt
                         .video__detail-btns
-                            .video__detail-btn
-                                i.fas.fa-thumbs-up
-                                span 123
-                            .video__detail-btn    
-                                i.fas.fa-thumbs-down
-                                span 1
-                            .video__detail-btn
-                                i.fas.fa-share
+                            .video__detail-btn.likeBtn-js
+                                +adviseLogin-like
+                                i.fas.fa-thumbs-up.likeIcon-js
+                                span.likeCount-js=video.preferences.like
+                            .video__detail-btn.dislikeBtn-js
+                                +adviseLogin-dislike
+                                i.fas.fa-thumbs-down.dislikeIcon-js
+                                span.dislikeCount-js=video.preferences.dislike
+                            .video__detail-btn.shareBtn-js
+                                +socialMedia
+                                i.fas.fa-share.shareIcon-js
                                 span SHARE
                             .video__detail-btn
                                 i.fas.fa-archive
@@ -42,7 +47,7 @@ block content
                                 i.fas.fa-ellipsis-h
                 .video__column
                     .video__detail
-                        img(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                        img(src=`${video.creator.avatarUrl.includes("http") ? video.creator.avatarUrl : `/${video.creator.avatarUrl}`}`)
                         a(href=routes.userDetail(video.creator.id))=video.creator.name
                             p.video__creator
                     .video__detail
@@ -56,25 +61,21 @@ block content
                 .comments-view
                     if video.comments.length > 1 
                         span.video__comment-number#countComment-js #{video.comments.length}
-                        span   comments
+                        span#countCmntText-js   comments
                     else
                         span.video__comment-number#countComment-js #{video.comments.length}
-                        span   comment
+                        span#countCmntText-js   comment
                 .comments-create
                     if !loggedUser
                         img(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
-                        form(action="", method="post")
-                            input(type="text", name="comment", placeholder="Add a public comment..." disabled="disabled" autocomplete="off")
-                            .video__comments-submit
-                                button CANCEL
-                                input(type="submit", value="COMMENT")
                     else
                         img(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
-                        form(action="", method="post")#addComment-js
-                            input(type="text", name="comment", class="comment-js" placeholder="Add a public comment..." autocomplete="off")
-                            .video__comments-submit
-                                button CANCEL
-                                input(type="submit", value="COMMENT")                   
+                    form(action="", method="post")#addComment-js
+                        .textarea-box
+                            textarea(name="comment", rows="1" class="comment-js" id="comment-js" placeholder="Add a public comment...")
+                        .video__comments-submit.createCommentBtns-js
+                            input(type="reset", value="CANCEL", id="cancel-js")
+                            input(type="submit", value="COMMENT")                   
                 .comments-block
                     ul.video__comments-list#commentContainer-js
                         each item in comments.reverse()
@@ -83,12 +84,27 @@ block content
                                     .comment__creator-avatar
                                         a(href=routes.userDetail(item.creator.id))
                                             img(src=`${item.creator.avatarUrl.includes("http") ? item.creator.avatarUrl : `/${item.creator.avatarUrl}`}`)
-                                    .comment__creator-details
-                                        .comment__creator-info
+                                    .comment__creator-details#commentCreatorDetails-js
+                                        .comment__creator-info.commentDeta-js
                                             span.comment__creator-name=item.creator.name
                                             span.video__createdAt.comment__creator-time=item.createdAt
-                                        .comment__text
-                                            span=item.text
+                                        .comment__text.commentText-js
+                                            p=item.text
+                                        .comment__edit-form.cmntEditForm-js
+                                            form(action="" method="post" id="editComment" class="edit-comment")
+                                                .textarea-box
+                                                    textarea(name="newComment", id="newComment" rows="1")=item.text
+                                                .comment__edit--submit
+                                                    button CANCEL
+                                                    input(type="submit" value="COMMENT")
+                                        .comment__btns
+                                            .comment__btn.cmntLikeBtn-js
+                                                i.fas.fa-thumbs-up.cmntLikeIcon-js
+                                                span.cmntLikeCount-js=item.preferences.like
+                                            .comment__btn.cmntDislikeBtn-js   
+                                                i.fas.fa-thumbs-down.cmntDislikeIcon-js
+                                                span.cmntDislikeCount-js=item.preferences.dislike
+
                                 if loggedUser && item.creator.id === loggedUser.id
                                     .comment__edit
                                         .comment__edit__btn.commentBtn-js
@@ -96,10 +112,9 @@ block content
                                         .comment__edit__container.commentOptions-js
                                             ul.comment__edit-options
                                                 li.commentEditBtn-js
-                                                    i.fas.fa-pen
-                                                    span Edit
-                                        
+                                                        i.fas.fa-pen
+                                                        span Edit
                                                 li.commentDeleteBtn-js
-                                                    i.fas.fa-trash
-                                                    span Delete
+                                                        i.fas.fa-trash
+                                                        span Delete
                                             //- input(type="text", name="comment", class="editComment-js" value=item.text)

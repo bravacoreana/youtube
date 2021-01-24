@@ -2,28 +2,36 @@ extends layouts/main
 include mixins/videoBlock
 
 block content
-    .user-profile
-        .user-profile__header
-            if !user.avatarUrl
-                img.u-avatar(src="https://static1.squarespace.com/static/5b47794f96d4553780daae3b/5b4911e888251bc248f72092/5b491753aa4a995f4ea81a9b/1557777464536/profile-placeholder.jpg?format=1500w")
-            else    
+    .video-container#videoContainer-js
+        .user-profile
+            .user-profile__header
                 img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
-            h4.profile__username=user.name
-        if loggedUser
-            if user.id === loggedUser.id
-                .user-profile__btns
-                    a(href=routes.users+routes.editProfile)
-                        button Edit Profile
-                    a(href=routes.users+routes.changePassword)
-                        button Change Password
-        .video-container#videoContainer-js
-            .video-wrap#videoWrap-js
-                each video in user.videos
-                    +videoBlock({
-                        id: video.id,
-                        title: video.title,
-                        thumbnail: video.thumbnailFile,
-                        creator: video.creator,
-                        createdAt: video.createdAt,
-                        views: video.views,
-                    })
+                h4.profile__username=user.name
+            if loggedUser
+                if user.id === loggedUser.id
+                    .user-profile__btns
+                        a(href=routes.users+routes.editProfile)
+                            button Edit Profile
+                        a(href=routes.users+routes.changePassword)
+                            button Change Password
+                    .user-profile__details
+                        table
+                            tr
+                                th Subscriptions
+                                th Upload
+                                th Likes
+                            tr
+                                th 23
+                                th 1
+                                th 25
+            .video-container#videoContainer-js
+                .video-wrap#videoWrap-js
+                    each video in user.videos
+                        +videoBlock({
+                            id: video.id,
+                            title: video.title,
+                            thumbnail: video.thumbnailFile,
+                            creator: video.creator,
+                            createdAt: video.createdAt,
+                            views: video.views,
+                        })

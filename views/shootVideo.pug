@@ -1,17 +1,18 @@
 extends layouts/main
 
 block content
-    .form-container
-        .record-container#recordContainer-js
-            video#recordVideoPreview-js
-        button#recordBtn-js Start Recording
-        form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
-            .fileUpload
-                lable(for="Thumbnail") Thumbnail
-                input(type="file", id="thumbnailFile", name="thumbnailFile")
-            .fileUpload
-                label(for="Video") Video         
-                input(type="file", id="videoFile", name="videoFile")
-            input(type="title", name="title", placeholder="Title")
-            textarea(name="description", placeholder="Description")
-            input(type="submit", value="Upload")
+    .video-container#videoContainer-js
+        .form-container
+            .record-container#recordContainer-js
+                video#recordVideoPreview-js
+            button#recordBtn-js Start Recording
+            form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
+                .fileUpload
+                    lable(for="Thumbnail") Thumbnail
+                    input(type="file", id="thumbnailFile", name="thumbnailFile")
+                .fileUpload
+                    label(for="Video") Video         
+                    input(type="file", id="videoFile", name="videoFile")
+                input(type="title", name="title", placeholder="Title")
+                textarea(name="description", placeholder="Description")
+                input(type="submit", value="Upload")
