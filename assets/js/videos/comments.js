@@ -4,7 +4,7 @@ const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
 const commentInput = document.getElementById("comment-js");
 const mainCmtBtns = document.querySelector(".createCommentBtns-js");
-const commentBtns = document.querySelectorAll(".commentBtn-js");
+const ellipsisBtns = document.querySelectorAll(".commentBtn-js");
 
 const downCmntCount = () => {
   const cmntCount = document.getElementById("countComment-js");
@@ -18,11 +18,6 @@ const downCmntCount = () => {
   }
 };
 
-const processDeleteComment = (commentList) => {
-  commentList.parentNode.removeChild(commentList);
-  downCmntCount();
-};
-
 const upCmntCount = () => {
   const cmntCount = document.getElementById("countComment-js");
   const upCount = parseInt(cmntCount.innerText, 10) + 1;
@@ -33,6 +28,11 @@ const upCmntCount = () => {
   } else {
     countCmntText.innerText = " comments";
   }
+};
+
+const processDeleteComment = (commentList) => {
+  commentList.parentNode.removeChild(commentList);
+  downCmntCount();
 };
 
 const handleDeleteBtn = async (target) => {
@@ -54,23 +54,27 @@ const handleDeleteBtn = async (target) => {
     });
 };
 
-const closeEdit = (commentDeta, commentText, editFormBox) => {
-  const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
+const closeEdit = () => {
+  const cmntList = document.querySelector(".cmntEditActivated");
+  const commentDeta = cmntList.querySelector(".commentDeta-js");
+  const commentText = cmntList.querySelector(".commentText-js");
+  const editFormBox = cmntList.querySelector(".cmntEditForm-js");
+
   commentDeta.classList.remove("hide");
   commentText.classList.remove("hide");
   editFormBox.classList.remove("show");
   [].forEach.call(ellipsisBtns, (btn) => {
     btn.classList.remove("hide");
   });
+  cmntList.classList.remove("cmntEditActivated");
 };
 
 const updateComment = async (event) => {
   event.preventDefault();
+  const cmntList = document.querySelector(".cmntEditActivated");
   const videoId = window.location.href.split("/videos/")[1];
-  const newComment = event.target.querySelector("#newComment").value;
-  const cmntList = event.target.parentNode.parentNode.parentNode.parentNode;
+  const newComment = cmntList.querySelector("#newComment").value;
   const commentId = cmntList.id;
-  console.log("updated");
   await axios({
     url: `/api/${videoId}/comment-update`,
     method: "POST",
@@ -81,56 +85,76 @@ const updateComment = async (event) => {
   }).then((response) => {
     if (response.status === 200) {
       const comment = cmntList.querySelector(".commentText-js");
-      console.log("YEAY!");
       comment.innerText = newComment;
-      const commentDeta = cmntList.querySelector(".commentDeta-js");
-      const commentText = cmntList.querySelector(".commentText-js");
-      const editFormBox = event.target.parentNode;
-      const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
-      closeEdit(commentDeta, commentText, editFormBox, ellipsisBtns);
+
+      // const cmntDeta = cmntList.querySelector(".commentDeta-js");
+      // const editedMsg = document.createElement("span");
+      // editedMsg.innerText = " (Edited) ";
+      // cmntDeta.appendChild(editedMsg);
+      closeEdit();
     }
   });
 };
 
-const handleEditBtn = (target) => {
-  const targetComme = target.parentNode.parentNode.parentNode.parentNode;
-  const commentDeta = targetComme.querySelector(".commentDeta-js");
-  const commentText = targetComme.querySelector(".commentText-js");
-  const editFormBox = targetComme.querySelector(".cmntEditForm-js");
+const cancelEdit = (cmntList, cmntDetail, cmntText, editFormBox) => {
+  const oldComment = document.querySelector(".commentText-js").innerText;
+  const newComment = cmntList.querySelector("#newComment");
+  newComment.value = oldComment;
+
+  cmntDetail.classList.remove("hide");
+  cmntText.classList.remove("hide");
+  editFormBox.classList.remove("show");
+  [].forEach.call(ellipsisBtns, (btn) => {
+    btn.classList.remove("hide");
+  });
+  cmntList.classList.remove("cmntEditActivated");
+};
+
+const handleEditBtn = (element) => {
+  const cmntList = element.parentNode.parentNode.parentNode.parentNode;
+  const cmntDetail = cmntList.querySelector(".commentDeta-js");
+  const cmntText = cmntList.querySelector(".commentText-js");
+  const editFormBox = cmntList.querySelector(".cmntEditForm-js");
   const editForm = editFormBox.querySelector("form");
-  const ellipsisBtns = document.getElementsByClassName("commentBtn-js");
-  commentDeta.classList.add("hide");
-  commentText.classList.add("hide");
+
+  cmntList.classList.add("cmntEditActivated");
+  cmntDetail.classList.add("hide");
+  cmntText.classList.add("hide");
   editFormBox.classList.add("show");
   [].forEach.call(ellipsisBtns, (btn) => {
     btn.classList.add("hide");
   });
+
   const cancelBtn = editFormBox.querySelector("button");
-  if (cancelBtn) {
+  if (cancelBtn)
     cancelBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      closeEdit(commentDeta, commentText, editFormBox);
+      cancelEdit(cmntList, cmntDetail, cmntText, editFormBox);
     });
-  }
-  // const submitBtn = targetComme.querySelector('input[type="submit"]');
+
   editForm.addEventListener("submit", updateComment);
-  // editForm.addEventListener("keydown", (e) => {
-  //   if (e.key === "Enter") updateComment();
-  // });
 };
 
 const handleOption = (event) => {
-  if (event.target.innerText.includes("Edit")) handleEditBtn(event.target);
-  if (event.target.innerText.includes("Delete")) handleDeleteBtn(event.target);
+  const tg = event.target;
+  const tgEdit = tg.parentNode.classList.contains("commentEditBtn-js");
+  const tgDelete = tg.parentNode.classList.contains("commentDeleteBtn-js");
+  const tagName = tg.tagName.toLowerCase();
+  if (tg.classList.contains("commentEditBtn-js")) handleEditBtn(tg);
+  if (tagName === "span" && tgEdit) handleEditBtn(tg.parentNode);
+  if (tagName === "i" && tgEdit) handleEditBtn(tg.parentNode);
+  if (tg.classList.contains("commentDeleteBtn-js")) handleDeleteBtn(tg);
+  if (tagName === "span" && tgDelete) handleDeleteBtn(tg.parentNode);
+  if (tagName === "i" && tgDelete) handleDeleteBtn(tg.parentNode);
 };
 
 const openOptions = (event) => {
-  const optionList = event.target.parentNode.nextElementSibling;
-  optionList.classList.toggle("show");
-  optionList.addEventListener("mouseleave", () => {
-    optionList.classList.remove("show");
+  const cmntEditContainer = event.target.parentNode.nextElementSibling;
+  cmntEditContainer.classList.toggle("show");
+  cmntEditContainer.addEventListener("mouseleave", () => {
+    cmntEditContainer.classList.remove("show");
   });
-  optionList.addEventListener("click", handleOption);
+  cmntEditContainer.addEventListener("click", handleOption);
 };
 
 const createComment = (username, avatarUrl, comment, commentId) => {
@@ -171,8 +195,8 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   divCmtText.classList.add("comment__text");
   divCmtText.classList.add("commentText-js");
 
-  const spanCmtText = document.createElement("span");
-  spanCmtText.innerHTML = comment;
+  const pCmtText = document.createElement("p");
+  pCmtText.innerHTML = comment;
 
   const divCmtEditForm = document.createElement("div");
   divCmtEditForm.classList.add("comment__edit-form");
@@ -183,13 +207,17 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   formCmt.id = "editComment";
   formCmt.classList.add("edit-comment");
 
-  const inputCmt = document.createElement("input");
-  inputCmt.setAttribute("type", "text");
-  inputCmt.name = "comment";
-  inputCmt.value = comment;
+  const divTextareaBox = document.createElement("div");
+  divTextareaBox.classList.add("textarea-box");
+
+  const textareaCmt = document.createElement("textarea");
+  textareaCmt.setAttribute("name", "newComment");
+  textareaCmt.setAttribute("rows", "1");
+  textareaCmt.id = "newComment";
+  textareaCmt.innerHTML = comment;
 
   const divCmtSubmit = document.createElement("div");
-  divCmtSubmit.classList.add("video__comments-submit");
+  divCmtSubmit.classList.add("comment__edit--submit");
 
   const btnCancel = document.createElement("button");
   btnCancel.innerHTML = "CANCEL";
@@ -246,10 +274,11 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   divCmtCreatorInfo.appendChild(spanCmtCreatorName);
   divCmtCreatorInfo.appendChild(spanCmtCreatedTime);
   divCmtCreatorDetails.appendChild(divCmtText);
-  divCmtText.appendChild(spanCmtText);
+  divCmtText.appendChild(pCmtText);
   divCmtCreatorDetails.appendChild(divCmtEditForm);
   divCmtEditForm.appendChild(formCmt);
-  formCmt.appendChild(inputCmt);
+  formCmt.appendChild(divTextareaBox);
+  divTextareaBox.appendChild(textareaCmt);
   formCmt.appendChild(divCmtSubmit);
   divCmtSubmit.appendChild(btnCancel);
   divCmtSubmit.appendChild(inputSubmit);
@@ -267,6 +296,7 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   liCmtDeleteBtn.appendChild(spanCmtDeleteBtn);
 
   divCmtEditBtn.addEventListener("click", openOptions);
+  formCmt.addEventListener("submit", updateComment);
 };
 
 const sendComment = async (username, avatarUrl, comment) => {
@@ -295,6 +325,9 @@ const requestInfo = (event) => {
         data: { username, avatarUrl },
       } = response;
       const comment = commentInput.value;
+      if (comment.trim() === "") {
+        return false;
+      }
       sendComment(username, avatarUrl, comment);
       commentInput.value = "";
     }
@@ -336,9 +369,10 @@ const accessPermission = async () => {
 
 const init = () => {
   accessPermission();
-  if (commentBtns)
-    commentBtns.forEach((commentBtn) => {
-      commentBtn.addEventListener("click", openOptions);
+  if (ellipsisBtns)
+    ellipsisBtns.forEach((btn) => {
+      btn.addEventListener("click", openOptions);
     });
 };
-if (commentForm) init();
+
+if (commentsContainer) init();
