@@ -17,7 +17,7 @@ export const postAddComment = async (req, res) => {
       creator: user.id,
       videos: video,
     });
-    res.json({ id: newComment.id });
+    res.json({ id: newComment.id, createdAt: newComment.createdAt });
     video.comments.push(newComment.id);
     video.save();
   } catch (error) {
@@ -115,15 +115,15 @@ export const getDislikeComment = async (req, res) => {
 
 export const postLikeComment = async (req, res) => {
   const {
-    body: { cmntId },
+    body: { cmntId, count },
   } = req;
   try {
     const comment = await Comment.findById(cmntId);
     const user = await User.findById(req.user.id);
     if (!user.likeComment.includes(cmntId)) {
       user.likeComment.push(cmntId);
-      comment.preferences.like += 1;
       user.save();
+      comment.preferences.like += 1;
       comment.save();
     }
     res.status(200);
@@ -136,7 +136,6 @@ export const postLikeComment = async (req, res) => {
 
 export const postUndoLikeComment = async (req, res) => {
   const {
-    // params: { id },
     body: { cmntId },
   } = req;
   try {
@@ -144,7 +143,7 @@ export const postUndoLikeComment = async (req, res) => {
     const user = await User.findById(req.user.id);
     comment.preferences.like -= 1;
     comment.save();
-    user.likeComment.splice(cmntId, 1);
+    user.likeComment.remove(cmntId);
     user.save();
     res.status(200);
   } catch (error) {
@@ -186,7 +185,7 @@ export const postUndoDislikeComment = async (req, res) => {
     const user = await User.findById(req.user.id);
     comment.preferences.dislike -= 1;
     comment.save();
-    user.dislikeComment.splice(cmntId, 1);
+    user.dislikeComment.remove(cmntId);
     user.save();
     res.status(200);
   } catch (error) {

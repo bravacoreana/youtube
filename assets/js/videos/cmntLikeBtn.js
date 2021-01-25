@@ -3,8 +3,7 @@ import axios from "axios";
 
 const cmntLikeBtns = document.querySelectorAll(".cmntLikeBtn-js");
 const cmntDislikeBtns = document.querySelectorAll(".cmntDislikeBtn-js");
-let likeClicked = false;
-let dislikeClicked = false;
+// let likeClicked = false;
 
 const cancelCmntDislikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
@@ -23,23 +22,24 @@ const cancelCmntDislikeCount = async (count, cmntId) => {
 
 const cancelCmntLikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
-  const response = await axios({
+  await axios({
     url: `/api/${videoId}/undo-comment-like`,
     method: "POST",
     data: {
       count,
       cmntId,
     },
+  }).then((response) => {
+    if (response.status === 200) {
+      console.log("succeed");
+    }
   });
-  if (response.status === 200) {
-    console.log("succeed");
-  }
 };
 
-const sendCmntLikeCount = async (count, cmntId) => {
+const sendCmntDislikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/comment-like`,
+    url: `/api/${videoId}/comment-dislike`,
     method: "POST",
     data: {
       count,
@@ -50,11 +50,10 @@ const sendCmntLikeCount = async (count, cmntId) => {
     console.log("succeed");
   }
 };
-
-const sendCmntDislikeCount = async (count, cmntId) => {
+const sendCmntLikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/comment-dislike`,
+    url: `/api/${videoId}/comment-like`,
     method: "POST",
     data: {
       count,
@@ -72,18 +71,18 @@ export const handleClickDislike = (dislikeBtn) => {
   const count = cmntList.querySelector(".cmntDislikeCount-js");
   const likeBtn = cmntList.querySelector(".cmntLikeBtn-js");
 
-  if (!dislikeClicked) {
-    dislikeClicked = true;
-    count.textContent++;
+  if (!dislikeBtn.classList.contains("selectedCmnt")) {
+    const countUp = parseInt(count.innerText, 10) + 1;
     dislikeBtn.classList.add("selectedCmnt");
     likeBtn.style.pointerEvents = "none";
-    sendCmntDislikeCount(count.textContent, cmntId);
+    count.innerText = countUp;
+    sendCmntDislikeCount(countUp, cmntId);
   } else {
-    dislikeClicked = false;
-    count.textContent--;
+    const countDown = parseInt(count.innerText, 10) - 1;
     dislikeBtn.classList.remove("selectedCmnt");
     likeBtn.style.pointerEvents = "";
-    cancelCmntDislikeCount(count.textContent, cmntId);
+    count.innerText = countDown;
+    cancelCmntDislikeCount(countDown, cmntId);
   }
 };
 
@@ -92,24 +91,40 @@ export const handleClickLike = (likeBtn) => {
   const cmntId = cmntList.id;
   const count = cmntList.querySelector(".cmntLikeCount-js");
   const dislikeBtn = cmntList.querySelector(".cmntDislikeBtn-js");
-
-  if (!likeClicked) {
-    likeClicked = true;
-    count.textContent++;
+  if (!likeBtn.classList.contains("selectedCmnt")) {
+    const countUp = parseInt(count.innerText, 10) + 1;
     likeBtn.classList.add("selectedCmnt");
     dislikeBtn.style.pointerEvents = "none";
-    sendCmntLikeCount(count.textContent, cmntId);
+    count.innerText = countUp;
+    sendCmntLikeCount(countUp, cmntId);
   } else {
-    likeClicked = false;
-    count.textContent--;
+    const countDown = parseInt(count.innerText, 10) - 1;
     likeBtn.classList.remove("selectedCmnt");
     dislikeBtn.style.pointerEvents = "";
-    cancelCmntLikeCount(count.textContent, cmntId);
+    count.innerText = countDown;
+    cancelCmntLikeCount(countDown, cmntId);
   }
 };
 
 const redirectSignIn = () => {
   window.location.href = "http://localhost:4000/signIn";
+};
+
+const postAccessPermission = async (event) => {
+  const response = await axios({
+    url: "/api/access-permission",
+    method: "POST",
+  });
+  if (response.status === 200) {
+    cmntLikeBtns.forEach((btn) => {
+      if (btn.contains(event.target)) handleClickLike(btn);
+    });
+    cmntDislikeBtns.forEach((btn) => {
+      if (btn.contains(event.target)) handleClickDislike(btn);
+    });
+  } else {
+    redirectSignIn();
+  }
 };
 
 const getCmntDislike = async () => {
@@ -122,11 +137,12 @@ const getCmntDislike = async () => {
     const cmntLists = document.querySelectorAll(".comment__list");
     cmntLists.forEach((li) => {
       if (dislikedCmnts.includes(li.id)) {
-        dislikeClicked = true;
         const likeBtn = li.querySelector(".cmntLikeBtn-js");
         const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
-        dislikeBtn.classList.add("selectedCmnt");
-        likeBtn.style.pointerEvents = "none";
+        if (!dislikeBtn.classList.contains("selectedCmnt")) {
+          dislikeBtn.classList.add("selectedCmnt");
+          likeBtn.style.pointerEvents = "none";
+        }
       }
     });
   });
@@ -142,33 +158,15 @@ const getCmntLike = async () => {
     const cmntLists = document.querySelectorAll(".comment__list");
     cmntLists.forEach((li) => {
       if (likedCmnts.includes(li.id)) {
-        likeClicked = true;
         const likeBtn = li.querySelector(".cmntLikeBtn-js");
         const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
-        likeBtn.classList.add("selectedCmnt");
-        dislikeBtn.style.pointerEvents = "none";
+        if (!likeBtn.classList.contains("selectedCmnt")) {
+          likeBtn.classList.add("selectedCmnt");
+          dislikeBtn.style.pointerEvents = "none";
+        }
       }
     });
   });
-};
-
-const postAccessPermission = async (event) => {
-  const response = await axios({
-    url: "/api/access-permission",
-    method: "POST",
-  });
-  if (response.status === 200) {
-    cmntLikeBtns.forEach((btn) => {
-      const cmntLikeBtn = event.target.parentNode;
-      if (event.target.parentNode === btn) handleClickLike(cmntLikeBtn);
-    });
-    cmntDislikeBtns.forEach((btn) => {
-      const cmntDislikeBtn = event.target.parentNode;
-      if (event.target.parentNode === btn) handleClickDislike(cmntDislikeBtn);
-    });
-  } else if (response.status === 204) {
-    redirectSignIn();
-  }
 };
 
 const init = () => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
-// const cmntLikeBtns = document.querySelectorAll(".cmntLikeBtn-js");
-// const cmntDislikeBtns = document.querySelectorAll(".cmntDislikeBtn-js");
+import { timeCalc } from "./timeCalc";
+
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
 const commentInput = document.getElementById("comment-js");
@@ -88,11 +88,6 @@ const updateComment = async (event) => {
     if (response.status === 200) {
       const comment = cmntList.querySelector(".commentText-js");
       comment.innerText = newComment;
-
-      // const cmntDeta = cmntList.querySelector(".commentDeta-js");
-      // const editedMsg = document.createElement("span");
-      // editedMsg.innerText = " (Edited) ";
-      // cmntDeta.appendChild(editedMsg);
       closeEdit();
     }
   });
@@ -159,7 +154,7 @@ const openOptions = (event) => {
   cmntEditContainer.addEventListener("click", handleOption);
 };
 
-const createComment = (username, avatarUrl, comment, commentId) => {
+const createComment = (username, avatarUrl, comment, commentId, createdAt) => {
   const liCmntList = document.createElement("li");
   liCmntList.classList.add("comment__list");
   liCmntList.id = commentId;
@@ -192,7 +187,7 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   const spanCmtCreatedTime = document.createElement("span");
   spanCmtCreatedTime.classList.add("video__createdAt");
   spanCmtCreatedTime.classList.add("comment__creator-time");
-  spanCmtCreatedTime.innerHTML = "Just now";
+  spanCmtCreatedTime.innerHTML = timeCalc(createdAt);
 
   const divCmtText = document.createElement("div");
   divCmtText.classList.add("comment__text");
@@ -341,12 +336,14 @@ const createComment = (username, avatarUrl, comment, commentId) => {
 
   divCmtEditBtn.addEventListener("click", openOptions);
   formCmt.addEventListener("submit", updateComment);
+
   divCmntLikeBtn.addEventListener("click", (e) => {
     e.preventDefault();
     handleClickLike(divCmntLikeBtn);
   });
-  divCmntDislikeBtn.addEventListener("click", (event) => {
-    event.preventDefault();
+
+  divCmntDislikeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     handleClickDislike(divCmntDislikeBtn);
   });
 };
@@ -361,7 +358,13 @@ const sendComment = async (username, avatarUrl, comment) => {
     },
   });
   if (response.status === 200) {
-    createComment(username, avatarUrl, comment, response.data.id);
+    createComment(
+      username,
+      avatarUrl,
+      comment,
+      response.data.id,
+      response.data.createdAt
+    );
     upCmntCount();
   }
 };

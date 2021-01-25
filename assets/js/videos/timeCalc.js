@@ -1,6 +1,6 @@
 const createdAt = document.getElementsByClassName("video__createdAt");
 
-const timeCalc = (value) => {
+export const timeCalc = (value) => {
   const today = new Date();
   const timeValue = new Date(value);
 
