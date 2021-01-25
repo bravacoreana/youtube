@@ -17,6 +17,10 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Video",
   },
+  preferences: {
+    like: { type: Number, default: 0 },
+    dislike: { type: Number, default: 0 },
+  },
   isDeleted: { type: Boolean },
 });
 

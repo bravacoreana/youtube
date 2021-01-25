@@ -12,6 +12,8 @@ import "./videos/preview";
 import "./videos/videoPlayer";
 import "./videos/videoRecorder";
 import "./videos/likeBtn";
+import "./videos/cmntLikeBtn";
 // import "./videos/socialMedia";
 
 import "./videos/comments";
+import "./videos/textarea";

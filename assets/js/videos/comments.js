@@ -1,5 +1,7 @@
 import axios from "axios";
-
+import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
+// const cmntLikeBtns = document.querySelectorAll(".cmntLikeBtn-js");
+// const cmntDislikeBtns = document.querySelectorAll(".cmntDislikeBtn-js");
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
 const commentInput = document.getElementById("comment-js");
@@ -172,7 +174,8 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   aAvatarUrl.href = document.getElementById("userDetail").getAttribute("href");
 
   const imgAvatar = document.createElement("img");
-  imgAvatar.src = avatarUrl;
+  if (avatarUrl.includes("uploads/avatars/")) imgAvatar.src = `/${avatarUrl}`;
+  else imgAvatar.src = avatarUrl;
 
   const divCmtCreatorDetails = document.createElement("div");
   divCmtCreatorDetails.classList.add("comment__creator-details");
@@ -226,6 +229,37 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   inputSubmit.setAttribute("type", "submit");
   inputSubmit.value = "COMMENT";
 
+  // COMMENT LIKE&DISLIKE BTNS
+  const divCmntBtns = document.createElement("div");
+  divCmntBtns.classList.add("comment__btns");
+
+  const divCmntLikeBtn = document.createElement("div");
+  divCmntLikeBtn.classList.add("comment__btn");
+  divCmntLikeBtn.classList.add("cmntLikeBtn-js");
+
+  const iCmntLike = document.createElement("i");
+  iCmntLike.classList.add("fas");
+  iCmntLike.classList.add("fa-thumbs-up");
+  iCmntLike.classList.add("cmntLikeIcon-js");
+
+  const spanCmntLike = document.createElement("span");
+  spanCmntLike.classList.add("cmntLikeCount-js");
+  spanCmntLike.innerText = "0";
+
+  const divCmntDislikeBtn = document.createElement("div");
+  divCmntDislikeBtn.classList.add("comment__btn");
+  divCmntDislikeBtn.classList.add("cmntDislikeBtn-js");
+
+  const iCmntDislike = document.createElement("i");
+  iCmntDislike.classList.add("fas");
+  iCmntDislike.classList.add("fa-thumbs-down");
+  iCmntDislike.classList.add("cmntDislikeIcon-js");
+
+  const spanCmntDislike = document.createElement("span");
+  spanCmntDislike.classList.add("cmntDislikeCount-js");
+  spanCmntDislike.innerText = "0";
+
+  // COMMENT EDIT
   const divCmtEdit = document.createElement("div");
   divCmtEdit.classList.add("comment__edit");
 
@@ -282,6 +316,16 @@ const createComment = (username, avatarUrl, comment, commentId) => {
   formCmt.appendChild(divCmtSubmit);
   divCmtSubmit.appendChild(btnCancel);
   divCmtSubmit.appendChild(inputSubmit);
+
+  // comment Like&Dislike
+  divCmtCreatorDetails.appendChild(divCmntBtns);
+  divCmntBtns.appendChild(divCmntLikeBtn);
+  divCmntLikeBtn.appendChild(iCmntLike);
+  divCmntLikeBtn.appendChild(spanCmntLike);
+  divCmntBtns.appendChild(divCmntDislikeBtn);
+  divCmntDislikeBtn.appendChild(iCmntDislike);
+  divCmntDislikeBtn.appendChild(spanCmntDislike);
+
   //
   liCmntList.appendChild(divCmtEdit);
   divCmtEdit.appendChild(divCmtEditBtn);
@@ -297,6 +341,14 @@ const createComment = (username, avatarUrl, comment, commentId) => {
 
   divCmtEditBtn.addEventListener("click", openOptions);
   formCmt.addEventListener("submit", updateComment);
+  divCmntLikeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    handleClickLike(divCmntLikeBtn);
+  });
+  divCmntDislikeBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    handleClickDislike(divCmntDislikeBtn);
+  });
 };
 
 const sendComment = async (username, avatarUrl, comment) => {

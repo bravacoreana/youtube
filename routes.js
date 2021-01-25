@@ -31,6 +31,12 @@ const ADD_COMMENT = "/:id/comment";
 const EDIT_COMMENT = "/:id/comment-edit";
 const COMMENT_UPDATE = "/:id/comment-update";
 const DELETE_COMMENT = "/:id/comment/delete";
+
+const COMMENT_LIKE = "/:id/comment-like";
+const COMMENT_LIKE_UNDO = "/:id/undo-comment-like";
+const COMMENT_DISLIKE = "/:id/comment-dislike";
+const COMMENT_DISLIKE_UNDO = "/:id/undo-comment-dislike";
+
 const LIKE = "/:id/like";
 const LIKE_UNDO = "/:id/undo-like";
 const DISLIKE = "/:id/dislike";
@@ -90,6 +96,10 @@ const routes = {
   accessPermission: ACCESS_PERMISSION,
   userInfo: USER_INFO,
   commentUpdate: COMMENT_UPDATE,
+  commentLike: COMMENT_LIKE,
+  commentLikeUndo: COMMENT_LIKE_UNDO,
+  commentDislike: COMMENT_DISLIKE,
+  commentDislikeUndo: COMMENT_DISLIKE_UNDO,
 };
 
 export default routes;
