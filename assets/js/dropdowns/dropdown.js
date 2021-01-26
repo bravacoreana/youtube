@@ -27,9 +27,8 @@ const openThemeBox = () => {
 
 const closeDropdown = () => {
   dropdownMain.classList.remove("open-dropdown");
-  if (themeBox.classList.contains("open-dropdown")) {
+  if (themeBox.classList.contains("open-dropdown"))
     themeBox.classList.remove("open-dropdown");
-  }
   dropdownBtn.removeEventListener("click", closeDropdown);
   dropdownBtn.addEventListener("click", openDropdown);
 };
@@ -45,4 +44,5 @@ const init = () => {
   dropdownBtn.addEventListener("click", openDropdown);
   document.addEventListener("click", closeAll);
 };
+
 init();

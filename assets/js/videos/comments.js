@@ -13,11 +13,9 @@ const downCmntCount = () => {
   const downCount = parseInt(cmntCount.innerText, 10) - 1;
   const countCmntText = document.getElementById("countCmntText-js");
   cmntCount.innerText = downCount;
-  if (cmntCount.innerText === "1" || cmntCount.innerText === "0") {
+  if (cmntCount.innerText === "1" || cmntCount.innerText === "0")
     countCmntText.innerText = " comment";
-  } else {
-    countCmntText.innerText = " comments";
-  }
+  else countCmntText.innerText = " comments";
 };
 
 const upCmntCount = () => {
@@ -25,11 +23,9 @@ const upCmntCount = () => {
   const upCount = parseInt(cmntCount.innerText, 10) + 1;
   const countCmntText = document.getElementById("countCmntText-js");
   cmntCount.innerText = upCount;
-  if (cmntCount.innerText === "1" || cmntCount.innerText === "0") {
+  if (cmntCount.innerText === "1" || cmntCount.innerText === "0")
     countCmntText.innerText = " comment";
-  } else {
-    countCmntText.innerText = " comments";
-  }
+  else countCmntText.innerText = " comments";
 };
 
 const processDeleteComment = (commentList) => {

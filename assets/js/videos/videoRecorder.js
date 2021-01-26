@@ -59,10 +59,9 @@ const getVideo = async () => {
     recordBtn.removeEventListener("click", getVideo);
   }
 };
+
 const init = () => {
   recordBtn.addEventListener("click", getVideo);
 };
 
-if (recorderContainer) {
-  init();
-}
+if (recorderContainer) init();

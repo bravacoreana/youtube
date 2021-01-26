@@ -12,17 +12,12 @@ const handleThumbnail = (event) => {
     };
   })(image);
 
-  if (file) {
-    reader.readAsDataURL(file[0]);
-  }
-
+  if (file) reader.readAsDataURL(file[0]);
   previewThumbnail.appendChild(image);
 };
 
 const init = () => {
-  if (thumbnailFile) {
-    thumbnailFile.addEventListener("change", handleThumbnail);
-  }
+  if (thumbnailFile) thumbnailFile.addEventListener("change", handleThumbnail);
 };
 
 init();

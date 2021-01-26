@@ -35,11 +35,9 @@ const colorScheme = () => {
 };
 
 const firstLoadColorScheme = () => {
-  if (darkModeSetting) {
+  if (darkModeSetting)
     darkModeSetting === "enabled" ? handleDarkMode() : handleLightMode();
-  } else {
-    handlePreferMode();
-  }
+  else handlePreferMode();
 };
 
 const init = () => {

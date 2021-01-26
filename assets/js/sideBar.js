@@ -151,4 +151,5 @@ const init = () => {
   handleMainBox();
   if (!sidebar.style.display) sidebar.style.display = "none";
 };
+
 init();
