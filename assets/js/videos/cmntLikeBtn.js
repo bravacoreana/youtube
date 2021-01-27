@@ -8,8 +8,8 @@ const cmntDislikeBtns = document.querySelectorAll(".cmntDislikeBtn-js");
 const cancelCmntDislikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/undo-comment-dislike`,
-    method: "POST",
+    url: `/api/${videoId}/comment-dislike`,
+    method: "DELETE",
     data: {
       count,
       cmntId,
@@ -23,8 +23,8 @@ const cancelCmntDislikeCount = async (count, cmntId) => {
 const cancelCmntLikeCount = async (count, cmntId) => {
   const videoId = window.location.href.split("/videos/")[1];
   await axios({
-    url: `/api/${videoId}/undo-comment-like`,
-    method: "POST",
+    url: `/api/${videoId}/comment-like`,
+    method: "DELETE",
     data: {
       count,
       cmntId,
@@ -127,18 +127,26 @@ const postAccessPermission = async (event) => {
   }
 };
 
-const getCmntDislike = async () => {
+const getCmntDetails = async () => {
   const videoId = window.location.href.split("/videos/")[1];
   await axios({
-    url: `/api/${videoId}/comment-dislike`,
+    url: `/api/${videoId}/comment-details`,
     method: "GET",
   }).then((res) => {
-    const dislikedCmnts = res.data;
+    console.log("SENT");
+    const likedCmnts = res.data.like;
+    const dislikedCmnts = res.data.dislike;
     const cmntLists = document.querySelectorAll(".comment__list");
     cmntLists.forEach((li) => {
+      const likeBtn = li.querySelector(".cmntLikeBtn-js");
+      const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
+      if (likedCmnts.includes(li.id)) {
+        if (!likeBtn.classList.contains("selectedCmnt")) {
+          likeBtn.classList.add("selectedCmnt");
+          dislikeBtn.style.pointerEvents = "none";
+        }
+      }
       if (dislikedCmnts.includes(li.id)) {
-        const likeBtn = li.querySelector(".cmntLikeBtn-js");
-        const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
         if (!dislikeBtn.classList.contains("selectedCmnt")) {
           dislikeBtn.classList.add("selectedCmnt");
           likeBtn.style.pointerEvents = "none";
@@ -148,30 +156,8 @@ const getCmntDislike = async () => {
   });
 };
 
-const getCmntLike = async () => {
-  const videoId = window.location.href.split("/videos/")[1];
-  await axios({
-    url: `/api/${videoId}/comment-like`,
-    method: "GET",
-  }).then((res) => {
-    const likedCmnts = res.data;
-    const cmntLists = document.querySelectorAll(".comment__list");
-    cmntLists.forEach((li) => {
-      if (likedCmnts.includes(li.id)) {
-        const likeBtn = li.querySelector(".cmntLikeBtn-js");
-        const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
-        if (!likeBtn.classList.contains("selectedCmnt")) {
-          likeBtn.classList.add("selectedCmnt");
-          dislikeBtn.style.pointerEvents = "none";
-        }
-      }
-    });
-  });
-};
-
 const init = () => {
-  getCmntLike();
-  getCmntDislike();
+  getCmntDetails();
   cmntLikeBtns.forEach((btn) => {
     btn.addEventListener("click", postAccessPermission);
   });
@@ -179,4 +165,47 @@ const init = () => {
     btn.addEventListener("click", postAccessPermission);
   });
 };
-if (cmntLikeBtns || cmntDislikeBtns) init();
+
+if (document.querySelector(".comments-block")) init();
+
+// const getCmntDislike = async () => {
+//   const videoId = window.location.href.split("/videos/")[1];
+//   await axios({
+//     url: `/api/${videoId}/comment-dislike`,
+//     method: "GET",
+//   }).then((res) => {
+//     const dislikedCmnts = res.data;
+//     const cmntLists = document.querySelectorAll(".comment__list");
+//     cmntLists.forEach((li) => {
+//       if (dislikedCmnts.includes(li.id)) {
+//         const likeBtn = li.querySelector(".cmntLikeBtn-js");
+//         const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
+//         if (!dislikeBtn.classList.contains("selectedCmnt")) {
+//           dislikeBtn.classList.add("selectedCmnt");
+//           likeBtn.style.pointerEvents = "none";
+//         }
+//       }
+//     });
+//   });
+// };
+
+// const getCmntLike = async () => {
+//   const videoId = window.location.href.split("/videos/")[1];
+//   await axios({
+//     url: `/api/${videoId}/comment-like`,
+//     method: "GET",
+//   }).then((res) => {
+//     const likedCmnts = res.data;
+//     const cmntLists = document.querySelectorAll(".comment__list");
+//     cmntLists.forEach((li) => {
+//       if (likedCmnts.includes(li.id)) {
+//         const likeBtn = li.querySelector(".cmntLikeBtn-js");
+//         const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
+//         if (!likeBtn.classList.contains("selectedCmnt")) {
+//           likeBtn.classList.add("selectedCmnt");
+//           dislikeBtn.style.pointerEvents = "none";
+//         }
+//       }
+//     });
+//   });
+// };

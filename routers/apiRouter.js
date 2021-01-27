@@ -2,23 +2,22 @@ import express from "express";
 import routes from "../routes";
 import {
   postLike,
-  postLikeUndo,
+  deleteLike,
   postDislike,
-  postDislikeUndo,
   postRegisterView,
   getLike,
   getDislike,
+  deleteDislike,
 } from "../controllers/videoController";
 import {
   deleteComment,
   postLikeComment,
   postAddComment,
   postEditComment,
-  getLikeComment,
-  postUndoLikeComment,
+  deleteLikeComment,
   postDislikeComment,
-  postUndoDislikeComment,
-  getDislikeComment,
+  delteDislikeComment,
+  commentDetails,
 } from "../controllers/commentController";
 import { postAccessPermission, userInfo } from "../controllers/userController";
 
@@ -26,23 +25,23 @@ const apiRouter = express.Router();
 
 apiRouter.post(routes.registerView, postRegisterView);
 apiRouter.post(routes.accessPermission, postAccessPermission);
-apiRouter.post(routes.addComment, postAddComment);
-apiRouter.post(routes.commentUpdate, postEditComment);
 apiRouter.post(routes.userInfo, userInfo);
+
 apiRouter.get(routes.like, getLike);
 apiRouter.post(routes.like, postLike);
-apiRouter.post(routes.likeUndo, postLikeUndo);
+apiRouter.delete(routes.like, deleteLike);
 apiRouter.get(routes.dislike, getDislike);
 apiRouter.post(routes.dislike, postDislike);
-apiRouter.post(routes.dislikeUndo, postDislikeUndo);
-apiRouter.post(routes.deleteComment, deleteComment);
+apiRouter.delete(routes.dislike, deleteDislike);
 
-apiRouter.get(routes.commentLike, getLikeComment);
+apiRouter.post(routes.comment, postAddComment);
+apiRouter.put(routes.comment, postEditComment);
+apiRouter.delete(routes.comment, deleteComment);
+
+apiRouter.get(routes.commentDetails, commentDetails);
 apiRouter.post(routes.commentLike, postLikeComment);
-apiRouter.post(routes.commentLikeUndo, postUndoLikeComment);
-
-apiRouter.get(routes.commentDislike, getDislikeComment);
+apiRouter.delete(routes.commentLike, deleteLikeComment);
 apiRouter.post(routes.commentDislike, postDislikeComment);
-apiRouter.post(routes.commentDislikeUndo, postUndoDislikeComment);
+apiRouter.delete(routes.commentDislike, delteDislikeComment);
 
 export default apiRouter;

@@ -38,8 +38,8 @@ const handleDeleteBtn = async (target) => {
   const commentId = commentList.id;
   const videoId = window.location.href.split("/videos/")[1];
   await axios({
-    url: `/api/${videoId}/comment/delete`,
-    method: "POST",
+    url: `/api/${videoId}/comment`,
+    method: "DELETE",
     data: {
       commentId,
     },
@@ -74,8 +74,8 @@ const updateComment = async (event) => {
   const newComment = cmntList.querySelector("#newComment").value;
   const commentId = cmntList.id;
   await axios({
-    url: `/api/${videoId}/comment-update`,
-    method: "POST",
+    url: `/api/${videoId}/comment`,
+    method: "PUT",
     data: {
       newComment,
       commentId,

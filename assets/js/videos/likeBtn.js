@@ -10,8 +10,8 @@ let dislikeClicked = false;
 const cancelDislikeCount = async (count) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/undo-dislike`,
-    method: "POST",
+    url: `/api/${videoId}/dislike`,
+    method: "DELETE",
     data: {
       count,
     },
@@ -38,8 +38,8 @@ const sendDislikeCount = async (count) => {
 const cancelLikeCount = async (count) => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/undo-like`,
-    method: "POST",
+    url: `/api/${videoId}/like`,
+    method: "DELETE",
     data: {
       count,
     },
