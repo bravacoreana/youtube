@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
-import { timeCalc } from "./timeCalc";
+import { timeCalc } from "../timeCalc";
 
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
@@ -83,6 +83,11 @@ const updateComment = async (event) => {
   }).then((response) => {
     if (response.status === 200) {
       const comment = cmntList.querySelector(".commentText-js");
+      const cmntDeta = cmntList.querySelector(".commentDeta-js");
+      const spanEdited = document.createElement("span");
+      spanEdited.classList.add("comment__creator-updated");
+      spanEdited.innerHTML = "(Edited)";
+      cmntDeta.appendChild(spanEdited);
       comment.innerText = newComment;
       closeEdit();
     }
@@ -365,9 +370,9 @@ const sendComment = async (username, avatarUrl, comment) => {
   }
 };
 
-const requestInfo = (event) => {
+const requestInfo = async (event) => {
   event.preventDefault();
-  axios({
+  await axios({
     url: "/api/user-info",
     method: "POST",
   }).then((response) => {
@@ -376,12 +381,11 @@ const requestInfo = (event) => {
         data: { username, avatarUrl },
       } = response;
       const comment = commentInput.value;
-      if (comment.trim() === "") {
-        return false;
-      }
+      if (comment.trim() === "") return false;
       sendComment(username, avatarUrl, comment);
       commentInput.value = "";
     }
+    return "";
   });
 };
 

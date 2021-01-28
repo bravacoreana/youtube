@@ -20,6 +20,9 @@ export const postAddComment = async (req, res) => {
     res.json({ id: newComment.id, createdAt: newComment.createdAt });
     video.comments.push(newComment.id);
     video.save();
+    await User.findById(user.id);
+    user.comments.push(newComment.id);
+    user.save();
   } catch (error) {
     res.status(400);
   } finally {
@@ -29,23 +32,19 @@ export const postAddComment = async (req, res) => {
 
 export const postEditComment = async (req, res) => {
   const {
-    // params: { id },
     body: { newComment, commentId },
   } = req;
   try {
-    // const video = await Video.findById(id).populate("comment");
     const comment = await Comment.findById(commentId).populate("creator");
     if (comment.creator.id !== req.user.id) {
       throw Error();
     } else {
       await Comment.findByIdAndUpdate(commentId, {
         text: newComment,
+        isUpdated: true,
       });
-      // await video.comment.findByIdAndUpdate(commentId);
     }
   } catch (error) {
-    // res.status(204);
-    console.log("It's not working");
     console.log(error);
   } finally {
     res.end();
@@ -61,6 +60,9 @@ export const deleteComment = async (req, res) => {
     const video = await Video.findById(id);
     video.comments.remove(commentId);
     video.save();
+    const user = await User.findById(req.user.id);
+    user.comments.remove(commentId);
+    user.save();
     await Comment.findOneAndRemove({ _id: commentId });
   } catch (error) {
     console.log(error);
@@ -69,53 +71,9 @@ export const deleteComment = async (req, res) => {
   }
 };
 
-// export const getLikeComment = async (req, res) => {
-//   const {
-//     params: { id },
-//   } = req;
-//   try {
-//     const likeArray = [];
-//     const video = await Video.findById(id).populate("comments");
-//     const user = await User.findById(req.user.id);
-//     for (let i = 0; i < video.comments.length; i++) {
-//       const cmntId = video.comments[i].id;
-//       if (user.likeComment.includes(cmntId)) {
-//         likeArray.push(cmntId);
-//       }
-//     }
-//     res.json(likeArray);
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     res.end();
-//   }
-// };
-
-// export const getDislikeComment = async (req, res) => {
-//   const {
-//     params: { id },
-//   } = req;
-//   try {
-//     const dislikeArray = [];
-//     const video = await Video.findById(id).populate("comments");
-//     const user = await User.findById(req.user.id);
-//     for (let i = 0; i < video.comments.length; i++) {
-//       const cmntId = video.comments[i].id;
-//       if (user.dislikeComment.includes(cmntId)) {
-//         dislikeArray.push(cmntId);
-//       }
-//     }
-//     res.json(dislikeArray);
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     res.end();
-//   }
-// };
-
 export const postLikeComment = async (req, res) => {
   const {
-    body: { cmntId, count },
+    body: { cmntId },
   } = req;
   try {
     const comment = await Comment.findById(cmntId);
@@ -155,8 +113,7 @@ export const deleteLikeComment = async (req, res) => {
 
 export const postDislikeComment = async (req, res) => {
   const {
-    // params: { id },
-    body: { count, cmntId },
+    body: { cmntId },
   } = req;
   try {
     const comment = await Comment.findById(cmntId);
@@ -177,7 +134,6 @@ export const postDislikeComment = async (req, res) => {
 
 export const delteDislikeComment = async (req, res) => {
   const {
-    // params: { id },
     body: { cmntId },
   } = req;
   try {
@@ -195,21 +151,27 @@ export const delteDislikeComment = async (req, res) => {
   }
 };
 
-export const commentDetails = async (req, res) => {
+export const getCommentPreferences = async (req, res) => {
   const {
     params: { id },
+    user,
   } = req;
   try {
     const like = [];
     const dislike = [];
+    const isUpdated = [];
     const video = await Video.findById(id).populate("comments");
-    const user = await User.findById(req.user.id);
+
     for (let i = 0; i < video.comments.length; i++) {
       const cmntId = video.comments[i].id;
-      if (user.likeComment.includes(cmntId)) like.push(cmntId);
-      if (user.dislikeComment.includes(cmntId)) dislike.push(cmntId);
+      const loggedUser = await User.findById(user.id);
+      if (user) {
+        if (loggedUser.likeComment.includes(cmntId)) like.push(cmntId);
+        if (loggedUser.dislikeComment.includes(cmntId)) dislike.push(cmntId);
+      }
+      if (video.comments[i].isUpdated === true) isUpdated.push(cmntId);
     }
-    res.json({ like, dislike });
+    res.json({ like, dislike, isUpdated });
   } catch (error) {
     console.log(error);
   } finally {

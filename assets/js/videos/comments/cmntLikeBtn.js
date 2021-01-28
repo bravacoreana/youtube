@@ -127,15 +127,15 @@ const postAccessPermission = async (event) => {
   }
 };
 
-const getCmntDetails = async () => {
+const commentPreferences = async () => {
   const videoId = window.location.href.split("/videos/")[1];
   await axios({
-    url: `/api/${videoId}/comment-details`,
+    url: `/api/${videoId}/comment`,
     method: "GET",
   }).then((res) => {
-    console.log("SENT");
     const likedCmnts = res.data.like;
     const dislikedCmnts = res.data.dislike;
+    const edited = res.data.isUpdated;
     const cmntLists = document.querySelectorAll(".comment__list");
     cmntLists.forEach((li) => {
       const likeBtn = li.querySelector(".cmntLikeBtn-js");
@@ -152,12 +152,19 @@ const getCmntDetails = async () => {
           likeBtn.style.pointerEvents = "none";
         }
       }
+      if (edited.includes(li.id)) {
+        const cmntDeta = li.querySelector(".commentDeta-js");
+        const spanEdited = document.createElement("span");
+        spanEdited.classList.add("comment__creator-updated");
+        spanEdited.innerHTML = "(Edited)";
+        cmntDeta.appendChild(spanEdited);
+      }
     });
   });
 };
 
 const init = () => {
-  getCmntDetails();
+  commentPreferences();
   cmntLikeBtns.forEach((btn) => {
     btn.addEventListener("click", postAccessPermission);
   });
