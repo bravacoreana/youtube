@@ -27,20 +27,14 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 // API
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
-const ADD_COMMENT = "/:id/comment";
-const EDIT_COMMENT = "/:id/comment-edit";
-const COMMENT_UPDATE = "/:id/comment-update";
-const DELETE_COMMENT = "/:id/comment/delete";
-
-const COMMENT_LIKE = "/:id/comment-like";
-const COMMENT_LIKE_UNDO = "/:id/undo-comment-like";
-const COMMENT_DISLIKE = "/:id/comment-dislike";
-const COMMENT_DISLIKE_UNDO = "/:id/undo-comment-dislike";
-
+const VIDEO = "/:id/video";
 const LIKE = "/:id/like";
-const LIKE_UNDO = "/:id/undo-like";
 const DISLIKE = "/:id/dislike";
-const DISLIKE_UNDO = "/:id/undo-dislike";
+const COMMENT = "/:id/comment";
+const COMMENT_LIKE = "/:id/comment-like";
+const COMMENT_DISLIKE = "/:id/comment-dislike";
+const COMMENT_DETAILS = "/:id/comment-details";
+
 const ACCESS_PERMISSION = "/access-permission";
 const USER_INFO = "/user-info";
 
@@ -86,20 +80,15 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
-  addComment: ADD_COMMENT,
-  editComment: EDIT_COMMENT,
-  deleteComment: DELETE_COMMENT,
+  comment: COMMENT,
   like: LIKE,
-  likeUndo: LIKE_UNDO,
   dislike: DISLIKE,
-  dislikeUndo: DISLIKE_UNDO,
   accessPermission: ACCESS_PERMISSION,
   userInfo: USER_INFO,
-  commentUpdate: COMMENT_UPDATE,
   commentLike: COMMENT_LIKE,
-  commentLikeUndo: COMMENT_LIKE_UNDO,
   commentDislike: COMMENT_DISLIKE,
-  commentDislikeUndo: COMMENT_DISLIKE_UNDO,
+  commentDetails: COMMENT_DETAILS,
+  video: VIDEO,
 };
 
 export default routes;

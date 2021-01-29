@@ -20,10 +20,20 @@ const UserSchema = new mongoose.Schema({
       ref: "Video",
     },
   ],
-  likeVideo: [{ type: String }],
-  dislikeVideo: [{ type: String }],
-  likeComment: [{ type: String }],
-  dislikeComment: [{ type: String }],
+  // likeVideo: [{ type: String }],
+  // dislikeVideo: [{ type: String }],
+  // likeComment: [{ type: String }],
+  // dislikeComment: [{ type: String }],
+  preferences: {
+    comments: {
+      like: [{ type: String }],
+      dislike: [{ type: String }],
+    },
+    videos: {
+      like: [{ type: String }],
+      dislike: [{ type: String }],
+    },
+  },
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

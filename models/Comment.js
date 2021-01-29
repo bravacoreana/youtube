@@ -22,6 +22,7 @@ const CommentSchema = new mongoose.Schema({
     dislike: { type: Number, default: 0 },
   },
   isDeleted: { type: Boolean },
+  isUpdated: { type: Boolean, default: false },
 });
 
 const model = mongoose.model("Comment", CommentSchema);

@@ -78,8 +78,14 @@ export const postLikeComment = async (req, res) => {
   try {
     const comment = await Comment.findById(cmntId);
     const user = await User.findById(req.user.id);
-    if (!user.likeComment.includes(cmntId)) {
-      user.likeComment.push(cmntId);
+    // if (!user.likeComment.includes(cmntId)) {
+    //   user.likeComment.push(cmntId);
+    //   user.save();
+    //   comment.preferences.like += 1;
+    //   comment.save();
+    // }
+    if (!user.preferences.comments.like.includes(cmntId)) {
+      user.preferences.comments.like.push(cmntId);
       user.save();
       comment.preferences.like += 1;
       comment.save();
@@ -101,7 +107,8 @@ export const deleteLikeComment = async (req, res) => {
     const user = await User.findById(req.user.id);
     comment.preferences.like -= 1;
     comment.save();
-    user.likeComment.remove(cmntId);
+    // user.likeComment.remove(cmntId);
+    user.preferences.comments.like.remove(cmntId);
     user.save();
     res.status(200);
   } catch (error) {
@@ -118,8 +125,14 @@ export const postDislikeComment = async (req, res) => {
   try {
     const comment = await Comment.findById(cmntId);
     const user = await User.findById(req.user.id);
-    if (!user.dislikeComment.includes(cmntId)) {
-      user.dislikeComment.push(cmntId);
+    // if (!user.dislikeComment.includes(cmntId)) {
+    //   user.dislikeComment.push(cmntId);
+    //   user.save();
+    //   comment.preferences.dislike += 1;
+    //   comment.save();
+    // }
+    if (!user.preferences.comments.dislike.includes(cmntId)) {
+      user.preferences.comments.dislike.push(cmntId);
       user.save();
       comment.preferences.dislike += 1;
       comment.save();
@@ -141,7 +154,8 @@ export const delteDislikeComment = async (req, res) => {
     const user = await User.findById(req.user.id);
     comment.preferences.dislike -= 1;
     comment.save();
-    user.dislikeComment.remove(cmntId);
+    // user.dislikeComment.remove(cmntId);
+    user.preferences.comments.dislike.remove(cmntId);
     user.save();
     res.status(200);
   } catch (error) {
@@ -164,10 +178,14 @@ export const getCommentPreferences = async (req, res) => {
 
     for (let i = 0; i < video.comments.length; i++) {
       const cmntId = video.comments[i].id;
-      const loggedUser = await User.findById(user.id);
       if (user) {
-        if (loggedUser.likeComment.includes(cmntId)) like.push(cmntId);
-        if (loggedUser.dislikeComment.includes(cmntId)) dislike.push(cmntId);
+        const loggedUser = await User.findById(user.id);
+        // if (loggedUser.likeComment.includes(cmntId)) like.push(cmntId);
+        // if (loggedUser.dislikeComment.includes(cmntId)) dislike.push(cmntId);
+        if (loggedUser.preferences.comments.like.includes(cmntId))
+          like.push(cmntId);
+        if (loggedUser.preferences.comments.dislike.includes(cmntId))
+          dislike.push(cmntId);
       }
       if (video.comments[i].isUpdated === true) isUpdated.push(cmntId);
     }

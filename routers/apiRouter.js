@@ -5,9 +5,8 @@ import {
   deleteLike,
   postDislike,
   postRegisterView,
-  getLike,
-  getDislike,
   deleteDislike,
+  getPreferences,
 } from "../controllers/videoController";
 import {
   deleteComment,
@@ -17,7 +16,7 @@ import {
   deleteLikeComment,
   postDislikeComment,
   delteDislikeComment,
-  commentDetails,
+  getCommentPreferences,
 } from "../controllers/commentController";
 import { postAccessPermission, userInfo } from "../controllers/userController";
 
@@ -27,18 +26,17 @@ apiRouter.post(routes.registerView, postRegisterView);
 apiRouter.post(routes.accessPermission, postAccessPermission);
 apiRouter.post(routes.userInfo, userInfo);
 
-apiRouter.get(routes.like, getLike);
+apiRouter.get(routes.video, getPreferences);
 apiRouter.post(routes.like, postLike);
 apiRouter.delete(routes.like, deleteLike);
-apiRouter.get(routes.dislike, getDislike);
 apiRouter.post(routes.dislike, postDislike);
 apiRouter.delete(routes.dislike, deleteDislike);
 
+apiRouter.get(routes.comment, getCommentPreferences);
 apiRouter.post(routes.comment, postAddComment);
 apiRouter.put(routes.comment, postEditComment);
 apiRouter.delete(routes.comment, deleteComment);
 
-apiRouter.get(routes.commentDetails, commentDetails);
 apiRouter.post(routes.commentLike, postLikeComment);
 apiRouter.delete(routes.commentLike, deleteLikeComment);
 apiRouter.post(routes.commentDislike, postDislikeComment);

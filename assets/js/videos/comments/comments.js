@@ -84,10 +84,12 @@ const updateComment = async (event) => {
     if (response.status === 200) {
       const comment = cmntList.querySelector(".commentText-js");
       const cmntDeta = cmntList.querySelector(".commentDeta-js");
-      const spanEdited = document.createElement("span");
-      spanEdited.classList.add("comment__creator-updated");
-      spanEdited.innerHTML = "(Edited)";
-      cmntDeta.appendChild(spanEdited);
+      if (!cmntDeta.querySelector(".comment__creator-updated")) {
+        const spanEdited = document.createElement("span");
+        spanEdited.classList.add("comment__creator-updated");
+        spanEdited.innerHTML = "(Edited)";
+        cmntDeta.appendChild(spanEdited);
+      }
       comment.innerText = newComment;
       closeEdit();
     }
