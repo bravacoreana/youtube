@@ -97,32 +97,22 @@ const handleClickLike = () => {
   }
 };
 
-const getLike = async () => {
+const getPreferences = async () => {
   const videoId = window.location.href.split("/videos/")[1];
   const response = await axios({
-    url: `/api/${videoId}/like`,
+    url: `/api/${videoId}/video`,
     method: "GET",
   });
-  if (response.data === true) {
+  if (response.data === "like") {
     likeClicked = true;
     likeBtn.classList.add("selectedVideo");
     dislikeBtn.style.pointerEvents = "none";
-  } else {
-    likeClicked = false;
-  }
-};
-
-const getDislike = async () => {
-  const videoId = window.location.href.split("/videos/")[1];
-  const response = await axios({
-    url: `/api/${videoId}/dislike`,
-    method: "GET",
-  });
-  if (response.data === true) {
+  } else if (response.data === "dislike") {
     dislikeClicked = true;
     dislikeBtn.classList.add("selectedVideo");
     likeBtn.style.pointerEvents = "none";
   } else {
+    likeClicked = false;
     dislikeClicked = false;
   }
 };
@@ -163,8 +153,7 @@ const postAccessPermission = async (event) => {
 const init = () => {
   likeBtn.addEventListener("click", postAccessPermission);
   dislikeBtn.addEventListener("click", postAccessPermission);
-  getLike();
-  getDislike();
+  getPreferences();
 };
 
 if (likeBtn || dislikeBtn) init();
