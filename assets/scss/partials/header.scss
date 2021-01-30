@@ -75,7 +75,7 @@
         border: none;
         color: var(--clr-icon);
         background-color: var(--clr-background);
-        padding: 5px 3%;
+        padding: 0px 3%;
         i {
           font-size: 14px;
           color: var(--clr-search);
@@ -120,4 +120,11 @@
 
 .open-dropdown {
   display: block;
+}
+
+.none {
+  display: none;
+}
+.block {
+  display: block !important;
 }

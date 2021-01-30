@@ -177,9 +177,11 @@
     font-weight: 600;
     margin-right: 10px;
   }
+  &-updated,
   &-time {
     color: var(--clr-subtext);
     font-size: 11px;
+    margin-right: 5px;
   }
 }
 
