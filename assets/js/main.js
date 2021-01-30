@@ -1,19 +1,19 @@
 import "../scss/styles.scss";
 
+import "./header";
 import "./sideBar";
 import "./countryCode";
 
 import "./dropdowns/dropdown";
 import "./dropdowns/theme";
 
-import "./videos/timeCalc";
-import "./videos/dateCalc";
+import "./videos/postedAt";
+import "./videos/postedDate";
 import "./videos/preview";
 import "./videos/videoPlayer";
 import "./videos/videoRecorder";
 import "./videos/likeBtn";
-import "./videos/cmntLikeBtn";
-// import "./videos/socialMedia";
+import "./videos/comments/comments";
+import "./videos/comments/cmntLikeBtn";
 
-import "./videos/comments";
 import "./videos/textarea";
