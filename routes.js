@@ -30,6 +30,7 @@ const REGISTER_VIEW = "/:id/view";
 const VIDEO = "/:id/video";
 const LIKE = "/:id/like";
 const DISLIKE = "/:id/dislike";
+const SUBSCRIPTION = "/:id/subscription";
 const COMMENT = "/:id/comment";
 const COMMENT_LIKE = "/:id/comment-like";
 const COMMENT_DISLIKE = "/:id/comment-dislike";
@@ -89,6 +90,7 @@ const routes = {
   commentDislike: COMMENT_DISLIKE,
   commentDetails: COMMENT_DETAILS,
   video: VIDEO,
+  subscription: SUBSCRIPTION,
 };
 
 export default routes;

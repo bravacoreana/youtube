@@ -18,7 +18,13 @@ import {
   delteDislikeComment,
   getCommentPreferences,
 } from "../controllers/commentController";
-import { postAccessPermission, userInfo } from "../controllers/userController";
+import {
+  deleteSubscription,
+  getSubscription,
+  postAccessPermission,
+  postSubscription,
+  userInfo,
+} from "../controllers/userController";
 
 const apiRouter = express.Router();
 
@@ -41,5 +47,9 @@ apiRouter.post(routes.commentLike, postLikeComment);
 apiRouter.delete(routes.commentLike, deleteLikeComment);
 apiRouter.post(routes.commentDislike, postDislikeComment);
 apiRouter.delete(routes.commentDislike, delteDislikeComment);
+
+apiRouter.get(routes.subscription, getSubscription);
+apiRouter.post(routes.subscription, postSubscription);
+apiRouter.delete(routes.subscription, deleteSubscription);
 
 export default apiRouter;

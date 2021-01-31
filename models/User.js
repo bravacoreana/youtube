@@ -20,10 +20,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Video",
     },
   ],
-  // likeVideo: [{ type: String }],
-  // dislikeVideo: [{ type: String }],
-  // likeComment: [{ type: String }],
-  // dislikeComment: [{ type: String }],
+  subscriptions: [{ type: String }],
   preferences: {
     comments: {
       like: [{ type: String }],

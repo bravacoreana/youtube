@@ -166,3 +166,63 @@ export const userInfo = (req, res) => {
   }
   res.end();
 };
+
+export const getSubscription = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    if (req.user) {
+      const video = await Video.findById(id);
+      const user = await User.findById(req.user.id);
+
+      if (user.subscriptions.includes(video.creator)) {
+        res.send("true");
+      } else {
+        res.send("false");
+      }
+    } else {
+      console.log("ahahah");
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const postSubscription = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const user = await User.findById(req.user.id);
+    if (!user.subscriptions.includes(video.creator)) {
+      user.subscriptions.push(video.creator);
+      user.save();
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const deleteSubscription = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const user = await User.findById(req.user.id);
+    if (user.subscriptions.includes(video.creator)) {
+      user.subscriptions.remove(video.creator);
+      user.save();
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
