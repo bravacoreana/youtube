@@ -83,6 +83,7 @@ export const logout = (req, res) => {
 
 export const myProfile = async (req, res) => {
   try {
+    // const user = await User.findOne({ _id: req.user.id }).populate("videos");
     const user = await User.findById(req.user.id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
@@ -95,6 +96,7 @@ export const userDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
+    // const user = await User.findOne({ _id: id }).populate("videos");
     const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
