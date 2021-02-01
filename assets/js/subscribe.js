@@ -50,9 +50,14 @@ const getSubscribe = async () => {
     if (response.data === true) {
       subscribeBtn.classList.add("subscribed");
       subscribe = true;
-    } else if (response.data === false) {
+    }
+    if (response.data === false) {
       subscribeBtn.classList.remove("subscribed");
       subscribe = false;
+    }
+    if (response.data === "none") {
+      subscribeBtn.classList.add("subscribed");
+      subscribeBtn.removeEventListener("click", handleSubscribe);
     }
   });
 };

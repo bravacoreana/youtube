@@ -28,21 +28,25 @@ block content
                                 span.video__view-text   view ·
                             span.video__createdDate#createdDate-js=video.createdAt
                         .video__detail-btns
-                            .video__detail-btn.likeBtn-js
-                                +adviseLogin-like
-                                i.fas.fa-thumbs-up.likeIcon-js
-                                span.likeCount-js=video.preferences.like
-                            .video__detail-btn.dislikeBtn-js
-                                +adviseLogin-dislike
-                                i.fas.fa-thumbs-down.dislikeIcon-js
-                                span.dislikeCount-js=video.preferences.dislike
-                            .video__detail-btn.shareBtn-js
-                                +socialMedia
-                                i.fas.fa-share.shareIcon-js
-                                span SHARE
                             .video__detail-btn
-                                i.fas.fa-archive
-                                span SAVE
+                                +adviseLogin-like
+                                .likeBtn-js
+                                    i.fas.fa-thumbs-up.likeIcon-js
+                                    span.likeCount-js=video.preferences.like
+                            .video__detail-btn
+                                +adviseLogin-dislike
+                                .dislikeBtn-js
+                                    i.fas.fa-thumbs-down.dislikeIcon-js
+                                    span.dislikeCount-js=video.preferences.dislike
+                            .video__detail-btn
+                                +socialMedia
+                                .shareBtn-js
+                                    i.fas.fa-share
+                                    span SHARE
+                            .video__detail-btn
+                                .saveBtn-js
+                                    i.fas.fa-archive
+                                    span SAVE
                             .video__detail-btn
                                 i.fas.fa-ellipsis-h
                 .video__column
@@ -52,7 +56,7 @@ block content
                             p.video__creator
                     .video__detail
                         .video__creator-detail-btns
-                            button.video__subscribe SUBSCRIBE
+                            button.video__subscribe.subscribe-js SUBSCRIBE
                             i.fas.fa-bell
                 .video__column
                     .video__detail

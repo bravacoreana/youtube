@@ -59,15 +59,15 @@
       img {
         @include avatar($avatarL);
       }
-      button {
+      .video__subscribe {
         color: #fff;
         background-color: var(--clr-logo);
         border: none;
         padding: 9px 16px;
         margin-right: 10px;
-        &:focus {
-          background-color: var(--clr-lightGrey);
-        }
+        // &:focus {
+        //   background-color: var(--clr-lightGrey);
+        // }
       }
       i {
         color: var(--clr-icon);
@@ -257,4 +257,8 @@
 
 .button__show {
   display: block !important;
+}
+
+.subscribed {
+  background-color: var(--clr-lightGrey) !important;
 }

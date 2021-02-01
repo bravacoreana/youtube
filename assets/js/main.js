@@ -3,6 +3,7 @@ import "../scss/styles.scss";
 import "./header";
 import "./sideBar";
 import "./countryCode";
+import "./subscribe";
 
 import "./dropdowns/dropdown";
 import "./dropdowns/theme";
