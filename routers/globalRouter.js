@@ -6,9 +6,11 @@ import {
   getSignIn,
   getSignUp,
   githubSignIn,
+  googleSignIn,
   logout,
   myProfile,
   postGithubSignIn,
+  postGoogleSignIn,
   postSignIn,
   postSignUp,
 } from "../controllers/userController";
@@ -36,6 +38,12 @@ globalRouter.get(
   routes.githubCallback,
   passport.authenticate("github", { failureRedirect: routes.signIn }),
   postGithubSignIn
+);
+globalRouter.get(routes.google, googleSignIn);
+globalRouter.get(
+  routes.googleCallback,
+  passport.authenticate("google", { failureRedirect: routes.signIn }),
+  postGoogleSignIn
 );
 globalRouter.get(routes.myProfile, myProfile);
 
