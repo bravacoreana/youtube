@@ -1,6 +1,7 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
+import Video from "../models/Video";
 
 export const getSignUp = (req, res) => {
   res.render("signUp", { pageTitle: "Sign Up" });
@@ -41,6 +42,7 @@ export const postSignIn = passport.authenticate("local", {
   successRedirect: routes.home,
   failureRedirect: routes.signIn,
 });
+
 export const githubSignIn = passport.authenticate("github");
 
 export const githubSignInCallback = async (
@@ -76,6 +78,43 @@ export const postGithubSignIn = (req, res) => {
   res.redirect(routes.home);
 };
 
+export const googleSignIn = passport.authenticate("google", {
+  scope: ["profile", "email"],
+});
+
+export const googleSignInCallback = async (
+  request,
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  const {
+    _json: { sub, name, picture, email },
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.googleId = sub;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      googleId: sub,
+      avatarUrl: picture,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+
+export const postGoogleSignIn = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
@@ -85,7 +124,7 @@ export const myProfile = async (req, res) => {
   try {
     // const user = await User.findOne({ _id: req.user.id }).populate("videos");
     const user = await User.findById(req.user.id).populate("videos");
-    res.render("userDetail", { pageTitle: "User Detail", user });
+    res.render("myProfile", { pageTitle: "My Profile", user });
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -173,16 +212,13 @@ export const getSubscription = async (req, res) => {
   } = req;
   try {
     if (req.user) {
-      const video = await Video.findById(id);
+      const video = await Video.findById(id).populate("creator");
       const user = await User.findById(req.user.id);
-
-      if (user.subscriptions.includes(video.creator)) {
-        res.send("true");
-      } else {
-        res.send("false");
-      }
+      if (req.user.id === video.creator.id) res.send("none");
+      else if (user.subscriptions.includes(video.creator)) res.send("true");
+      else res.send("false");
     } else {
-      console.log("ahahah");
+      return;
     }
   } catch (error) {
     console.log(error);

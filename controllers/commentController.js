@@ -180,8 +180,6 @@ export const getCommentPreferences = async (req, res) => {
       const cmntId = video.comments[i].id;
       if (user) {
         const loggedUser = await User.findById(user.id);
-        // if (loggedUser.likeComment.includes(cmntId)) like.push(cmntId);
-        // if (loggedUser.dislikeComment.includes(cmntId)) dislike.push(cmntId);
         if (loggedUser.preferences.comments.like.includes(cmntId))
           like.push(cmntId);
         if (loggedUser.preferences.comments.dislike.includes(cmntId))

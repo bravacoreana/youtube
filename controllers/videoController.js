@@ -184,8 +184,6 @@ export const getPreferences = async (req, res) => {
   try {
     if (req.user) {
       const user = await User.findById(req.user.id);
-      // if (user.likeVideo.includes(id)) res.send("like");
-      // else if (user.dislikeVideo.includes(id)) res.send("dislike");
       if (user.preferences.videos.like.includes(id)) res.send("like");
       else if (user.preferences.videos.dislike.includes(id))
         res.send("dislike");
@@ -206,7 +204,6 @@ export const postLike = async (req, res) => {
     video.preferences.like += 1;
     video.save();
     const user = await User.findById(req.user.id);
-    // if (!user.likeVideo.includes(id)) req.user.likeVideo.push(id);
     if (!user.preferences.videos.like.includes(id))
       user.preferences.videos.like.push(id);
     user.save();
@@ -228,7 +225,6 @@ export const deleteLike = async (req, res) => {
     video.preferences.like -= 1;
     video.save();
     user.preferences.videos.like.remove(id);
-    // req.user.likeVideo.remove(id);
     user.save();
     res.status(200);
   } catch (error) {
@@ -247,7 +243,6 @@ export const postDislike = async (req, res) => {
     video.preferences.dislike += 1;
     video.save();
     const user = await User.findById(req.user.id);
-    // if (!user.dislikeVideo.includes(id)) req.user.dislikeVideo.push(id);
     if (!user.preferences.videos.dislike.includes(id))
       user.preferences.videos.dislike.push(id);
     user.save();
@@ -268,8 +263,6 @@ export const deleteDislike = async (req, res) => {
     const video = await Video.findById(id);
     video.preferences.dislike -= 1;
     video.save();
-    // req.user.dislikeVideo.splice(id, 1);
-    // req.user.dislikeVideo.remove(id);
     user.preferences.videos.dislike.remove(id);
     user.save();
     res.status(200);
