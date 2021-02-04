@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
-import { timeCalc } from "../timeCalc";
+import { timeCalc } from "../postedAt";
 
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
