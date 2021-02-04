@@ -1,8 +1,8 @@
 extends layouts/main
 
 block content
-    .form-wrapper
-        .form-container
+    .form-wrapper#videoContainer-js
+        .form-container#videoWrap-js
             form(action=routes.signUp, method="post", enctype="multipart/form-data")
                 include ./partials/previewImg
                 .fileUpload
@@ -13,4 +13,5 @@ block content
                 input(type="password", name="password", placeholder="Password" required=true)
                 input(type="password", name="password2", placeholder="Verify Password" required=true)
                 input(type="submit", value="Sign Up")
+                a(href=routes.signIn) Sign In
             include ./partials/socialLogin

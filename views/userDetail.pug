@@ -5,25 +5,27 @@ block content
     .video-container#videoContainer-js
         .user-profile
             .user-profile__header
-                img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
-                h4.profile__username=user.name
-            if loggedUser
-                if user.id === loggedUser.id
-                    .user-profile__btns
+                .user-profile__profile
+                    img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                    h4.username=user.name
+                .user-profile__btns
+                    if loggedUser && user.id === loggedUser.id
                         a(href=routes.users+routes.editProfile)
                             button Edit Profile
                         a(href=routes.users+routes.changePassword)
                             button Change Password
-                    .user-profile__details
+                if loggedUser && user.id === loggedUser.id
+                    .user-profile__info
                         table
                             tr
                                 th Subscriptions
-                                th Upload
-                                th Likes
+                                td=user.subscriptions.length
                             tr
-                                th 23
-                                th 1
-                                th 25
+                                th Upload
+                                td=user.videos.length
+                            tre
+                                th Likes
+                                td=user.preferences.videos.like.length
             .video-container#videoContainer-js
                 .video-wrap#videoWrap-js
                     each video in user.videos
