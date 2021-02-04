@@ -11,6 +11,7 @@ import "./dropdowns/theme";
 import "./videos/postedAt";
 import "./videos/postedDate";
 import "./videos/preview";
+import "./videos/socialMedia";
 import "./videos/videoPlayer";
 import "./videos/videoRecorder";
 import "./videos/likeBtn";
