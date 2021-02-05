@@ -14,16 +14,31 @@ const SIDEBARMINI_WIDTH = "70px";
 const SIDEBAR_WIDTH = "270px";
 
 const handleMainBox = () => {
+  // if (wrap) {
+  //   if (boxContainer.offsetWidth > 2100) {
+  //     wrap.style.gridTemplateColumns = "repeat(6,1fr)";
+  //   } else if (boxContainer.offsetWidth > 1566) {
+  //     wrap.style.gridTemplateColumns = "repeat(5,1fr)";
+  //   } else if (boxContainer.offsetWidth > 1180) {
+  //     wrap.style.gridTemplateColumns = "repeat(4,1fr)";
+  //   } else if (boxContainer.offsetWidth > 873) {
+  //     wrap.style.gridTemplateColumns = "repeat(3,1fr)";
+  //   } else if (boxContainer.offsetWidth > 400) {
+  //     wrap.style.gridTemplateColumns = "repeat(2,1fr)";
+  //   } else {
+  //     wrap.style.gridTemplateColumns = "repeat(1,1fr)";
+  //   }
+  // }
   if (wrap) {
-    if (boxContainer.offsetWidth > 2100) {
+    if (wrap.offsetWidth > 2100) {
       wrap.style.gridTemplateColumns = "repeat(6,1fr)";
-    } else if (boxContainer.offsetWidth > 1566) {
+    } else if (wrap.offsetWidth > 1566) {
       wrap.style.gridTemplateColumns = "repeat(5,1fr)";
-    } else if (boxContainer.offsetWidth > 1180) {
+    } else if (wrap.offsetWidth > 1180) {
       wrap.style.gridTemplateColumns = "repeat(4,1fr)";
-    } else if (boxContainer.offsetWidth > 873) {
+    } else if (wrap.offsetWidth > 873) {
       wrap.style.gridTemplateColumns = "repeat(3,1fr)";
-    } else if (boxContainer.offsetWidth > 400) {
+    } else if (wrap.offsetWidth > 400) {
       wrap.style.gridTemplateColumns = "repeat(2,1fr)";
     } else {
       wrap.style.gridTemplateColumns = "repeat(1,1fr)";
