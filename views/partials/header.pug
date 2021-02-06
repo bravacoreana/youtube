@@ -11,8 +11,8 @@ header.header
                     span.siteName #{siteName}
                     span.countryCode#countryCode-js
         .header__column
-            form(action=routes.results, method="get")
-                input(type="text", placeholder="Search", name="search_query", autocomplete="off")
+            form(action=routes.results, method="get" id="searchForm")
+                input(type="text", placeholder="Search", name="search_query", autocomplete="off" id="searchFormInput")
                 button(type="submit")
                     i.fas.fa-search
             a(href="#")
@@ -49,7 +49,7 @@ header.header
                     +theme
                 else
                     ul.dropdown-content#dropdownContent-js
-                        a(href=routes.userDetail(loggedUser.id))#userDetail
+                        a(href=routes.myProfile)#userDetail
                             li
                                 .dropdown__user
                                     img.dropdown__user-avatar#userAvatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
