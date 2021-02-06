@@ -161,6 +161,28 @@ export const videoDelete = async (req, res) => {
   res.redirect(routes.home);
 };
 
+export const likedVideo = async (req, res) => {
+  const { user } = req;
+  try {
+    if (!user) res.render("signIn");
+    else {
+      const reqUser = await User.findById(user.id);
+      const ids = reqUser.preferences.videos.like;
+      if (ids.length === 0) {
+        const videos = await Video.find({})
+          .sort({ _id: -1 })
+          .populate("creator");
+        res.render("likedVideo", { videos, user });
+      } else {
+        const videos = await Video.find({ _id: ids }).populate("creator");
+        res.render("likedVideo", { videos, user });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postRegisterView = async (req, res) => {
   const {
     params: { id },

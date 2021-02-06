@@ -7,15 +7,16 @@ const LOG_OUT = "/logout";
 
 // USER
 const USERS = "/users";
+const LIKED_VIDEO = "/liked-video";
 const USER_DETAIL = "/:id";
 const MY_PROFILE = "/myprofile";
-const EDIT_PROFILE = "/editprofile";
-const CHANGE_PASSWORD = "/changePassword";
+const EDIT_PROFILE = "/edit-profile";
+const CHANGE_PASSWORD = "/change-password";
 
 // VIDEOS
 const VIDEOS = "/videos";
 const VIDEO_UPLOAD = "/upload";
-const SHOOT_VIDEO = "/shootVideo";
+const SHOOT_VIDEO = "/shoot-video";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
@@ -78,7 +79,7 @@ const routes = {
     }
     return DELETE_VIDEO;
   },
-  // shootVideo: SHOOT_VIDEO,
+  likedVideo: LIKED_VIDEO,
   shootVideo: SHOOT_VIDEO,
   myProfile: MY_PROFILE,
   github: GITHUB,

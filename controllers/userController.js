@@ -122,9 +122,13 @@ export const logout = (req, res) => {
 
 export const myProfile = async (req, res) => {
   try {
-    // const user = await User.findOne({ _id: req.user.id }).populate("videos");
     const user = await User.findById(req.user.id).populate("videos");
-    res.render("myProfile", { pageTitle: "My Profile", user });
+    if (user.videos.length === 0) {
+      const videos = await Video.find({}).sort({ _id: -1 }).populate("creator");
+      res.render("myProfile", { pageTitle: "My Profile", videos, user });
+    } else {
+      res.render("myProfile", { pageTitle: "My Profile", user });
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -188,7 +192,7 @@ export const postChangePassword = async (req, res) => {
 
 export const postAccessPermission = (req, res) => {
   const { user } = req;
-  user ? res.status(200) : res.status(204);
+  user.id ? res.status(200) : res.status(204);
   res.end();
 };
 
@@ -215,8 +219,9 @@ export const getSubscription = async (req, res) => {
       const video = await Video.findById(id).populate("creator");
       const user = await User.findById(req.user.id);
       if (req.user.id === video.creator.id) res.send("none");
-      else if (user.subscriptions.includes(video.creator)) res.send("true");
-      else res.send("false");
+      else if (user.subscriptions.includes(video.creator.id)) {
+        res.send("true");
+      } else res.send("false");
     } else {
       return;
     }
