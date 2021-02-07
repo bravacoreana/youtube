@@ -240,6 +240,9 @@ export const postSubscription = async (req, res) => {
     const video = await Video.findById(id);
     const user = await User.findById(req.user.id);
     if (!user.subscriptions.includes(video.creator)) {
+      const videoCreator = await User.findById(video.creator);
+      videoCreator.channel.subsCount += 1;
+      videoCreator.save();
       user.subscriptions.push(video.creator);
       user.save();
     }
@@ -258,6 +261,9 @@ export const deleteSubscription = async (req, res) => {
     const video = await Video.findById(id);
     const user = await User.findById(req.user.id);
     if (user.subscriptions.includes(video.creator)) {
+      const videoCreator = await User.findById(video.creator);
+      videoCreator.channel.subsCount -= 1;
+      videoCreator.save();
       user.subscriptions.remove(video.creator);
       user.save();
     }

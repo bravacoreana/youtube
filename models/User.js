@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
       ref: "Video",
     },
   ],
+  channel: {
+    subsCount: { type: Number, default: 0 },
+  },
   subscriptions: [{ type: String }],
   preferences: {
     comments: {
