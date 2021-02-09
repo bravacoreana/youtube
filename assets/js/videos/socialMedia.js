@@ -11,11 +11,6 @@ const redditBtn = document.querySelector(".redditBtn-js");
 const wordPressBtn = document.querySelector(".wordpressBtn-js");
 // const emailBtn = document.querySelector(".emailBtn-js");
 
-const postUrl = encodeURI(document.location.href);
-const postTitle = document.querySelector(".video__title").innerHTML;
-const videoUrl = document.querySelector("video").src;
-const postDesc = document.querySelector(".video__description").innerHTML;
-
 const closeModal = (event) => {
   const isClickInside = shareBtn.contains(event.target);
   if (!isClickInside || shareCloseBtn === event.target)
@@ -30,7 +25,11 @@ const openShare = () => {
 };
 
 const share = () => {
-  console.log(postUrl, postTitle, videoUrl, postDesc);
+  const postUrl = encodeURI(document.location.href);
+  const postTitle = document.querySelector(".video__title").innerHTML;
+  const videoUrl = document.querySelector("video").src;
+  const postDesc = document.querySelector(".video__description").innerHTML;
+
   facebookBtn.setAttribute(
     "href",
     `https://www.facebook.com/sharer.php?u=${postUrl}`

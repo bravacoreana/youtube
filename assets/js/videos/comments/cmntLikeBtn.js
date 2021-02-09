@@ -137,16 +137,17 @@ const commentPreferences = async () => {
     const dislikedCmnts = res.data.dislike;
     const edited = res.data.isUpdated;
     const cmntLists = document.querySelectorAll(".comment__list");
+
     cmntLists.forEach((li) => {
       const likeBtn = li.querySelector(".cmntLikeBtn-js");
       const dislikeBtn = li.querySelector(".cmntDislikeBtn-js");
-      if (likedCmnts.includes(li.id)) {
+      if (likedCmnts && likedCmnts.includes(li.id)) {
         if (!likeBtn.classList.contains("selectedCmnt")) {
           likeBtn.classList.add("selectedCmnt");
           dislikeBtn.style.pointerEvents = "none";
         }
       }
-      if (dislikedCmnts.includes(li.id)) {
+      if (dislikedCmnts && dislikedCmnts.includes(li.id)) {
         if (!dislikeBtn.classList.contains("selectedCmnt")) {
           dislikeBtn.classList.add("selectedCmnt");
           likeBtn.style.pointerEvents = "none";

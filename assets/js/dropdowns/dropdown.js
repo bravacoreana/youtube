@@ -20,7 +20,7 @@ const backToMain = () => {
 };
 
 const openThemeBox = () => {
-  if (themeBox) themeBox.classList.add("open-dropdown");
+  themeBox && themeBox.classList.add("open-dropdown");
   dropdownMain.classList.remove("open-dropdown");
   themeGoBack.addEventListener("click", backToMain);
 };

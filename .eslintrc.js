@@ -13,7 +13,8 @@ module.exports = {
     "prettier/prettier": "error",
     "no-console": "off",
     "import/prefer-default-export": "off",
-    "no-use-before-define": ["error", { functions: false, classes: false }],
+    "no-unused-expressions": "off",
+    "no-use-before-define": "off",
   },
   ignorePatterns: ["node_modules/"],
 };
