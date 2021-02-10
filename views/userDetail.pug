@@ -9,10 +9,12 @@ block content
                     img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
                     .user-profile__info
                         h4.username=user.name
-                        if user.channel.subsCount > 1
-                            span.count=`${user.channel.subsCount} Subscribers`
-                        else
+                        if user.channel.subsCount === 0
+                            span.count No subscribers
+                        else if user.channel.subsCount === 1
                             span.count=`${user.channel.subsCount} Subscriber`
+                        else
+                            span.count=`${user.channel.subsCount} Subscribers`
                 .user-profile__btns
                     if loggedUser && user.id === loggedUser.id
                         a(href=routes.users+routes.editProfile)

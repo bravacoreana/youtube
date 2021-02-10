@@ -90,7 +90,8 @@ block content
                                             img(src=`${item.creator.avatarUrl.includes("http") ? item.creator.avatarUrl : `/${item.creator.avatarUrl}`}`)
                                     .comment__creator-details#commentCreatorDetails-js
                                         .comment__creator-info.commentDeta-js
-                                            span.comment__creator-name=item.creator.name
+                                            a(href=routes.userDetail(item.creator.id))
+                                                span.comment__creator-name=item.creator.name
                                             span.video__createdAt.comment__creator-time=item.createdAt
                                         .comment__text.commentText-js
                                             p=item.text
@@ -121,4 +122,3 @@ block content
                                                 li.commentDeleteBtn-js
                                                         i.fas.fa-trash
                                                         span Delete
-                                            //- input(type="text", name="comment", class="editComment-js" value=item.text)

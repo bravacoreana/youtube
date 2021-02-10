@@ -1,53 +1,61 @@
 extends layouts/main
 include mixins/videoBlock
+include mixins/noVideos
+include mixins/userProfile
 
 block content
-    .video-container#videoContainer-js
-        .video-wrap#videoWrap-js
-            if videos
-                each video in videos
-                    +videoBlock({
-                        id: video.id,
-                        title: video.title,
-                        thumbnail: video.thumbnailFile,
-                        creator: video.creator,
-                        createdAt: video.createdAt,
-                        views: video.views,
-                    })                
-            else
-                each video in user.videos
-                    +videoBlock({
-                        id: video.id,
-                        title: video.title,
-                        thumbnail: video.thumbnailFile,
-                        creator: video.creator,
-                        createdAt: video.createdAt,
-                        views: video.views,
-                    })
-        .user-myprofile
-            .user-myprofile__header
-                .user-myprofile__profile
-                    img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
-                    h4.username=user.name
-                .user-myprofile__btns
-                    if loggedUser && user.id === loggedUser.id
-                        a(href=routes.users+routes.editProfile)
-                            button Edit Profile
-                        a(href=routes.users+routes.changePassword)
-                            button Change Password
-                if loggedUser && user.id === loggedUser.id
-                    .user-myprofile__info
-                        if videos
-                            p You haven't posted any video yet!
-                                br
-                                | Share your moments!
-                        table
-                            tr
-                                th Subscriptions
-                                td=user.subscriptions.length
-                            tr
-                                th Upload
-                                td=user.videos.length
-                            tre
-                                th Likes
-                                td=user.preferences.videos.like.length
+    .myprofile-container
+        if videos
+            +noVideo
+            +userProfile
+        else
+            .video-container#videoContainer-js
+                .video-wrap#videoWrap-js
+                    //- if videos
+                    //-     +noVideo
+                    //- else
+                    each video in user.videos
+                        +videoBlock({
+                            id: video.id,
+                            title: video.title,
+                            thumbnail: video.thumbnailFile,
+                            creator: video.creator,
+                            createdAt: video.createdAt,
+                            views: video.views,
+                        })
+            +userProfile
+            //- .user-myprofile
+            //-     .user-myprofile__header
+            //-         .user-myprofile__profile
+            //-             img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+            //-             h4.username=user.name
+            //-         .user-myprofile__btns
+            //-             if loggedUser && user.id === loggedUser.id
+            //-                 a(href=routes.users+routes.editProfile)
+            //-                     button Edit Profile
+            //-                 a(href=routes.users+routes.changePassword)
+            //-                     button Change Password
+            //-         if loggedUser && user.id === loggedUser.id
+            //-             .user-myprofile__info
+            //-                 table
+            //-                     tr
+            //-                         th Subscriptions
+            //-                         td=user.subscriptions.length
+            //-                     tr
+            //-                         th Upload
+            //-                         td=user.videos.length
+            //-                     tre
+            //-                         th Likes
+            //-                         td=user.preferences.videos.like.length
+
+
+
+                    //- each video in videos
+                    //-     +videoBlock({
+                    //-         id: video.id,
+                    //-         title: video.title,
+                    //-         thumbnail: video.thumbnailFile,
+                    //-         creator: video.creator,
+                    //-         createdAt: video.createdAt,
+                    //-         views: video.views,
+                    //-     })      
