@@ -1,8 +1,18 @@
+.myprofile-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .user-myprofile {
-  width: 300px;
+  display: block;
   color: var(--clr-text);
   margin-right: 1%;
+  margin-top: 75px;
+  transition: all 0.5s ease-in-out;
   &__header {
+    width: 200px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,5 +54,11 @@
     td {
       margin: 10px 0px;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .user-myprofile {
+    display: none;
   }
 }

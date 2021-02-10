@@ -24,6 +24,7 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: 1fr 1fr 1fr 0.5fr 0.5fr;
+  // grid-template-rows: repeat(5, 1fr);
   max-height: 450px;
   max-width: 500px;
   margin: 1%;
