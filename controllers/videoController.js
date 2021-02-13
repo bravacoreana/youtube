@@ -169,7 +169,6 @@ export const likedVideo = async (req, res) => {
       const reqUser = await User.findById(user.id);
       const ids = reqUser.preferences.videos.like;
       const videos = await Video.find({ _id: ids }).populate("creator");
-      console.log(videos);
       res.render("likedVideo", { videos, user });
     }
   } catch (error) {
