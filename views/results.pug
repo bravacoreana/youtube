@@ -2,13 +2,15 @@ extends layouts/main
 include mixins/videoBlock
 
 block content
-    .results__wrapper
+    .results__wrapper#videoContainer-js
         .results__header
-            h2 Searching results for: #{searchQuery}
-        .search__videos
+            span Searching results for: 
+            .results--query
+                span #{searchQuery}
+        .results__videos
             if videos.length === 0
                 h5 No Videos Found!
-            .video-container#videoContainer-js
+            .video-container
                 .video-wrap#videoWrap-js
                     each video in videos
                         +videoBlock({
