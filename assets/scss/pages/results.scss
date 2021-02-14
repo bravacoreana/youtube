@@ -1,6 +1,26 @@
 .results__wrapper {
   @include headerGap;
+  width: 100%;
+  color: var(--clr-text);
   .results__header {
-    margin-left: 5%;
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+    .results--query {
+      margin-left: 10px;
+      border: 1px solid var(--clr-subtext);
+      background-color: var(--clr-subtext);
+      padding: 7px 15px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .results__videos {
+    h5 {
+      margin-top: 75px;
+      margin-left: 2%;
+    }
   }
 }
