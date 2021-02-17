@@ -17,13 +17,14 @@ const handleVideoData = (event) => {
 };
 
 const stopStreamedVideo = (videoElem) => {
-  const stream = videoElem.srcObject;
+  let stream = videoElem.srcObject;
   const tracks = stream.getTracks();
 
   tracks.forEach((track) => {
     track.stop();
   });
-  videoElem.srcObject = null;
+  // videoElem.srcObject = null;
+  stream = null;
 };
 
 const stopRecording = () => {

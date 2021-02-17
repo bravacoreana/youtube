@@ -123,12 +123,7 @@ export const logout = (req, res) => {
 export const myProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate("videos");
-    if (user.videos.length === 0) {
-      const videos = await Video.find({}).sort({ _id: -1 }).populate("creator");
-      res.render("myProfile", { pageTitle: "My Profile", videos, user });
-    } else {
-      res.render("myProfile", { pageTitle: "My Profile", user });
-    }
+    res.render("myProfile", { pageTitle: "My Profile", user });
   } catch (error) {
     res.redirect(routes.home);
   }

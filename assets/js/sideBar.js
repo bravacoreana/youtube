@@ -110,7 +110,6 @@ const handleSidebar = () => {
   } else if (MQ_LG && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
-
     boxContainer.style.marginLeft = SIDEBAR_WIDTH;
   } else {
     console.log("ERROR AT LOADING SIDEBAR");
