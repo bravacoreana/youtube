@@ -2,7 +2,7 @@ mixin videoBlock(video={})
     .videoBlock
         .videoBlock__column#videoBlockThumbnail-js
             a(href=routes.detail(video.id))
-                img.video__thumbnail(src=`/${video.thumbnail}`)
+                img.video__thumbnail(src=`${video.thumbnail}`)
                 .video__playBtn
                     span
                         i.fas.fa-play
