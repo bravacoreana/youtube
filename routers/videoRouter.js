@@ -25,7 +25,7 @@ videoRouter.post(
   routes.shootVideo,
   onlyPrivate,
   multerUploadVideo,
-  getShootVideo
+  postVideoUpload
 );
 videoRouter.get(routes.detail(), videoDetail);
 videoRouter.get(routes.edit(), onlyPrivate, getVideoEdit);

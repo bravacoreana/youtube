@@ -40,8 +40,9 @@ export const postVideoUpload = async (req, res) => {
     body: { title, description },
     files,
   } = req;
-  const videoFile = files.videoFile[0].path;
-  const thumbnailFile = files.thumbnailFile[0].path;
+  const videoFile = files.videoFile[0].location;
+  const thumbnailFile = files.thumbnailFile[0].location;
+  console.log(req.files);
   try {
     const newVideo = await Video.create({
       videoFile,
@@ -56,6 +57,7 @@ export const postVideoUpload = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
+    0;
   }
 };
 
@@ -123,7 +125,7 @@ export const postVideoEdit = async (req, res) => {
   } = req;
   try {
     if (thumbnailFile !== undefined) {
-      const thumbnailFileUrl = thumbnailFile[0].path;
+      const thumbnailFileUrl = thumbnailFile[0].location;
       await Video.findByIdAndUpdate(id, {
         title,
         description,
