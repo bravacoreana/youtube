@@ -42,7 +42,6 @@ export const postVideoUpload = async (req, res) => {
   } = req;
   const videoFile = files.videoFile[0].location;
   const thumbnailFile = files.thumbnailFile[0].location;
-  console.log(req.files);
   try {
     const newVideo = await Video.create({
       videoFile,
@@ -65,40 +64,22 @@ export const getShootVideo = (req, res) => {
   res.render("shootVideo", { pageTitle: "Shoot Video" });
 };
 
-// export const postShootVideo = (req, res) => {
-//   const {
-//     body: { title, description },
-//   } = req;
-//   console.log(title, description);
-// };
-
 export const videoDetail = async (req, res) => {
   const {
     params: { id },
   } = req;
-  Promise.all([
-    Video.findOne({ _id: id })
-      .populate({ path: "creator" })
-      .populate({ path: "comments" }),
-    Comment.find({ videos: id }).populate({ path: "creator" }),
-  ])
-    .then(([video, comments]) => {
-      res.render("videoDetail", { pageTitle: video.title, video, comments });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.redirect(routes.home);
+  try {
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
+    const comments = await Comment.find({ videos: id }).populate({
+      path: "creator",
     });
-
-  // try {
-  //   const video = await Video.findById(id).populate("creator");
-  //   // .populate("comments");
-  //   res.render("videoDetail", { pageTitle: video.title, video });
-  //   console.log(video.comments[0].creator);
-  // } catch (error) {
-  //   console.log(error);
-  //   res.redirect(routes.home);
-  // }
+    res.render("videoDetail", { pageTitle: video.title, video, comments });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
 export const getVideoEdit = async (req, res) => {
