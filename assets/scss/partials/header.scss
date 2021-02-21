@@ -7,7 +7,6 @@
   color: var(--clr-icon);
   z-index: 1000;
   display: flex;
-
   .header__container {
     width: 100%;
     display: flex;
@@ -113,7 +112,7 @@
 }
 
 @media (min-width: 652px) {
-  .search {
+  .search-icon {
     display: none;
   }
 }

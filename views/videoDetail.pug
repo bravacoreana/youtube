@@ -77,9 +77,11 @@ block content
                     form(action="", method="post")#addComment-js
                         .textarea-box
                             textarea(name="comment", rows="1" class="comment-js" id="comment-js" placeholder="Add a public comment...")
+                            .underline
                         .video__comments-submit.createCommentBtns-js
                             input(type="reset", value="CANCEL", id="cancel-js")
-                            input(type="submit", value="COMMENT")                   
+                            input(type="submit", value="COMMENT")
+         
                 .comments-block
                     ul.video__comments-list#commentContainer-js
                         each item in comments.reverse()

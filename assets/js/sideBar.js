@@ -14,21 +14,6 @@ const SIDEBARMINI_WIDTH = "70px";
 const SIDEBAR_WIDTH = "270px";
 
 const handleMainBox = () => {
-  // if (wrap) {
-  //   if (boxContainer.offsetWidth > 2100) {
-  //     wrap.style.gridTemplateColumns = "repeat(6,1fr)";
-  //   } else if (boxContainer.offsetWidth > 1566) {
-  //     wrap.style.gridTemplateColumns = "repeat(5,1fr)";
-  //   } else if (boxContainer.offsetWidth > 1180) {
-  //     wrap.style.gridTemplateColumns = "repeat(4,1fr)";
-  //   } else if (boxContainer.offsetWidth > 873) {
-  //     wrap.style.gridTemplateColumns = "repeat(3,1fr)";
-  //   } else if (boxContainer.offsetWidth > 400) {
-  //     wrap.style.gridTemplateColumns = "repeat(2,1fr)";
-  //   } else {
-  //     wrap.style.gridTemplateColumns = "repeat(1,1fr)";
-  //   }
-  // }
   if (wrap) {
     if (wrap.offsetWidth > 2100) {
       wrap.style.gridTemplateColumns = "repeat(6,1fr)";
@@ -95,18 +80,15 @@ const handleSidebar = () => {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
     boxContainer.style.marginLeft = SIDEBARMINI_WIDTH;
-    // sidebarMini.style.visibility = "visible";
   } else if (MQ_MD && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";
     boxContainer.style.marginLeft = "";
     boxContainer.style.marginLeft = SIDEBAR_WIDTH;
-    // sidebarMini.style.visibility = "hidden";
   } else if (MQ_LG && SIDEBAR === "block") {
     sidebar.style.display = "none";
     sidebarMini.style.display = "block";
     boxContainer.style.marginLeft = SIDEBARMINI_WIDTH;
-    // sidebarMini.style.visibility = "visible";
   } else if (MQ_LG && SIDEBAR === "none") {
     sidebar.style.display = "block";
     sidebarMini.style.display = "none";

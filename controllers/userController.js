@@ -187,7 +187,7 @@ export const postChangePassword = async (req, res) => {
 
 export const postAccessPermission = (req, res) => {
   const { user } = req;
-  user.id ? res.status(200) : res.status(204);
+  user ? res.status(200) : res.status(204);
   res.end();
 };
 

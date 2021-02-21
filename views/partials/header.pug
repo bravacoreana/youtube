@@ -3,22 +3,21 @@ include ../mixins/dropdowns/theme
 header.header
     .header__container
         .header__column
-            .header-sidebar
+            .header-sidebar.headerBtn-js
                 i.fas.fa-bars#sidebarBtn-js
-            .header-logo
+            .header-logo.header-js
                 a(href=routes.home)
                     i.fab.fa-youtube      
                     span.siteName #{siteName}
                     span.countryCode#countryCode-js
-        .header__column
-            form(action=routes.results, method="get" id="searchForm")
+        .header__column.formBox-js
+            form(action=routes.results, method="get" id="searchForm" class="searchForm-js")
                 input(type="text", placeholder="Search", name="search_query", autocomplete="off" id="searchFormInput")
                 button(type="submit")
                     i.fas.fa-search
-            a(href="#")
-                i.fas.fa-microphone
-        .header__column
-            .search
+            i.fas.fa-microphone.header-js
+        .header__column.header-js
+            .search-icon.search-js
                 i.fas.fa-search
             a(href=routes.videos+routes.shootVideo)
                 i.fas.fa-video
