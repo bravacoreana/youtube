@@ -1,55 +1,62 @@
-const search = document.querySelector(".search-js");
+const searchIcon = document.querySelector(".search-js");
 const items = document.querySelectorAll(".header-js");
 const btn = document.querySelector(".headerBtn-js");
+const sidebarBtn = document.querySelector(".sidebar-js");
 const formBox = document.querySelector(".formBox-js");
 const form = document.querySelector(".searchForm-js");
 const screenWidth = window.matchMedia("screen and (min-width:652px)");
-
-const newForm = `
-    <form action="/results" method="get" id="searchForm" class="full-search">
-      <input type="text" placeholder="Search"
-      name="search_query" autocomplete="off" id="searchFormInput"><button type="submit"><i class="fas fa-search"></i></button></form>
-    `;
+let arrowLeft;
+const NEW_FORM_WIDTH = "100%";
+const ORIGINAL_FORM_STYLE = "flex";
+const ORIGINAL_FORM_WIDTH = "60%";
 
 const closeFullSearch = () => {
   items.forEach((item) => {
     item.classList.remove("none");
   });
-  formBox.style.width = "60%";
+  formBox.style.width = ORIGINAL_FORM_WIDTH;
   form.style.display = "none";
-  btn.innerHTML = '<i class="fas fa-bars" id="sidebarBtn-js"></i>';
-  btn.removeEventListener("click", closeFullSearch);
+  arrowLeft.removeEventListener("click", closeFullSearch);
+  btn.removeChild(arrowLeft);
+  sidebarBtn.style.display = "block";
 };
 
 const openFullSearch = () => {
   items.forEach((item) => {
     item.classList.add("none");
   });
-  btn.innerHTML = '<i class="fas fa-arrow-left"></i>';
-  formBox.style.width = "100%";
+  sidebarBtn.style.display = "none";
+  arrowLeft = document.createElement("i");
+  arrowLeft.classList.add("fas");
+  arrowLeft.classList.add("fa-arrow-left");
+  btn.appendChild(arrowLeft);
+  formBox.style.width = NEW_FORM_WIDTH;
   if (!form.style.display || form.style.display === "none") {
-    form.style.display = "flex";
-    form.style.width = "100%";
+    form.style.display = ORIGINAL_FORM_STYLE;
+    form.style.width = NEW_FORM_WIDTH;
   }
-  btn.addEventListener("click", closeFullSearch);
+  arrowLeft.addEventListener("click", closeFullSearch);
 };
 
 const toggleSearchBar = (event) => {
   if (event.matches) {
-    form.style.display = "flex";
-    formBox.style.width = "60%";
+    form.style.display = ORIGINAL_FORM_STYLE;
+    formBox.style.width = ORIGINAL_FORM_WIDTH;
     items.forEach((item) => {
       item.classList.remove("none");
     });
-    btn.innerHTML = '<i class="fas fa-bars" id="sidebarBtn-js"></i>';
-    btn.removeEventListener("click", closeFullSearch);
+    if (arrowLeft) {
+      arrowLeft.removeEventListener("click", closeFullSearch);
+      btn.removeChild(arrowLeft);
+    }
+    sidebarBtn.style.display = "block";
   } else {
     form.style.display = "none";
   }
 };
 
 const init = () => {
-  search.addEventListener("click", openFullSearch);
+  searchIcon.addEventListener("click", openFullSearch);
   screenWidth.addEventListener("change", toggleSearchBar);
 };
 
