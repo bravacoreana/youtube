@@ -1,12 +1,8 @@
 extends layouts/main
 
 block content
-    //- .upload-container
     .video-container#videoContainer-js
         .video__upload#videoWrap-js
-            //- include ./partials/previewImg
-            //- .imgPreview#previewThumbnail
-            //- img.thumbnail(src=`/${video.thumbnailFile}`)
             .form-container
                 include ./partials/previewImg
                 form(action=routes.edit(video.id), method="post", enctype="multipart/form-data")

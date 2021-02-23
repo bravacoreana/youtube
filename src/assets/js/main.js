@@ -4,6 +4,7 @@ import "./header";
 import "./sideBar";
 import "./countryCode";
 import "./subscribe";
+import "./speech-api";
 
 import "./dropdowns/dropdown";
 import "./dropdowns/theme";

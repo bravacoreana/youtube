@@ -6,7 +6,8 @@ block content
         .user-profile
             .user-profile__header
                 .user-profile__profile
-                    img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                    //- img.u-avatar(src=`${loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}`}`)
+                    img.u-avatar(src=user.avatarUrl)
                     .user-profile__info
                         h4.username=user.name
                         if user.channel.subsCount === 0

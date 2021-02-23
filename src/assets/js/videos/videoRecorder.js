@@ -46,7 +46,7 @@ const getVideo = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
-      video: { width: 320, height: 180 },
+      video: { width: 1280, height: 720 },
     });
     videoPreview.srcObject = stream;
     videoPreview.muted = true;

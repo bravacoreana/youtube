@@ -235,10 +235,6 @@
     color: var(--clr-text);
     margin: 1px;
     padding: 0;
-    &:active,
-    &:focus .underline {
-      border-bottom: 2px solid yellow;
-    }
   }
 }
 .comment__btns {

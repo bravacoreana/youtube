@@ -5,6 +5,9 @@ const sidebarBtn = document.querySelector(".sidebar-js");
 const formBox = document.querySelector(".formBox-js");
 const form = document.querySelector(".searchForm-js");
 const screenWidth = window.matchMedia("screen and (min-width:652px)");
+
+const searchInput = form.querySelector("input");
+
 let arrowLeft;
 const NEW_FORM_WIDTH = "100%";
 const ORIGINAL_FORM_STYLE = "flex";
@@ -55,9 +58,17 @@ const toggleSearchBar = (event) => {
   }
 };
 
+const validateForm = () => {
+  const searchBtn = form.querySelector("button");
+  searchInput.value === ""
+    ? (searchBtn.disabled = true)
+    : (searchBtn.disabled = false);
+};
+
 const init = () => {
   searchIcon.addEventListener("click", openFullSearch);
   screenWidth.addEventListener("change", toggleSearchBar);
+  form.addEventListener("submit", validateForm);
 };
 
 init();
