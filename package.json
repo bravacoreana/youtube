@@ -7,13 +7,14 @@
   "author": "H Kim",
   "license": "ISC",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore 'scss'",
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
     "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
-    "build:assets": "cd src && WEBPACK_ENV=production webpack",
-    "build:server": "babel src --out-dir build --ignore 'src/assets', 'src/static', 'src/webpack.config.js'",
-    "copyAll": "cp -R src/static build && copy -R src/views build",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prebuild": "rm -rf build"
+    "prebuild": "rm -rf build",
+    "start": "node build/init.js"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -30,6 +31,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "get-blob-duration": "^1.1.2",
     "helmet": "^4.2.0",
     "mongoose": "^5.11.8",
     "morgan": "^1.10.0",
@@ -45,6 +47,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.0",
     "autoprefixer": "^10.1.0",
     "css-loader": "^5.0.1",
     "dotenv-webpack": "^6.0.0",
