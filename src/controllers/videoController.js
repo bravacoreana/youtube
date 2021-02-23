@@ -56,7 +56,6 @@ export const postVideoUpload = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
-    0;
   }
 };
 

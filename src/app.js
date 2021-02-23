@@ -49,7 +49,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(localsMiddleware);
-// app.use(fetchData);
 
 // Routers
 app.use(routes.home, globalRouter);

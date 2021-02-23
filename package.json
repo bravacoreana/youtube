@@ -14,7 +14,8 @@
     "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
     "prebuild": "rm -rf build",
-    "start": "node build/init.js"
+    "start": "node build/init.js",
+    "prestart": "npm run build"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
