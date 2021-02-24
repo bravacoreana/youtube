@@ -79,7 +79,7 @@ export const postGithubSignIn = (req, res) => {
 };
 
 export const googleSignIn = passport.authenticate("google", {
-  scope: ["profile", "email"],
+  scope: ["email", "profile"],
 });
 
 export const googleSignInCallback = async (
