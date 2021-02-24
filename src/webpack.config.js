@@ -2,7 +2,7 @@ const path = require("path");
 
 const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const Dotenv = require("dotenv-webpack");
+const Dotenv = require("dotenv-webpack");
 
 const MODE = process.env.WEBPACK_ENV;
 const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
@@ -61,9 +61,9 @@ const config = {
       // both options are optional
       filename: "styles.css",
     }),
-    // new Dotenv({
-    //   path: "./.env",
-    // }),
+    new Dotenv({
+      path: path.resolve(__dirname, "../.env"),
+    }),
     // new Dotenv(),
   ],
   devtool: "source-map",
