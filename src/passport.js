@@ -15,7 +15,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: process.env.PRODUCTION
+        ? `https://immense-fortress-16208.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:4000${routes.githubCallback}`,
     },
     githubSignInCallback
   )
@@ -26,11 +28,15 @@ passport.use(
     {
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: `http://localhost:4000${routes.googleCallback}`,
+      callbackURL: process.env.PRODUCTION
+        ? `https://immense-fortress-16208.herokuapp.com${routes.googleCallback}`
+        : `http://localhost:4000${routes.googleCallback}`,
+
       passReqToCallback: true,
     },
     googleSignInCallback
   )
 );
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
