@@ -8,7 +8,7 @@ const commentForm = document.getElementById("addComment-js");
 const commentInput = document.getElementById("comment-js");
 const mainCmtBtns = document.querySelector(".createCommentBtns-js");
 const ellipsisBtns = document.querySelectorAll(".commentBtn-js");
-// const WEBSITE = `https://immense-fortress-16208.herokuapp.com${routes.signIn}`;
+const WEBSITE = "https://immense-fortress-16208.herokuapp.com";
 
 const downCmntCount = () => {
   const cmntCount = document.getElementById("countComment-js");
@@ -406,7 +406,7 @@ const openButtons = () => {
 
 const redirectSignIn = () => {
   // window.location.href = WEBSITE ? WEBSITE : "http://localhost:4000/signIn";
-  window.location.href = routes.home + routes.signIn;
+  window.location.href = WEBSITE + routes.signIn;
 };
 
 const noInputAllowed = () => {
