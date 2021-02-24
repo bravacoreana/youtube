@@ -63,7 +63,7 @@ const config = {
     }),
     new Dotenv({
       // path: "../.env",
-      path: path.resolve(__dirname, "../.env"),
+      path: path.resolve(__dirname, "./.env"),
     }),
     // new Dotenv(),
   ],
