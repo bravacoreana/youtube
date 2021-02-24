@@ -1,12 +1,14 @@
 import axios from "axios";
 import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
 import { timeCalc } from "../postedAt";
+import routes from "../../../../routes";
 
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
 const commentInput = document.getElementById("comment-js");
 const mainCmtBtns = document.querySelector(".createCommentBtns-js");
 const ellipsisBtns = document.querySelectorAll(".commentBtn-js");
+// const WEBSITE = `https://immense-fortress-16208.herokuapp.com${routes.signIn}`;
 
 const downCmntCount = () => {
   const cmntCount = document.getElementById("countComment-js");
@@ -403,7 +405,8 @@ const openButtons = () => {
 };
 
 const redirectSignIn = () => {
-  window.location.href = "http://localhost:4000/signIn";
+  // window.location.href = WEBSITE ? WEBSITE : "http://localhost:4000/signIn";
+  window.location.href = routes.home + routes.signIn;
 };
 
 const noInputAllowed = () => {
