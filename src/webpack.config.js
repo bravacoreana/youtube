@@ -62,8 +62,8 @@ const config = {
       filename: "styles.css",
     }),
     new Dotenv({
-      // path: "../.env",
-      path: path.resolve(__dirname, "./.env"),
+      path: "../.env",
+      // path: path.resolve(__dirname, "./.env"),
     }),
     // new Dotenv(),
   ],
