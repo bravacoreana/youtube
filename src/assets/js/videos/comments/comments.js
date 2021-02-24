@@ -1,7 +1,6 @@
 import axios from "axios";
 import { handleClickLike, handleClickDislike } from "./cmntLikeBtn";
 import { timeCalc } from "../postedAt";
-import routes from "../../../../routes";
 
 const commentsContainer = document.getElementById("commentContainer-js");
 const commentForm = document.getElementById("addComment-js");
@@ -405,8 +404,7 @@ const openButtons = () => {
 };
 
 const redirectSignIn = () => {
-  // window.location.href = WEBSITE ? WEBSITE : "http://localhost:4000/signIn";
-  window.location.href = WEBSITE + routes.signIn;
+  window.location.href = `${WEBSITE}/sign-in`;
 };
 
 const noInputAllowed = () => {

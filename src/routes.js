@@ -1,7 +1,7 @@
 // GLOBAL
 const HOME = "/";
-const SIGN_UP = "/signUp";
-const SIGN_IN = "/signIn";
+const SIGN_UP = "/sign-up";
+const SIGN_IN = "/sign-in";
 const RESULTS = "/results";
 const LOG_OUT = "/logout";
 
