@@ -64,6 +64,7 @@ const config = {
     new Dotenv({
       path: "./.env",
     }),
+    // new Dotenv(),
   ],
   devtool: "source-map",
 };
