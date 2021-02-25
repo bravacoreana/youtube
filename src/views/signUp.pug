@@ -10,8 +10,18 @@ block content
                     input(type="file", id="avatar", class="image" name="avatar" accept="image/*")
                 input(type="text", name="name", placeholder="Full Name" required=true)
                 input(type="email", name="email", placeholder="Email" required=true)
+                if messages.error_email
+                    +message({
+                        type:'error',
+                        text:messages.error_email
+                })
                 input(type="password", name="password", placeholder="Password" required=true)
                 input(type="password", name="password2", placeholder="Verify Password" required=true)
+                if messages.error
+                    +message({
+                        type:'error',
+                        text:messages.error
+                })
                 input(type="submit", value="Sign Up")
                 a(href=routes.signIn) Sign In
             include ./partials/socialLogin

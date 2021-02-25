@@ -7,4 +7,9 @@ block content
                 input(type="email", name="email", placeholder="Email" required=true)
                 input(type="password", name="password", placeholder="Password" required=true)
                 input(type="submit", value="Sign In")
+                if messages.error
+                    +message({
+                        type:'error',
+                        text:messages.error
+                })
             include ./partials/socialLogin

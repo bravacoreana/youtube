@@ -2,15 +2,13 @@
 
 # Clonazione di YouTube con Vanilla e NodeJS - Aggiornato
 
-## Astratto
-
 Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 
 ```
 - App web completamente reattiva
 - YouTube clonato il più vicino possibile (ad eccezione dei moduli)
 - CRUD (video / commento)
-- Tema scuro / tema chiaro / tema del dispositivo
+- Dark theme / Light theme / tema del dispositivo
 - ES6 / Vanilla JS / NodeJs / Pug / SCSS / Mongo DB
 ```
 
@@ -19,7 +17,7 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 ## 0. Intestazione
 
 - API codice paese
-- Ricerca video disponibili: espressione regolare applicata
+- Ricerca video disponibili
 - Speech API (icona del microfono)
 - Disponibile per la ripresa di un video (icona della fotocamera)
 - Immagine del profilo dell'utente
@@ -27,12 +25,12 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 ## 1. Menu a discesa
 
 - Due diverse opzioni (prima / dopo l'accesso)
-  - Utente non registrato: iscriviti / accedi / tema
+  - Utente non registrato: iscriviti / accedi / tema / paese
   - Utente registrato: informazioni utente / caricamento (video) / profilo / tema / disconnessione
 
 ## 2. Barra laterale
 
-- Barra laterale reattiva (Nessuno / Piccolo / Grande)
+- Barra laterale reattiva (Nessuna / Piccola / Grande)
 - Attualmente accessibile da Home / Iscrizioni / I tuoi video / Video piaciuti (accesso necessario)
 
 ## 3. Video
@@ -40,14 +38,14 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 - CRUD
 - Anteprima in miniatura
 - iscriviti / mi piace / non mi piace / condividi
-  - l'abbonamento non è disponibile se è lo stesso utente.
+  - l'iscrizione non è disponibile se è lo stesso utente.
 - Conta le visualizzazioni quando lo spettatore finisce di guardare il video fino alla fine
 
 ## 4. commenti
 
 - CRUD
 - Pulsante Modifica (icona con i puntini di sospensione) disponibile solo se è lo stesso utente
-- Piace non piace
-- Se il commento viene mai modificato, il segno "Modificato" viene lasciato.
+- Piace / non mi piace
+- Se il commento viene modificato, compare il segno "Modificato".
 
-#### Questo progetto è stato creato sulla base di un corso in NomadCoders (nomadcoders.co).
+#### Questo progetto è stato creato sulla base di un corso di NomadCoders (nomadcoders.co).

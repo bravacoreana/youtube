@@ -14,9 +14,12 @@ export const postSignUp = async (req, res, next) => {
   } = req;
 
   if (password !== password2) {
-    req.flash("error_pwd", "Passwords are not match");
+    req.flash("error", "Passwords are not match");
     res.status(400);
-
+    res.render("signUp", { pageTitle: "Sign Up" });
+  } else if (await User.findOne({ email })) {
+    req.flash("error_email", "Email already exists!");
+    res.status(400);
     res.render("signUp", { pageTitle: "Sign Up" });
   } else {
     try {
@@ -43,9 +46,12 @@ export const getSignIn = (req, res) => {
 export const postSignIn = passport.authenticate("local", {
   successRedirect: routes.home,
   failureRedirect: routes.signIn,
+  failureFlash: "You have entered an invalid username or password",
 });
 
-export const githubSignIn = passport.authenticate("github");
+export const githubSignIn = passport.authenticate("github", {
+  failureFlash: "Please try again",
+});
 
 export const githubSignInCallback = async (
   accessToken,
@@ -82,6 +88,7 @@ export const postGithubSignIn = (req, res) => {
 
 export const googleSignIn = passport.authenticate("google", {
   scope: ["email", "profile"],
+  failureFlash: "Please try again",
 });
 
 export const googleSignInCallback = async (
@@ -175,6 +182,7 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPasswordVerify) {
+      req.flash("error", "Password are not match");
       res.status(400);
       res.redirect(routes.users + routes.changePassword);
       return;

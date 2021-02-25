@@ -2,8 +2,6 @@
 
 # Cloning YouTube with Vanilla and NodeJS - Updated
 
-## Abstract
-
 You can have a look at: https://immense-fortress-16208.herokuapp.com/
 
 ```
@@ -19,7 +17,7 @@ You can have a look at: https://immense-fortress-16208.herokuapp.com/
 ## 0. Header
 
 - Country Code API
-- Search videos available: applied regular expression
+- Search videos available
 - Speech API (microphone icon)
 - Available to shooting a video (camera icon)
 - User profile picture
@@ -27,7 +25,7 @@ You can have a look at: https://immense-fortress-16208.herokuapp.com/
 ## 1. Dropdown
 
 - Two different options(before/after sign in)
-  - Non signed in user: sign up / sign in / theme
+  - Non signed in user: sign up / sign in / theme / country
   - Signed in user: user information / upload(video) / profile / theme / sign out
 
 ## 2. Sidebar
@@ -48,6 +46,6 @@ You can have a look at: https://immense-fortress-16208.herokuapp.com/
 - CRUD
 - Edit button(ellipsis icon) available only if it's same user
 - Like / dislike
-- If comment is ever edited, 'Edited' mark leaves.
+- If comment is ever edited, 'Edited' mark appears.
 
 #### This project was created based on a course in NomadCoders(nomadcoders.co).

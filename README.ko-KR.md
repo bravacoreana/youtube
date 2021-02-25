@@ -2,10 +2,6 @@
 
 # 바닐라/Node 자바스크립트로 유튜브 클론하기
 
-## 개요
-
-`ES6` `Vanilla JS` `NodeJs` `Pug` `SCSS` `Mongo DB`
-
 작품 구경하기 : https://immense-fortress-16208.herokuapp.com/
 
 ```
@@ -14,6 +10,7 @@
 - CRUD (비디오/댓글)
 - 밝기 설정 (다크 모드/라이트 모드/기기에 따른 밝기 자동 설정)
 - 음성 인식을 통한 검색
+- ES6 / Vanilla JS / NodeJs / Pug / SCSS / Mongo DB
 ```
 
 ---

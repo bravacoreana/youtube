@@ -62,8 +62,27 @@ const getSubscribe = async () => {
   });
 };
 
+const adviseLogin = () => {
+  const modal = document.getElementById("adviseLoginSubscribe-js");
+  modal.classList.remove("hidden");
+  document.addEventListener("click", (event) => {
+    const isClickInside = modal.contains(event.target);
+    if (!isClickInside) modal.classList.add("hidden");
+  });
+};
+
+const postAccessPermission = async (event) => {
+  event.preventDefault();
+  const response = await axios({
+    url: "/api/access-permission",
+    method: "POST",
+  });
+  if (response.stats === 200) handleSubscribe();
+  else adviseLogin();
+};
+
 const init = () => {
   getSubscribe();
-  subscribeBtn.addEventListener("click", handleSubscribe);
+  subscribeBtn.addEventListener("click", postAccessPermission);
 };
 if (subscribeBtn) init();

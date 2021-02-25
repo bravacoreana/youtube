@@ -59,6 +59,9 @@
       img {
         @include avatar($avatarL);
       }
+      .video__creator-detail-btns {
+        position: relative;
+      }
       .video__subscribe {
         color: #fff;
         background-color: var(--clr-logo);
