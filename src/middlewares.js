@@ -1,7 +1,6 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
-import fetch from "node-fetch"; // fetch
 import routes from "./routes";
 
 const s3 = new aws.S3({
@@ -48,24 +47,3 @@ export const onlyPrivate = (req, res, next) => {
     next();
   }
 };
-
-// const IP_TOKEN = process.env.IPINFO_TOKEN;
-// const API_URL = "http://ip-api.com/json/";
-
-// export const fetchData = async (req, res, next) => {
-//   await fetch(API_URL)
-//     .then((response) => response.json())
-//     .then((json) => {
-//       res.locals.countryCode = json.countryCode;
-//     });
-//   next();
-// };
-
-// export const fetchData = async (req, res, next) => {
-//   await fetch(`https://ipinfo.io?token=${IP_TOKEN}`)
-//     .then((response) => response.json())
-//     .then((json) => {
-//       res.locals.countryCode = json.country;
-//     });
-//   next();
-// };

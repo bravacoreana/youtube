@@ -9,7 +9,6 @@ header.header
                 a(href=routes.home)
                     i.fab.fa-youtube      
                     span.siteName #{siteName}
-                    //- span.countryCode=countryCode
                     span.countryCode#countryCode-js
         .header__column.formBox-js
             form(action=routes.results, method="get" id="searchForm" class="searchForm-js")
