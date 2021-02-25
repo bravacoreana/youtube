@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import session from "express-session";
 import path from "path";
 import MongoStore from "connect-mongo";
-import { fetchData, localsMiddleware } from "./middlewares";
+import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -49,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(localsMiddleware);
-app.use(fetchData);
+// app.use(fetchData);
 
 // Routers
 app.use(routes.home, globalRouter);

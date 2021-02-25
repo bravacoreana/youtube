@@ -2,7 +2,7 @@ import "../scss/styles.scss";
 
 import "./header";
 import "./sideBar";
-// import "./countryCode";
+import "./countryCode";
 import "./subscribe";
 import "./speech-api";
 

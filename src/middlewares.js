@@ -49,12 +49,23 @@ export const onlyPrivate = (req, res, next) => {
   }
 };
 
-const IP_TOKEN = process.env.IPINFO_TOKEN;
-export const fetchData = async (req, res, next) => {
-  await fetch(`https://ipinfo.io?token=${IP_TOKEN}`)
-    .then((response) => response.json())
-    .then((json) => {
-      res.locals.countryCode = json.country;
-    });
-  next();
-};
+// const IP_TOKEN = process.env.IPINFO_TOKEN;
+// const API_URL = "http://ip-api.com/json/";
+
+// export const fetchData = async (req, res, next) => {
+//   await fetch(API_URL)
+//     .then((response) => response.json())
+//     .then((json) => {
+//       res.locals.countryCode = json.countryCode;
+//     });
+//   next();
+// };
+
+// export const fetchData = async (req, res, next) => {
+//   await fetch(`https://ipinfo.io?token=${IP_TOKEN}`)
+//     .then((response) => response.json())
+//     .then((json) => {
+//       res.locals.countryCode = json.country;
+//     });
+//   next();
+// };
