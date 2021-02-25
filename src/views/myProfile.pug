@@ -1,13 +1,11 @@
 extends layouts/main
 include mixins/videoBlock
-include mixins/noVideos
-include mixins/userProfile
 
 block content
     .myprofile-container
         if user.videos.length===0
-            +noVideo
-            +userProfile
+            include partials/noVideos
+            include partials/userProfile
         else
             .video-container#videoContainer-js
                 .video-wrap#videoWrap-js
@@ -20,4 +18,4 @@ block content
                             createdAt: video.createdAt,
                             views: video.views,
                         })
-            +userProfile
+            include partials/userProfile

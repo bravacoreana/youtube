@@ -1,7 +1,7 @@
 extends layouts/main
 include mixins/videoPlayer
 include mixins/adviseLogin
-include mixins/socialMedia
+
 
 block content
     .video-container#videoContainer-js
@@ -29,21 +29,34 @@ block content
                             span.video__createdDate#createdDate-js=video.createdAt
                         .video__detail-btns
                             .video__detail-btn
-                                +adviseLogin-like
+                                +adviseLogin({
+                                    type: "adviseLoginLike-js",
+                                    header:"Like this video?",
+                                    text:"Sign in to make your opinion count."
+                                })
                                 .likeBtn-js
                                     i.fas.fa-thumbs-up.likeIcon-js
                                     span.likeCount-js=video.preferences.like
                             .video__detail-btn
-                                +adviseLogin-dislike
+                                +adviseLogin({
+                                    type: "adviseLoginDislike-js",
+                                    header:"Don't you like this",
+                                    text:"Sign in to make your opinion count."
+                                })
                                 .dislikeBtn-js
                                     i.fas.fa-thumbs-down.dislikeIcon-js
                                     span.dislikeCount-js=video.preferences.dislike
                             .video__detail-btn
-                                +socialMedia
+                                include partials/socialMedia
                                 .shareBtn-js
                                     i.fas.fa-share
                                     span SHARE
                             .video__detail-btn
+                                //- +adviseLogin({
+                                //-     type: "adviseLoginSave-js",
+                                //-     header:"Want to watch this again later?",
+                                //-     text:"Sign in to add this video to a playlist."
+                                //- })
                                 .saveBtn-js
                                     i.fas.fa-archive
                                     span SAVE
@@ -57,6 +70,11 @@ block content
                     .video__detail
                         .video__creator-detail-btns
                             button.video__subscribe.subscribe-js SUBSCRIBE
+                            +adviseLogin({
+                                type: "adviseLoginSubscribe-js",
+                                header:"Don't you like this",
+                                text:"Sign in to make your opinion count."
+                            })
                             i.fas.fa-bell
                 .video__column
                     .video__detail

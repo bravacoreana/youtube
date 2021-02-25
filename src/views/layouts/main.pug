@@ -1,3 +1,5 @@
+include ../mixins/message
+
 doctype html
 html
     head
@@ -8,9 +10,9 @@ html
         //- meta(http-equiv="Content-Security-Policy" content="upgrade-insecure-requests")
         //- link(rel="icon", href="data:,")
     body
+        include ../partials/header
         if messages.error_pwd
             span=messages.error_pwd
-        include ../partials/header
         main
             include ../partials/sideBar
             block content
