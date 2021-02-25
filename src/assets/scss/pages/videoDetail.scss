@@ -164,6 +164,7 @@
       .comment__edit--submit {
         display: flex;
         justify-content: flex-end;
+        margin-top: 10px;
       }
     }
   }
@@ -214,16 +215,16 @@
 }
 
 .textarea-box {
-  // border-bottom: 2px solid var(--clr-subtext);
+  border-bottom: 2px solid var(--clr-subtext);
   padding: 5px;
   height: auto;
   position: relative;
-  .underline {
-    border: 1px solid var(--clr-subtext);
-    position: absolute;
-    width: 100%;
-    bottom: 2px;
-  }
+  // .underline {
+  //   border: 1px solid var(--clr-subtext);
+  //   position: absolute;
+  //   width: 100%;
+  //   bottom: 2px;
+  // }
   textarea {
     width: 100%;
     resize: none;
