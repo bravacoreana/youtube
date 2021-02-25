@@ -3,15 +3,16 @@ extends layouts/main
 block content
     .video-container#videoContainer-js
         .video__upload#videoWrap-js
-            .form-container
-                include ./partials/previewImg
-                form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
-                    .fileUpload
-                        lable(for="Thumbnail") Thumbnail
-                        input(type="file", id="thumbnailFile", class="image", name="thumbnailFile" required=true, accept="image/*")
-                    .fileUpload
-                        label(for="Video") Video         
-                        input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")
-                    input(type="title", name="title", placeholder="Title", maxlength="100" required=true)
-                    textarea(name="description", placeholder="Description" rows="20" required=true)
-                    input(type="submit", value="Upload")
+            .form-wrapper
+                .form-container
+                    include ./partials/previewImg
+                    form(action=routes.videoUpload, method="post" enctype="multipart/form-data")
+                        .fileUpload
+                            lable(for="Thumbnail") Thumbnail
+                            input(type="file", id="thumbnailFile", class="image", name="thumbnailFile" required=true, accept="image/*")
+                        .fileUpload
+                            label(for="Video") Video         
+                            input(type="file", id="videoFile", name="videoFile" required=true, accept="video/*")
+                        input(type="title", name="title", placeholder="Title", maxlength="100" required=true)
+                        textarea(name="description", placeholder="Description" rows="20" required=true)
+                        input(type="submit", value="Upload")
