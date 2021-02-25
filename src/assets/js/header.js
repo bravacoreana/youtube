@@ -50,7 +50,6 @@ const toggleSearchBar = (event) => {
     });
     if (arrowLeft) {
       arrowLeft.removeEventListener("click", closeFullSearch);
-      btn.removeChild(arrowLeft);
     }
     sidebarBtn.style.display = "block";
   } else {

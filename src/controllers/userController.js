@@ -14,7 +14,9 @@ export const postSignUp = async (req, res, next) => {
   } = req;
 
   if (password !== password2) {
+    req.flash("error_pwd", "Passwords are not match");
     res.status(400);
+
     res.render("signUp", { pageTitle: "Sign Up" });
   } else {
     try {

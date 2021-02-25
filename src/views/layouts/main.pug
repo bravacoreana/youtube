@@ -5,9 +5,11 @@ html
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.15.1/css/all.css", integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp", crossorigin="anonymous")
         link(rel="stylesheet", href="/static/styles.css")
         link(rel="shortcut icon", href="https://avatars1.githubusercontent.com/u/73965333?s=460&u=f5303ea7a05f6850f4da6407c920218363e863e2&v=4")
-        meta(http-equiv="Content-Security-Policy" content="upgrade-insecure-requests")
+        //- meta(http-equiv="Content-Security-Policy" content="upgrade-insecure-requests")
         //- link(rel="icon", href="data:,")
     body
+        if messages.error_pwd
+            span=messages.error_pwd
         include ../partials/header
         main
             include ../partials/sideBar

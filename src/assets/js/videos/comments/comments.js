@@ -404,7 +404,7 @@ const openButtons = () => {
 };
 
 const redirectSignIn = () => {
-  window.location.href = `${WEBSITE}/sign-in`;
+  window.location.href = `${WEBSITE}/sign-in` || `localhost:4000/sign-in`;
 };
 
 const noInputAllowed = () => {
