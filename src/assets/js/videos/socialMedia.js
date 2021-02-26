@@ -14,7 +14,6 @@ const wordPressBtn = document.querySelector(".wordpressBtn-js");
 const closeModal = (event) => {
   const isClickInside = shareBtn.contains(event.target);
   if (!isClickInside || shareCloseBtn === event.target) {
-    // shareContainer.classList.add("none");
     shareContainer.classList.remove("block");
   }
 };
