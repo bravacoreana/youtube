@@ -47,4 +47,4 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 - Piace / non mi piace
 - Se il commento viene modificato, compare il segno "Modificato".
 
-#### Questo progetto è stato creato sulla base di un corso di NomadCoders (nomadcoders.co).
+#### Questo progetto è stato creato sulla base di un corso di [NomadCoders](nomadcoders.co).
