@@ -14,13 +14,13 @@ const wordPressBtn = document.querySelector(".wordpressBtn-js");
 const closeModal = (event) => {
   const isClickInside = shareBtn.contains(event.target);
   if (!isClickInside || shareCloseBtn === event.target)
-    shareContainer.classList.add("hidden");
+    shareContainer.classList.add("none");
 };
 
 const openShare = () => {
-  shareContainer.classList.add("share__show");
-  if (shareContainer.classList.contains("hidden"))
-    shareContainer.classList.remove("hidden");
+  shareContainer.classList.add("block");
+  if (shareContainer.classList.contains("none"))
+    shareContainer.classList.remove("none");
   document.addEventListener("click", closeModal);
 };
 

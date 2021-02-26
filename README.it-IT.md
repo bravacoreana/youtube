@@ -30,7 +30,7 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 ## 2. Barra laterale
 
 - Barra laterale reattiva (Nessuna / Piccola / Grande)
-- Attualmente accessibile da Home / Iscrizioni / I tuoi video / Video piaciuti (accesso necessario)
+- Attualmente accessibile da Home /I tuoi video / Video piaciuti (accesso necessario)
 
 ## 3. Video
 

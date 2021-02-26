@@ -31,7 +31,7 @@
 ## 2. 사이드바
 
 - 반응형 사이드바
-- 현재 Home/Subscriptions/Your Videos/Liked Videos 접근 가능(로그인 한 사용자에 한함)
+- 현재 Home/Your Videos/Liked Videos 접근 가능(로그인 한 사용자에 한함)
 
 ## 3. 비디오
 

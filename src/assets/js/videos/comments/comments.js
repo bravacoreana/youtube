@@ -59,11 +59,11 @@ const closeEdit = () => {
   const commentText = cmntList.querySelector(".commentText-js");
   const editFormBox = cmntList.querySelector(".cmntEditForm-js");
 
-  commentDeta.classList.remove("hide");
-  commentText.classList.remove("hide");
-  editFormBox.classList.remove("show");
+  commentDeta.classList.remove("none");
+  commentText.classList.remove("none");
+  editFormBox.classList.remove("block");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.remove("hide");
+    btn.classList.remove("none");
   });
   cmntList.classList.remove("cmntEditActivated");
 };
@@ -102,11 +102,11 @@ const cancelEdit = (cmntList, cmntDetail, cmntText, editFormBox) => {
   const newComment = cmntList.querySelector("#newComment");
   newComment.value = oldComment;
 
-  cmntDetail.classList.remove("hide");
-  cmntText.classList.remove("hide");
-  editFormBox.classList.remove("show");
+  cmntDetail.classList.remove("none");
+  cmntText.classList.remove("none");
+  editFormBox.classList.remove("block");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.remove("hide");
+    btn.classList.remove("none");
   });
   cmntList.classList.remove("cmntEditActivated");
 };
@@ -119,11 +119,11 @@ const handleEditBtn = (element) => {
   const editForm = editFormBox.querySelector("form");
 
   cmntList.classList.add("cmntEditActivated");
-  cmntDetail.classList.add("hide");
-  cmntText.classList.add("hide");
-  editFormBox.classList.add("show");
+  cmntDetail.classList.add("none");
+  cmntText.classList.add("none");
+  editFormBox.classList.add("block");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.add("hide");
+    btn.classList.add("none");
   });
 
   const cancelBtn = editFormBox.querySelector("button");
@@ -151,9 +151,9 @@ const handleOption = (event) => {
 
 const openOptions = (event) => {
   const cmntEditContainer = event.target.parentNode.nextElementSibling;
-  cmntEditContainer.classList.toggle("show");
+  cmntEditContainer.classList.toggle("block");
   cmntEditContainer.addEventListener("mouseleave", () => {
-    cmntEditContainer.classList.remove("show");
+    cmntEditContainer.classList.remove("block");
   });
   cmntEditContainer.addEventListener("click", handleOption);
 };

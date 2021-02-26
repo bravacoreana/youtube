@@ -64,10 +64,10 @@ const getSubscribe = async () => {
 
 const adviseLogin = () => {
   const modal = document.getElementById("adviseLoginSubscribe-js");
-  modal.classList.remove("hidden");
+  modal.classList.remove("none");
   document.addEventListener("click", (event) => {
     const isClickInside = modal.contains(event.target);
-    if (!isClickInside) modal.classList.add("hidden");
+    if (!isClickInside) modal.classList.add("none");
   });
 };
 

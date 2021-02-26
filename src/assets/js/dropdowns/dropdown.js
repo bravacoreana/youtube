@@ -9,32 +9,31 @@ const closeAll = (event) => {
   const isClickTheme = themeBox.contains(event.target);
   const isClickBtn = dropdownBtn.contains(event.target);
   if (!isClickMain && !isClickTheme && !isClickBtn) {
-    dropdownMain.classList.remove("open-dropdown");
+    dropdownMain.classList.remove("block");
     dropdownBtn.addEventListener("click", openDropdown);
   }
 };
 
 const backToMain = () => {
-  dropdownMain.classList.add("open-dropdown");
-  themeBox.classList.remove("open-dropdown");
+  dropdownMain.classList.add("block");
+  themeBox.classList.remove("block");
 };
 
 const openThemeBox = () => {
-  themeBox && themeBox.classList.add("open-dropdown");
-  dropdownMain.classList.remove("open-dropdown");
+  themeBox && themeBox.classList.add("block");
+  dropdownMain.classList.remove("block");
   themeGoBack.addEventListener("click", backToMain);
 };
 
 const closeDropdown = () => {
-  dropdownMain.classList.remove("open-dropdown");
-  if (themeBox.classList.contains("open-dropdown"))
-    themeBox.classList.remove("open-dropdown");
+  dropdownMain.classList.remove("block");
+  if (themeBox.classList.contains("block")) themeBox.classList.remove("block");
   dropdownBtn.removeEventListener("click", closeDropdown);
   dropdownBtn.addEventListener("click", openDropdown);
 };
 
 const openDropdown = () => {
-  dropdownMain.classList.add("open-dropdown");
+  dropdownMain.classList.add("block");
   themeBtn.addEventListener("click", openThemeBox);
   dropdownBtn.removeEventListener("click", openDropdown);
   dropdownBtn.addEventListener("click", closeDropdown);

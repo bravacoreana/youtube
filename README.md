@@ -30,7 +30,7 @@ You can have a look at: https://immense-fortress-16208.herokuapp.com/
 ## 2. Sidebar
 
 - Responsive sidebar(None/Small/Large)
-- Currently accessible at Home/Subscriptions/Your Videos/Liked Videos (Sign in needed)
+- Currently accessible at Home/Your Videos/Liked Videos (Sign in needed)
 
 ## 3. Video
 
