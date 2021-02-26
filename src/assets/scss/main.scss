@@ -28,18 +28,19 @@ button {
   display: none;
 }
 
-// .open-dropdown {
-//   display: block;
-// }
-// .share__show {
-//   display: block;
-// }
+.open-dropdown {
+  display: block;
+}
+.share__show {
+  display: block;
+}
+.show {
+  display: block !important;
+}
+.hide {
+  display: none !important;
+}
+
 // .hidden {
 //   display: none;
-// }
-// .show {
-//   display: block !important;
-// }
-// .hide {
-//   display: none !important;
 // }
