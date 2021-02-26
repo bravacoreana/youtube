@@ -1,4 +1,4 @@
-[ENG](README.en-GB.md) / [KOR](README.ko-KR.md) / [ITA](README.it-IT.md)
+[ENG](README.md) / [KOR](README.ko-KR.md) / [ITA](README.it-IT.md)
 
 # Clonazione di YouTube con Vanilla e NodeJS - Aggiornato
 
@@ -6,7 +6,6 @@ Puoi dare un'occhiata a: https://immense-fortress-16208.herokuapp.com/
 
 ```
 - App web completamente reattiva
-- YouTube clonato il più vicino possibile (ad eccezione dei moduli)
 - CRUD (video / commento)
 - Dark theme / Light theme / tema del dispositivo
 - ES6 / Vanilla JS / NodeJs / Pug / SCSS / Mongo DB

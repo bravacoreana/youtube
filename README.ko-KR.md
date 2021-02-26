@@ -1,4 +1,4 @@
-[ENG](README.en-GB.md) / [KOR](README.ko-KR.md) / [ITA](README.it-IT.md)
+[ENG](README.md) / [KOR](README.ko-KR.md) / [ITA](README.it-IT.md)
 
 # 바닐라/Node 자바스크립트로 유튜브 클론하기
 
@@ -6,7 +6,6 @@
 
 ```
 - 100% 반응형 웹앱
-- 폼 형식을 제외, 유튜브에 최대한 가깝게 클론
 - CRUD (비디오/댓글)
 - 밝기 설정 (다크 모드/라이트 모드/기기에 따른 밝기 자동 설정)
 - 음성 인식을 통한 검색
