@@ -119,19 +119,19 @@ const getPreferences = async () => {
 
 const adviseLoginDislike = () => {
   const modal = document.getElementById("adviseLoginDislike-js");
-  modal.classList.remove("none");
+  modal.classList.remove("hidden");
   document.addEventListener("click", (event) => {
     const isClickInside = modal.contains(event.target);
-    if (!isClickInside) modal.classList.add("none");
+    if (!isClickInside) modal.classList.add("hidden");
   });
 };
 
 const adviseLoginLike = () => {
   const modal = document.getElementById("adviseLoginLike-js");
-  modal.classList.remove("none");
+  modal.classList.remove("hidden");
   document.addEventListener("click", (event) => {
     const isClickInside = modal.contains(event.target);
-    if (!isClickInside) modal.classList.add("none");
+    if (!isClickInside) modal.classList.add("hidden");
   });
 };
 

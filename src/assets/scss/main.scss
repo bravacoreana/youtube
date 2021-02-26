@@ -17,10 +17,6 @@ button {
   background-color: var(--clr-lightGrey);
 }
 
-.open-dropdown {
-  display: block;
-}
-
 .none {
   display: none !important;
 }
@@ -28,8 +24,12 @@ button {
   display: block !important;
 }
 
-// .hidden {
-//   display: none;
+.hidden {
+  display: none;
+}
+
+// .open-dropdown {
+//   display: block;
 // }
 // .share__show {
 //   display: block;
@@ -37,7 +37,6 @@ button {
 // .hidden {
 //   display: none;
 // }
-
 // .show {
 //   display: block !important;
 // }
