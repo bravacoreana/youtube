@@ -59,11 +59,11 @@ const closeEdit = () => {
   const commentText = cmntList.querySelector(".commentText-js");
   const editFormBox = cmntList.querySelector(".cmntEditForm-js");
 
-  commentDeta.classList.remove("none");
-  commentText.classList.remove("none");
-  editFormBox.classList.remove("block");
+  commentDeta.classList.remove("hide");
+  commentText.classList.remove("hide");
+  editFormBox.classList.remove("show");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.remove("none");
+    btn.classList.remove("hide");
   });
   cmntList.classList.remove("cmntEditActivated");
 };
@@ -102,11 +102,11 @@ const cancelEdit = (cmntList, cmntDetail, cmntText, editFormBox) => {
   const newComment = cmntList.querySelector("#newComment");
   newComment.value = oldComment;
 
-  cmntDetail.classList.remove("none");
-  cmntText.classList.remove("none");
-  editFormBox.classList.remove("block");
+  cmntDetail.classList.remove("hide");
+  cmntText.classList.remove("hide");
+  editFormBox.classList.remove("show");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.remove("none");
+    btn.classList.remove("hide");
   });
   cmntList.classList.remove("cmntEditActivated");
 };
@@ -119,11 +119,11 @@ const handleEditBtn = (element) => {
   const editForm = editFormBox.querySelector("form");
 
   cmntList.classList.add("cmntEditActivated");
-  cmntDetail.classList.add("none");
-  cmntText.classList.add("none");
-  editFormBox.classList.add("block");
+  cmntDetail.classList.add("hide");
+  cmntText.classList.add("hide");
+  editFormBox.classList.add("show");
   [].forEach.call(ellipsisBtns, (btn) => {
-    btn.classList.add("none");
+    btn.classList.add("hide");
   });
 
   const cancelBtn = editFormBox.querySelector("button");
@@ -151,9 +151,9 @@ const handleOption = (event) => {
 
 const openOptions = (event) => {
   const cmntEditContainer = event.target.parentNode.nextElementSibling;
-  cmntEditContainer.classList.toggle("block");
+  cmntEditContainer.classList.toggle("show");
   cmntEditContainer.addEventListener("mouseleave", () => {
-    cmntEditContainer.classList.remove("block");
+    cmntEditContainer.classList.remove("show");
   });
   cmntEditContainer.addEventListener("click", handleOption);
 };
@@ -404,7 +404,7 @@ const openButtons = () => {
 };
 
 const redirectSignIn = () => {
-  window.location.href = `${WEBSITE}/sign-in`;
+  window.location.href = `${WEBSITE}/sign-in` || `localhost:4000/sign-in`;
 };
 
 const noInputAllowed = () => {

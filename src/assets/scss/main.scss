@@ -17,9 +17,9 @@ button {
   background-color: var(--clr-lightGrey);
 }
 
-// .open-dropdown {
-//   display: block;
-// }
+.open-dropdown {
+  display: block;
+}
 
 .none {
   display: none !important;
@@ -28,19 +28,19 @@ button {
   display: block !important;
 }
 
-// .hidden {
-//   display: none;
-// }
-// .share__show {
-//   display: block;
-// }
-// .hidden {
-//   display: none;
-// }
+.hidden {
+  display: none;
+}
+.share__show {
+  display: block;
+}
+.hidden {
+  display: none;
+}
 
-// .show {
-//   display: block !important;
-// }
-// .hide {
-//   display: none !important;
-// }
+.show {
+  display: block !important;
+}
+.hide {
+  display: none !important;
+}
