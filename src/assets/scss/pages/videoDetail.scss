@@ -168,6 +168,13 @@
         display: flex;
         justify-content: flex-end;
         margin-top: 10px;
+        button {
+          margin-right: 10px;
+        }
+        input {
+          border-radius: 0;
+          border: none;
+        }
       }
     }
   }
