@@ -47,4 +47,4 @@ You can have a look at: https://immense-fortress-16208.herokuapp.com/
 - Like / dislike
 - If comment is ever edited, 'Edited' mark appears.
 
-#### This project was created based on a course in [NomadCoders](nomadcoders.co).
+#### This project was created based on a course in [NomadCoders](http://www.en.nomadcoders.co).
